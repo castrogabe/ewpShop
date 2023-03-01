@@ -6,6 +6,7 @@ import Header from './components/Header';
 import BottomHeader from './components/BottomHeader';
 import BottomFooter from './components/BottomFooter';
 import Footer from './components/Footer';
+import ProductScreen from './screens/ProductScreen';
 
 function App() {
   return (
@@ -14,8 +15,9 @@ function App() {
       <BottomHeader />
       <main className='mt-0'>
         <Routes>
-          <Route path='/about' element={<AboutScreen />} />
           <Route path='/' element={<HomeScreen />} />
+          <Route path='/product/:slug' element={<ProductScreen />} />
+          <Route path='/about' element={<AboutScreen />} />
           <Route path='/jig' element={<JigScreen />} />
         </Routes>
       </main>
