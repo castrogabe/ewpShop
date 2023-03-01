@@ -8,6 +8,6 @@
 4. A few pages (HomeScreen, AboutScreen, JigScreen)
 5. Create Git Repository
 
-## Second Commit
+# Second Commit
 
 1. Add ProductScreen and Data.js for static data
