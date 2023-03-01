@@ -1,6 +1,5 @@
 import React from 'react';
 import { Row, Col } from 'react-bootstrap';
-import { Link } from 'react-router-dom';
 
 const BottomFooter = () => {
   return (
@@ -8,10 +7,10 @@ const BottomFooter = () => {
       <Row>
         <Col className='text-center'>
           Powered by{' '}
-          <Link to='https://gabewd.herokuapp.com' id='linked'>
+          <a href='https://www.gabewd.com/' id='linked'>
             {' '}
             &copy; gabewd.com
-          </Link>
+          </a>
         </Col>
       </Row>
     </div>

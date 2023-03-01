@@ -18,3 +18,18 @@
 2. update and fetch products from backend using axios
 3. get state from useReducer
 4. update HomeScreen.js
+
+# Fourth Commit by Reducer Hook
+
+1. define reducer
+2. update fetch data, get state from useReducer in HomeScreen
+3. create product and rating components
+4. Use rating in product component
+5. Add Helmet to pages and index.js
+6. Jumbotron with typewriter effect in HomeScreen and components add Jumbotron.js
+7. Create ProductScreen details
+8. Create loading component
+9. Create message component
+10. Add React spinner
+11. utils.js to define error function
+12. update server.js in backend
