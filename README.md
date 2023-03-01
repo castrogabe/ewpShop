@@ -39,3 +39,22 @@
 1. Add \_id number to products array in data.js
 2. Create CartScreen
 3. add app.get to server.js to fetch products by \_id
+
+# Sixth Commit SigninScreen
+
+1. Create SigninScreen
+2. Connect to MongoDB
+3. Add .env to (backend)
+4. Update and install all dependencies in {}package.json needed
+5. Signin to API
+6. Comment out \_id's in data.js (backend)
+7. Add models folder > backend/models/productModel.js
+8. Add routes folder > backend/routes/productRoutes.js
+9. backend/routes/seedRoutes.js
+10. backend/routes/userRoutes.js
+11. backend/models/productModel.js
+12. backend/models/userModel.js
+13. backend/utils.js(root)
+14. update server.js
+15. add SigninScreen to App.js
+16. update Header.js for signin link
