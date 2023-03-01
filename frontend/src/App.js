@@ -8,6 +8,12 @@ import BottomFooter from './components/BottomFooter';
 import Footer from './components/Footer';
 import ProductScreen from './screens/ProductScreen';
 import CartScreen from './screens/CartScreen';
+import SigninScreen from './screens/SigninScreen';
+import ShippingAddressScreen from './screens/ShippingAddressScreen';
+import SignupScreen from './screens/SignupScreen';
+import OrderScreen from './screens/OrderScreen';
+import PlaceOrderScreen from './screens/PlaceOrderScreen';
+import PaymentMethodScreen from './screens/PaymentMethodScreen';
 
 function App() {
   return (
@@ -21,6 +27,12 @@ function App() {
           <Route path='/' element={<HomeScreen />} />
           <Route path='/about' element={<AboutScreen />} />
           <Route path='/jig' element={<JigScreen />} />
+          <Route path='/signin' element={<SigninScreen />} />
+          <Route path='/signup' element={<SignupScreen />} />
+          <Route path='/placeorder' element={<PlaceOrderScreen />} />
+          <Route path='/order/:id' element={<OrderScreen />} />
+          <Route path='/shipping' element={<ShippingAddressScreen />} />
+          <Route path='/payment' element={<PaymentMethodScreen />} />
         </Routes>
       </main>
       <Footer />

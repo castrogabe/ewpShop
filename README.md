@@ -58,3 +58,13 @@
 14. update server.js
 15. add SigninScreen to App.js
 16. update Header.js for signin link
+
+# Seventh Commit-Checkout
+
+1. Create ShippingScreen and components/CheckoutSteps.js
+2. Create SignUpScreen and update backend/routes/userRoutes.js
+3. Create PaymentMethodScreen
+4. Create PlaceOrderScreen
+5. implement Place Order Action
+6. Create OrderScreen
+7. Pay Order By PayPal

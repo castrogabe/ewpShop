@@ -4,7 +4,7 @@ const data = {
       name: 'Steampunk Emperor 1',
       slug: 'Emperor 1',
       category: 'Steampunk Pens',
-      image: '/images/1aa.png', // 679px × 829px
+      image: '/images/1a.png', // 679px × 829px
       price: 400,
       countInStock: 1,
       Style: 'Fountain',
@@ -19,7 +19,7 @@ const data = {
       name: 'Steampunk Magenta Convertible 10',
       slug: 'Magenta Convertible 10',
       category: 'Steampunk Pens',
-      image: '/images/10aa.png',
+      image: '/images/10a.png',
       price: 200,
       countInStock: 1,
       Style: 'Rollerball',

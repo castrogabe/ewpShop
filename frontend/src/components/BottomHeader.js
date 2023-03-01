@@ -1,7 +1,7 @@
 import React from 'react';
 import { Row, Col, Nav } from 'react-bootstrap';
 
-const BottomHeader = () => {
+function BottomHeader() {
   return (
     <div>
       <Row>
@@ -15,6 +15,6 @@ const BottomHeader = () => {
       </Row>
     </div>
   );
-};
+}
 
 export default BottomHeader;
