@@ -3,7 +3,11 @@ import React, { useContext, useEffect, useReducer } from 'react';
 import { PayPalButtons, usePayPalScriptReducer } from '@paypal/react-paypal-js';
 import { Helmet } from 'react-helmet-async';
 import { useNavigate, useParams } from 'react-router-dom';
-import { Row, Col, Card, ListGroup } from 'react-bootstrap';
+import Row from 'react-bootstrap/Row';
+import Col from 'react-bootstrap/Col';
+import Button from 'react-bootstrap/Button';
+import ListGroup from 'react-bootstrap/ListGroup';
+import Card from 'react-bootstrap/Card';
 import { Link } from 'react-router-dom';
 import LoadingBox from '../components/LoadingBox';
 import MessageBox from '../components/MessageBox';
@@ -28,6 +32,18 @@ function reducer(state, action) {
     case 'PAY_RESET':
       return { ...state, loadingPay: false, successPay: false };
 
+    case 'DELIVER_REQUEST':
+      return { ...state, loadingDeliver: true };
+    case 'DELIVER_SUCCESS':
+      return { ...state, loadingDeliver: false, successDeliver: true };
+    case 'DELIVER_FAIL':
+      return { ...state, loadingDeliver: false };
+    case 'DELIVER_RESET':
+      return {
+        ...state,
+        loadingDeliver: false,
+        successDeliver: false,
+      };
     default:
       return state;
   }
@@ -40,14 +56,24 @@ export default function OrderScreen() {
   const { id: orderId } = params;
   const navigate = useNavigate();
 
-  const [{ loading, error, order, successPay, loadingPay }, dispatch] =
-    useReducer(reducer, {
-      loading: true,
-      order: {},
-      error: '',
-      successPay: false,
-      loadingPay: false,
-    });
+  const [
+    {
+      loading,
+      error,
+      order,
+      successPay,
+      loadingPay,
+      loadingDeliver,
+      successDeliver,
+    },
+    dispatch,
+  ] = useReducer(reducer, {
+    loading: true,
+    order: {},
+    error: '',
+    successPay: false,
+    loadingPay: false,
+  });
 
   const [{ isPending }, paypalDispatch] = usePayPalScriptReducer();
 
@@ -102,12 +128,20 @@ export default function OrderScreen() {
     };
 
     if (!userInfo) {
-      return navigate('/signin');
+      return navigate('/login');
     }
-    if (!order._id || successPay || (order._id && order._id !== orderId)) {
+    if (
+      !order._id ||
+      successPay ||
+      successDeliver ||
+      (order._id && order._id !== orderId)
+    ) {
       fetchOrder();
       if (successPay) {
         dispatch({ type: 'PAY_RESET' });
+      }
+      if (successDeliver) {
+        dispatch({ type: 'DELIVER_RESET' });
       }
     } else {
       const loadPaypalScript = async () => {
@@ -125,61 +159,50 @@ export default function OrderScreen() {
       };
       loadPaypalScript();
     }
-  }, [order, userInfo, orderId, navigate, paypalDispatch, successPay]);
+  }, [
+    order,
+    userInfo,
+    orderId,
+    navigate,
+    paypalDispatch,
+    successPay,
+    successDeliver,
+  ]);
+
+  async function deliverOrderHandler() {
+    try {
+      dispatch({ type: 'DELIVER_REQUEST' });
+      const { data } = await axios.put(
+        `/api/orders/${order._id}/deliver`,
+        {},
+        {
+          headers: { authorization: `Bearer ${userInfo.token}` },
+        }
+      );
+      dispatch({ type: 'DELIVER_SUCCESS', payload: data });
+      toast.success('Order is delivered');
+    } catch (err) {
+      toast.error(getError(err));
+      dispatch({ type: 'DELIVER_FAIL' });
+    }
+  }
+
   return loading ? (
     <LoadingBox></LoadingBox>
   ) : error ? (
     <MessageBox variant='danger'>{error}</MessageBox>
   ) : (
     <div className='content'>
+      <br />
       <Helmet>
-        <title>Order {orderId}</title>
+        <title>Order: {orderId}</title>
       </Helmet>
-      <h1 className='my-3'>Order {orderId}</h1>
+      <h6 className='my-3'>Order: {orderId}</h6>
       <Row>
         <Col md={8}>
-          <Card className='mb-3'>
-            <Card.Body>
-              <Card.Title>Shipping</Card.Title>
-              <Card.Text>
-                <strong>Name:</strong> {order.shippingAddress.fullName} <br />
-                <strong>Address: </strong>
-                {order.shippingAddress.address},
-                <br />
-                {order.shippingAddress.city},{order.shippingAddress.states},
-                <br />
-                {order.shippingAddress.postalCode},
-                <br />
-                {order.shippingAddress.country}
-              </Card.Text>
-              {order.isDelivered ? (
-                <MessageBox variant='success'>
-                  Delivered at {order.deliveredAt}
-                </MessageBox>
-              ) : (
-                <MessageBox variant='danger'>Not Delivered</MessageBox>
-              )}
-            </Card.Body>
-          </Card>
-          <Card className='mb-3'>
-            <Card.Body>
-              <Card.Title>Payment</Card.Title>
-              <Card.Text>
-                <strong>Method:</strong> {order.paymentMethod}
-              </Card.Text>
-              {order.isPaid ? (
-                <MessageBox variant='success'>
-                  Paid at {order.paidAt}
-                </MessageBox>
-              ) : (
-                <MessageBox variant='danger'>Not Paid</MessageBox>
-              )}
-            </Card.Body>
-          </Card>
-
-          <Card className='mb-3'>
-            <Card.Body>
-              <Card.Title>Items</Card.Title>
+          <div className='box'>
+            <div className='body'>
+              <title>Items</title>
               <ListGroup variant='flush'>
                 {order.orderItems.map((item) => (
                   <ListGroup.Item key={item._id}>
@@ -193,20 +216,56 @@ export default function OrderScreen() {
                         <Link to={`/product/${item.slug}`}>{item.name}</Link>
                       </Col>
                       <Col md={3}>
-                        <span>{item.quantity}</span>
+                        <span>Quantity: {item.quantity}</span>
                       </Col>
-                      <Col md={3}>${item.price}</Col>
+                      <Col md={3}>Price ${item.price}</Col>
                     </Row>
                   </ListGroup.Item>
                 ))}
               </ListGroup>
-            </Card.Body>
-          </Card>
+            </div>
+          </div>
+
+          <div className='box'>
+            <div className='body'>
+              <title>Shipping</title>
+              <text>
+                <strong>Name:</strong> {order.shippingAddress.fullName} <br />
+                <strong>Address: </strong> {order.shippingAddress.address},{' '}
+                {order.shippingAddress.city}, {order.shippingAddress.states},{' '}
+                {order.shippingAddress.postalCode},
+                {order.shippingAddress.country}
+              </text>
+              {order.isDelivered ? (
+                <MessageBox variant='success'>
+                  Delivered at {order.deliveredAt}
+                </MessageBox>
+              ) : (
+                <MessageBox variant='danger'>Not Delivered</MessageBox>
+              )}
+            </div>
+          </div>
+
+          <div className='box'>
+            <div className='body'>
+              <title>Payment</title>
+              <text>
+                <strong>Method:</strong> {order.paymentMethod}
+              </text>
+              {order.isPaid ? (
+                <MessageBox variant='success'>
+                  Paid at {order.paidAt}
+                </MessageBox>
+              ) : (
+                <MessageBox variant='danger'>Not Paid</MessageBox>
+              )}
+            </div>
+          </div>
         </Col>
         <Col md={4}>
-          <Card className='mb-3'>
-            <Card.Body>
-              <Card.Title>Order Summary</Card.Title>
+          <div className='box'>
+            <div className='body'>
+              <title>Order Summary</title>
               <ListGroup variant='flush'>
                 <ListGroup.Item>
                   <Row>
@@ -252,9 +311,19 @@ export default function OrderScreen() {
                     {loadingPay && <LoadingBox></LoadingBox>}
                   </ListGroup.Item>
                 )}
+                {userInfo.isAdmin && order.isPaid && !order.isDelivered && (
+                  <ListGroup.Item>
+                    {loadingDeliver && <LoadingBox></LoadingBox>}
+                    <div className='d-grid'>
+                      <Button type='button' onClick={deliverOrderHandler}>
+                        Deliver Order
+                      </Button>
+                    </div>
+                  </ListGroup.Item>
+                )}
               </ListGroup>
-            </Card.Body>
-          </Card>
+            </div>
+          </div>
         </Col>
       </Row>
     </div>

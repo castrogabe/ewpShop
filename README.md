@@ -110,3 +110,9 @@
 
 1. Remove ContactScreen and MapScreen from App.js and screens
 2. use gmail option in Footer.js
+
+# Twelfth Commit-Revert
+
+1. Finalize design features
+2. React Tables now responsive
+3. Add font-awesome icons

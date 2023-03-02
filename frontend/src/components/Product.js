@@ -28,13 +28,15 @@ function Product(props) {
   };
 
   return (
-    <Card>
+    <Card className='home-card'>
       <Link to={`/product/${product.slug}`}>
         <img src={product.image} className='card-img-top' alt={product.name} />
       </Link>
       <Card.Body>
         <Link to={`/product/${product.slug}`}>
           <Card.Title>{product.name}</Card.Title>
+          <Card.Title>Style: {product.style}</Card.Title>
+          <Card.Title>Finish: {product.finish}</Card.Title>
         </Link>
         <Rating rating={product.rating} numReviews={product.numReviews} />
         <Card.Text>${product.price}</Card.Text>
@@ -43,7 +45,12 @@ function Product(props) {
             Out of stock
           </Button>
         ) : (
-          <Button onClick={() => addToCartHandler(product)}>Add to cart</Button>
+          <Button
+            className='btn btn-primary btn-sm'
+            onClick={() => addToCartHandler(product)}
+          >
+            Add to cart
+          </Button>
         )}
       </Card.Body>
     </Card>

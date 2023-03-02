@@ -8,10 +8,10 @@ import Header from './components/Header';
 import Footer from './components/Footer';
 import CartScreen from './screens/CartScreen';
 import SigninScreen from './screens/SigninScreen';
-import ShippingAddressScreen from './screens/ShippingAddressScreen';
+import ShippingAddress2Screen from './screens/ShippingAddress2Screen';
 import SignupScreen from './screens/SignupScreen';
-import PaymentMethodScreen from './screens/PaymentMethodScreen';
-import PlaceOrderScreen from './screens/PlaceOrderScreen';
+import PaymentMethod3Screen from './screens/PaymentMethod3Screen';
+import PlaceOrder4Screen from './screens/PlaceOrder4Screen';
 import OrderScreen from './screens/OrderScreen';
 import OrderHistoryScreen from './screens/OrderHistoryScreen';
 import ProfileScreen from './screens/ProfileScreen';
@@ -49,7 +49,7 @@ function App() {
               </ProtectedRoute>
             }
           />
-          <Route path='/placeorder' element={<PlaceOrderScreen />} />
+          <Route path='/placeorder' element={<PlaceOrder4Screen />} />
           <Route
             path='/order/:id'
             element={
@@ -66,8 +66,8 @@ function App() {
               </ProtectedRoute>
             }
           ></Route>
-          <Route path='/shipping' element={<ShippingAddressScreen />}></Route>
-          <Route path='/payment' element={<PaymentMethodScreen />}></Route>
+          <Route path='/shipping' element={<ShippingAddress2Screen />}></Route>
+          <Route path='/payment' element={<PaymentMethod3Screen />}></Route>
           {/* Admin Routes */}
           <Route
             path='/admin/dashboard'

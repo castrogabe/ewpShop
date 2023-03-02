@@ -1,9 +1,8 @@
 import { useContext } from 'react';
 import { Store } from '../Store';
 import { Helmet } from 'react-helmet-async';
-import { Row, Col, Button, Card } from 'react-bootstrap';
+import { Row, Col, Button, Card, ListGroup } from 'react-bootstrap';
 import MessageBox from '../components/MessageBox';
-import ListGroup from 'react-bootstrap/ListGroup';
 import { Link, useNavigate } from 'react-router-dom';
 import axios from 'axios';
 
@@ -36,11 +35,11 @@ export default function CartScreen() {
   return (
     <div>
       <Helmet>
-        <title>Shopping Cart</title>
+        <title>Cart</title>
       </Helmet>
       <div className='content'>
         <br />
-        <h1>Shopping Cart</h1>
+        <h1>Cart</h1>
         <Row>
           <Col md={8}>
             {cartItems.length === 0 ? (
@@ -52,7 +51,7 @@ export default function CartScreen() {
                 {cartItems.map((item) => (
                   <ListGroup.Item key={item._id}>
                     <Row className='align-items-center'>
-                      <Col md={4}>
+                      <Col md={5}>
                         <img
                           src={item.image}
                           alt={item.name}
@@ -81,7 +80,7 @@ export default function CartScreen() {
                           <i className='fas fa-plus-circle'></i>
                         </Button>
                       </Col>
-                      <Col md={3}>${item.price}</Col>
+                      <Col md={2}>Price: ${item.price}</Col>
                       <Col md={2}>
                         <Button
                           onClick={() => removeItemHandler(item)}

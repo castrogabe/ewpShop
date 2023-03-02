@@ -81,20 +81,21 @@ export default function SearchScreen() {
       <div className='jumbotron1' alt='tools'>
         <Jumbotron
           text={[
-            'Steampunk Pens',
-            'Segmented Pens',
-            'Segmenting Videos',
+            'Bespoke Pens',
             'Kit Pens',
-            'Bespoke Fountain Pens',
+            'Segmented Pens',
+            'Steampunk Pens',
+            'Wine Bottle Stoppers',
           ]}
         />
       </div>
 
       <div className='content'>
+        <br />
         <Helmet>
           <title>Exotic Wood Pen</title>
         </Helmet>
-        <h1>Featured Pens</h1>
+        <h5>Hand Made</h5>
         <div className='box'>
           <p className='mt-3'>
             ~ I use quality pen kits and pen blanks are hand made by me in my

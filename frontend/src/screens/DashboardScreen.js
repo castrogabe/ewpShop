@@ -51,7 +51,8 @@ export default function DashboardScreen() {
 
   return (
     <div className='content'>
-      <h1>Dashboard</h1>
+      <br />
+      <h1 className='box'>Dashboard</h1>
       {loading ? (
         <LoadingBox />
       ) : error ? (
@@ -133,6 +134,7 @@ export default function DashboardScreen() {
               ></Chart>
             )}
           </div>
+          <br />
         </>
       )}
     </div>

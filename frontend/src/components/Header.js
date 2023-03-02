@@ -20,7 +20,7 @@ function Header() {
     localStorage.removeItem('paymentMethod');
     window.location.href = '/signin';
   };
-
+  const [sidebarIsOpen, setSidebarIsOpen] = useState(false);
   const [categories, setCategories] = useState([]);
 
   useEffect(() => {
@@ -38,10 +38,12 @@ function Header() {
     <>
       <ToastContainer position='bottom-center' limit={1} />
       <header>
-        <Navbar bg='dark' variant='dark' expand='lg'>
+        <Navbar className='header' bg='dark' variant='dark' expand='lg'>
           <Container>
             <LinkContainer to='/'>
-              <Navbar.Brand>Exotic Wood Pen</Navbar.Brand>
+              <Navbar.Brand>
+                <i class='fas fa-pen-nib'></i> Exotic Wood Pen
+              </Navbar.Brand>
             </LinkContainer>
 
             <Navbar.Toggle aria-controls='basic-navbar-nav' />
@@ -50,7 +52,9 @@ function Header() {
 
               <Nav className='me-auto  w-100  justify-content-end'>
                 <LinkContainer to='/about'>
-                  <Nav.Link>About Me</Nav.Link>
+                  <Nav.Link>
+                    <i className='fas fa-info'></i> About Me
+                  </Nav.Link>
                 </LinkContainer>
 
                 {/* Categories on mobile */}
@@ -59,7 +63,7 @@ function Header() {
                   title='Categories'
                   id='basic-nav-dropdown'
                 >
-                  <Nav className='flex-column text-dark w-100 p-2'>
+                  <Nav className='flex-column p-2'>
                     {categories.map((category) => (
                       <Nav.Item key={category}>
                         <LinkContainer to={`/search?category=${category}`}>
@@ -89,7 +93,7 @@ function Header() {
                   </NavDropdown>
                 ) : (
                   <Link className='nav-link' to='/signin'>
-                    Sign In
+                    <i class='fas fa-sign-in-alt'></i> Sign In
                   </Link>
                 )}
                 {userInfo && userInfo.isAdmin && (
@@ -109,7 +113,7 @@ function Header() {
                   </NavDropdown>
                 )}
                 <Link to='/cart' className='nav-link'>
-                  Cart
+                  <i className='fa fa-shopping-cart'></i> Cart
                   {cart.cartItems.length > 0 && (
                     <Badge pill bg='danger'>
                       {cart.cartItems.reduce((a, c) => a + c.quantity, 0)}

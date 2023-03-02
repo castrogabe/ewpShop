@@ -6,7 +6,7 @@ const BottomFooter = () => {
     <div className='bottom-footer'>
       <Row>
         <Col className='text-center'>
-          Powered by{' '}
+          MERN stack app developed by{' '}
           <a href='https://www.gabewd.com/' id='linked'>
             {' '}
             &copy; gabewd.com

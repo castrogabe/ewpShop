@@ -1,5 +1,4 @@
 import jwt from 'jsonwebtoken';
-import express from 'express';
 import mg from 'mailgun-js';
 
 export const generateToken = (user) => {
@@ -47,34 +46,6 @@ export const mailgun = () =>
     apiKey: process.env.MAILGUN_API_KEY,
     domain: process.env.MAILGUN_DOMIAN,
   });
-
-const app = express();
-app.use(express.json());
-app.use(express.urlencoded({ extended: true }));
-
-app.post('/api/email', (req, res) => {
-  const { name, email, subject, message } = req.body;
-  mailgun()
-    .messages()
-    .send(
-      {
-        to: 'Gabe Castro <john@mg.yourdomain.com>',
-        name: `${name}`,
-        from: `${email}`,
-        subject: `${subject}`,
-        html: `<p>${message}</p>`,
-      },
-      (error, body) => {
-        if (error) {
-          console.log(error);
-          res.status(500).send({ message: 'Error in sending email' });
-        } else {
-          console.log(body);
-          res.send({ message: 'Email sent successfully' });
-        }
-      }
-    );
-});
 
 export const payOrderEmailTemplate = (order) => {
   return `<h1>Thanks for shopping with us</h1>
@@ -131,7 +102,6 @@ export const payOrderEmailTemplate = (order) => {
     ${order.shippingAddress.fullName},<br/>
     ${order.shippingAddress.address},<br/>
     ${order.shippingAddress.city},<br/>
-    ${order.shippingAddress.state},<br/>
     ${order.shippingAddress.country},<br/>
     ${order.shippingAddress.postalCode}<br/>
     </p>

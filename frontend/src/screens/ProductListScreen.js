@@ -1,7 +1,7 @@
 import React, { useContext, useEffect, useReducer } from 'react';
 import axios from 'axios';
 import { Link, useLocation, useNavigate } from 'react-router-dom';
-import { Row, Col, Button } from 'react-bootstrap';
+import { Row, Col, Button, Table } from 'react-bootstrap';
 import { toast } from 'react-toastify';
 import { Store } from '../Store';
 import LoadingBox from '../components/LoadingBox';
@@ -135,16 +135,15 @@ export default function ProductListScreen() {
 
   return (
     <div className='content'>
-      <Row>
-        <Col>
+      <br />
+      <Row className='box'>
+        <Col md={6}>
           <h1>Product List Screen</h1>
         </Col>
-        <Col className='col text-end'>
-          <div>
-            <Button type='button' onClick={createHandler}>
-              Create Product
-            </Button>
-          </div>
+        <Col md={6} className='col text-end'>
+          <Button type='button' onClick={createHandler}>
+            Create Product
+          </Button>
         </Col>
       </Row>
 
@@ -157,49 +156,53 @@ export default function ProductListScreen() {
         <MessageBox variant='danger'>{error}</MessageBox>
       ) : (
         <>
-          <table className='table'>
-            <thead>
-              <tr>
-                <th>ID</th>
-                <th>NAME</th>
-                <th>PRICE</th>
-                <th>CATEGORY</th>
-                <th>STYLE</th>
-                <th>FINISH</th>
-                <th>ACTIONS</th>
-              </tr>
-            </thead>
-            <tbody>
-              {products.map((product) => (
-                <tr key={product._id}>
-                  <td>{product._id}</td>
-                  <td>{product.name}</td>
-                  <td>{product.price}</td>
-                  <td>{product.category}</td>
-                  <td>{product.style}</td>
-                  <td>{product.finish}</td>
-                  <td>
-                    <Button
-                      type='button'
-                      variant='primary'
-                      onClick={() => navigate(`/admin/product/${product._id}`)}
-                    >
-                      Edit
-                    </Button>
-                    &nbsp;
-                    <Button
-                      type='button'
-                      variant='primary'
-                      onClick={() => deleteHandler(product)}
-                    >
-                      Delete
-                    </Button>
-                  </td>
+          <div className='box'>
+            <Table responsive striped bordered className='noWrap'>
+              <thead className='thead'>
+                <tr>
+                  <th>ID</th>
+                  <th>NAME</th>
+                  <th>PRICE</th>
+                  <th>CATEGORY</th>
+                  <th>STYLE</th>
+                  <th>FINISH</th>
+                  <th>ACTIONS</th>
                 </tr>
-              ))}
-            </tbody>
-          </table>
-          <div>
+              </thead>
+              <tbody>
+                {products.map((product) => (
+                  <tr key={product._id}>
+                    <td>{product._id}</td>
+                    <td>{product.name}</td>
+                    <td>{product.price}</td>
+                    <td>{product.category}</td>
+                    <td>{product.style}</td>
+                    <td>{product.finish}</td>
+                    <td>
+                      <Button
+                        type='button'
+                        variant='primary'
+                        onClick={() =>
+                          navigate(`/admin/product/${product._id}`)
+                        }
+                      >
+                        Edit
+                      </Button>
+                      &nbsp;
+                      <Button
+                        type='button'
+                        variant='primary'
+                        onClick={() => deleteHandler(product)}
+                      >
+                        Delete
+                      </Button>
+                    </td>
+                  </tr>
+                ))}
+              </tbody>
+            </Table>
+          </div>
+          <div className='box'>
             {[...Array(pages).keys()].map((x) => (
               <Link
                 className={x + 1 === Number(page) ? 'btn text-bold' : 'btn'}
@@ -210,6 +213,7 @@ export default function ProductListScreen() {
               </Link>
             ))}
           </div>
+          <br />
         </>
       )}
     </div>
