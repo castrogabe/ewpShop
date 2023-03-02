@@ -1,4 +1,4 @@
-import React, { useEffect, useState, useReducer } from 'react';
+import React, { useEffect, useReducer } from 'react';
 import Jumbotron from '../components/Jumbotron';
 import { Row, Col } from 'react-bootstrap';
 import { Helmet } from 'react-helmet-async';

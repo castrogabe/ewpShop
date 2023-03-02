@@ -98,7 +98,7 @@ export default function SignupScreen() {
         </Col>
 
         <Col md={6} className='mt-3'>
-          <img src='/images/register.png' />
+          <img src='/images/register.png' alt='register' />
         </Col>
       </Row>
     </div>

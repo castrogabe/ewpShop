@@ -81,3 +81,17 @@
 8. Create SearchScreen (optional)
    components/Header.js without searchBar or sideBar
    components/Header1.js with searchBar and sideBar (optional)
+
+# Ninth Commit-Admin
+
+1. Create Admin component and Header.js
+2. Create DashboardScreen.js
+3. Manage Products
+4. Create Products and ProductEditScreen
+5. Update Product and image
+6. Delete Product
+7. List Order
+8. Deliver Order
+9. Delete Order
+10. List User
+11. Edit and Delete User

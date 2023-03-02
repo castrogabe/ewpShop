@@ -76,7 +76,7 @@ export default function SigninScreen() {
           </Form>
         </Col>
         <Col md={6} className='mt-3'>
-          <img src='/images/signin.png' />
+          <img src='/images/signin.png' alt='signin' />
         </Col>
       </Row>
     </div>

@@ -18,7 +18,7 @@ import SearchBox from '../components/SearchBox';
 
 function Header() {
   const { state, dispatch: ctxDispatch } = useContext(Store);
-  const { fullBox, cart, userInfo } = state;
+  const { cart, userInfo } = state;
 
   const signoutHandler = () => {
     ctxDispatch({ type: 'USER_SIGNOUT' });
@@ -41,9 +41,9 @@ function Header() {
     };
     fetchCategories();
   }, []);
+
   return (
     <>
-      <ToastContainer position='bottom-center' limit={1} />
       <header>
         <div
           className={
@@ -52,6 +52,7 @@ function Header() {
               : 'd-flex flex-column site-container'
           }
         >
+          <ToastContainer position='bottom-center' limit={1} />
           <Navbar bg='dark' variant='dark' expand='lg'>
             <Button
               variant='dark'
