@@ -21,6 +21,7 @@ export const JigScreen = () => {
             Exotic Wood Pen channel and many other great videos. ~
           </p>
         </div>
+
         <Row>
           <Col md={6}>
             <Card>

@@ -15,6 +15,7 @@ export default function ShippingAddressScreen() {
   const [fullName, setFullName] = useState(shippingAddress.fullName || '');
   const [address, setAddress] = useState(shippingAddress.address || '');
   const [city, setCity] = useState(shippingAddress.city || '');
+  const [states, setStates] = useState(shippingAddress.states || '');
   const [postalCode, setPostalCode] = useState(
     shippingAddress.postalCode || ''
   );
@@ -32,6 +33,7 @@ export default function ShippingAddressScreen() {
         fullName,
         address,
         city,
+        states,
         postalCode,
         country,
       },
@@ -42,6 +44,7 @@ export default function ShippingAddressScreen() {
         fullName,
         address,
         city,
+        states,
         postalCode,
         country,
       })
@@ -53,7 +56,7 @@ export default function ShippingAddressScreen() {
       <Helmet>
         <title>Shipping Address</title>
       </Helmet>
-
+      <br />
       <CheckoutSteps step1 step2></CheckoutSteps>
       <div className='container small-container'>
         <h1 className='my-3'>Shipping Address</h1>
@@ -82,6 +85,14 @@ export default function ShippingAddressScreen() {
               required
             />
           </Form.Group>
+          <Form.Group className='mb-3' controlId='states'>
+            <Form.Label>State</Form.Label>
+            <Form.Control
+              value={states}
+              onChange={(e) => setStates(e.target.value)}
+              required
+            />
+          </Form.Group>
           <Form.Group className='mb-3' controlId='postalCode'>
             <Form.Label>Postal Code</Form.Label>
             <Form.Control
@@ -98,6 +109,25 @@ export default function ShippingAddressScreen() {
               required
             />
           </Form.Group>
+          <div className='mb-3'>
+            <Button
+              id='chooseOnMap'
+              type='button'
+              variant='light'
+              onClick={() => navigate('/map')}
+            >
+              Choose Location On Map
+            </Button>
+            {shippingAddress.location && shippingAddress.location.lat ? (
+              <div>
+                LAT: {shippingAddress.location.lat}
+                LNG:{shippingAddress.location.lng}
+              </div>
+            ) : (
+              <div>No location</div>
+            )}
+          </div>
+
           <div className='mb-3'>
             <Button variant='primary' type='submit'>
               Continue

@@ -1,8 +1,7 @@
 import React, { useContext, useEffect, useState } from 'react';
 import { Helmet } from 'react-helmet-async';
 import { useNavigate } from 'react-router-dom';
-import Form from 'react-bootstrap/Form';
-import Button from 'react-bootstrap/Button';
+import { Form, Button } from 'react-bootstrap';
 import CheckoutSteps from '../components/CheckoutSteps';
 import { Store } from '../Store';
 
@@ -24,12 +23,13 @@ export default function PaymentMethodScreen() {
   }, [shippingAddress, navigate]);
   const submitHandler = (e) => {
     e.preventDefault();
-    ctxDispatch({ type: 'SAVE_PAYMENT_METHOD', payload: paymentMethodName });
+    ctxDispatch({ type: 'SAVE_PAYMENT_METHOD ', payload: paymentMethodName });
     localStorage.setItem('paymentMethod', paymentMethodName);
     navigate('/placeorder');
   };
   return (
     <div className='content'>
+      <br />
       <CheckoutSteps step1 step2 step3></CheckoutSteps>
       <div className='container small-container'>
         <Helmet>

@@ -23,6 +23,7 @@ const reducer = (state, action) => {
       return state;
   }
 };
+
 export default function DashboardScreen() {
   const [{ loading, summary, error }, dispatch] = useReducer(reducer, {
     loading: true,
@@ -57,7 +58,7 @@ export default function DashboardScreen() {
         <MessageBox variant='danger'>{error}</MessageBox>
       ) : (
         <>
-          <Row>
+          <Row className='mt-3'>
             <Col md={4}>
               <Card>
                 <Card.Body>
@@ -70,6 +71,7 @@ export default function DashboardScreen() {
                 </Card.Body>
               </Card>
             </Col>
+
             <Col md={4}>
               <Card>
                 <Card.Body>
@@ -82,6 +84,7 @@ export default function DashboardScreen() {
                 </Card.Body>
               </Card>
             </Col>
+
             <Col md={4}>
               <Card>
                 <Card.Body>

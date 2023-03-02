@@ -1,6 +1,6 @@
 import React, { useContext, useReducer, useState } from 'react';
 import { Helmet } from 'react-helmet-async';
-import { Button, Form } from 'react-bootstrap';
+import { Form, Button, Container } from 'react-bootstrap';
 import { Store } from '../Store';
 import { toast } from 'react-toastify';
 import { getError } from '../utils';
@@ -61,7 +61,7 @@ export default function ProfileScreen() {
   };
 
   return (
-    <div className='container small-container'>
+    <Container className='small-container'>
       <Helmet>
         <title>User Profile</title>
       </Helmet>
@@ -102,6 +102,6 @@ export default function ProfileScreen() {
           <Button type='submit'>Update</Button>
         </div>
       </form>
-    </div>
+    </Container>
   );
 }

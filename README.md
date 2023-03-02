@@ -95,3 +95,13 @@
 9. Delete Order
 10. List User
 11. Edit and Delete User
+
+# Tenth Commit-Advanced Features
+
+1. Google Map (option)
+2. Send email order receipt
+3. Create ContactPage
+4. Rate and review products
+5. Upload multiple images ProductScreen
+6. react-image-magnify on ProductScreen
+7. Pagination on HomeScreen

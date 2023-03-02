@@ -7,6 +7,7 @@ import productRouter from './routes/productRoutes.js';
 import userRouter from './routes/userRoutes.js';
 import orderRouter from './routes/orderRoutes.js';
 import uploadRouter from './routes/uploadRoutes.js';
+import mg from 'mailgun-js';
 
 dotenv.config();
 
@@ -19,13 +20,46 @@ mongoose
     console.log(err.message);
   });
 
+const mailgun = () =>
+  mg({
+    apiKey: process.env.MAILGUN_API_KEY,
+    domain: process.env.MAILGUN_DOMIAN,
+  });
+
 const app = express();
 
 app.use(express.json());
 app.use(express.urlencoded({ extended: true }));
 
+app.post('/api/email', (req, res) => {
+  const { name, subject, message } = req.body;
+  mailgun()
+    .messages()
+    .send(
+      {
+        from: `${name}`,
+        to: 'Gabe <example@mg.exaple.com>',
+        subject: `${subject}`,
+        html: `<p>${message}</p>`,
+      },
+      (error, body) => {
+        if (error) {
+          console.log(error);
+          res.status(500).send({ message: 'Error in sending email' });
+        } else {
+          console.log(body);
+          res.send({ message: 'Email sent successfully' });
+        }
+      }
+    );
+});
+
 app.get('/api/keys/paypal', (req, res) => {
   res.send(process.env.PAYPAL_CLIENT_ID || 'sb');
+});
+
+app.get('/api/keys/google', (req, res) => {
+  res.send({ key: process.env.GOOGLE_API_KEY || '' });
 });
 
 app.use('/api/upload', uploadRouter);

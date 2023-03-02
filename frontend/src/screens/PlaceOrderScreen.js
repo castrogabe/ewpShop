@@ -2,11 +2,7 @@ import Axios from 'axios';
 import React, { useContext, useEffect, useReducer } from 'react';
 import { Helmet } from 'react-helmet-async';
 import { Link, useNavigate } from 'react-router-dom';
-import Row from 'react-bootstrap/Row';
-import Col from 'react-bootstrap/Col';
-import Card from 'react-bootstrap/Card';
-import Button from 'react-bootstrap/Button';
-import ListGroup from 'react-bootstrap/ListGroup';
+import { Row, Col, Card, Button, ListGroup } from 'react-bootstrap';
 import { toast } from 'react-toastify';
 import { getError } from '../utils';
 import { Store } from '../Store';
@@ -41,7 +37,7 @@ export default function PlaceOrderScreen() {
     cart.cartItems.reduce((a, c) => a + c.quantity * c.price, 0)
   );
   cart.shippingPrice = cart.itemsPrice > 100 ? round2(0) : round2(10);
-  cart.taxPrice = round2(0.07 * cart.itemsPrice); // tax price: CA 0.07 = 7%
+  cart.taxPrice = round2(0.07 * cart.itemsPrice); // tax price: 0.07 = 7%
   cart.totalPrice = cart.itemsPrice + cart.shippingPrice + cart.taxPrice;
 
   const placeOrderHandler = async () => {
@@ -83,6 +79,7 @@ export default function PlaceOrderScreen() {
 
   return (
     <div className='content'>
+      <br />
       <CheckoutSteps step1 step2 step3 step4></CheckoutSteps>
       <Helmet>
         <title>Preview Order</title>

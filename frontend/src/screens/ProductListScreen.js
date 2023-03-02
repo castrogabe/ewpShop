@@ -137,7 +137,7 @@ export default function ProductListScreen() {
     <div className='content'>
       <Row>
         <Col>
-          <h1>Products</h1>
+          <h1>Product List Screen</h1>
         </Col>
         <Col className='col text-end'>
           <div>
@@ -164,8 +164,8 @@ export default function ProductListScreen() {
                 <th>NAME</th>
                 <th>PRICE</th>
                 <th>CATEGORY</th>
-                <th>Style</th>
-                <th>Finish</th>
+                <th>STYLE</th>
+                <th>FINISH</th>
                 <th>ACTIONS</th>
               </tr>
             </thead>
@@ -181,7 +181,7 @@ export default function ProductListScreen() {
                   <td>
                     <Button
                       type='button'
-                      variant='light'
+                      variant='primary'
                       onClick={() => navigate(`/admin/product/${product._id}`)}
                     >
                       Edit
@@ -189,7 +189,7 @@ export default function ProductListScreen() {
                     &nbsp;
                     <Button
                       type='button'
-                      variant='light'
+                      variant='primary'
                       onClick={() => deleteHandler(product)}
                     >
                       Delete

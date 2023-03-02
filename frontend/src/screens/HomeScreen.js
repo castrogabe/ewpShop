@@ -1,46 +1,81 @@
-import React, { useEffect, useReducer } from 'react';
+import React, { useEffect, useReducer, useState } from 'react';
 import Jumbotron from '../components/Jumbotron';
-import { Row, Col } from 'react-bootstrap';
-import { Helmet } from 'react-helmet-async';
+import { useNavigate, useLocation } from 'react-router-dom';
 import axios from 'axios';
-import logger from 'use-reducer-logger';
-import Product from '../components/Product';
+import { toast } from 'react-toastify';
+import { getError } from '../utils';
+import { Helmet } from 'react-helmet-async';
+import { Row, Col, Button } from 'react-bootstrap';
 import LoadingBox from '../components/LoadingBox';
 import MessageBox from '../components/MessageBox';
+import Product from '../components/Product';
+import LinkContainer from 'react-router-bootstrap/LinkContainer';
 
 const reducer = (state, action) => {
   switch (action.type) {
     case 'FETCH_REQUEST':
       return { ...state, loading: true };
     case 'FETCH_SUCCESS':
-      return { ...state, products: action.payload, loading: false };
+      return {
+        ...state,
+        products: action.payload.products,
+        page: action.payload.page,
+        pages: action.payload.pages,
+        countProducts: action.payload.countProducts,
+        loading: false,
+      };
     case 'FETCH_FAIL':
       return { ...state, loading: false, error: action.payload };
+
     default:
       return state;
   }
 };
 
-function HomeScreen() {
-  const [{ loading, error, products }, dispatch] = useReducer(logger(reducer), {
-    products: [],
-    loading: true,
-    error: '',
-  });
+export default function SearchScreen() {
+  const navigate = useNavigate();
+  const { search } = useLocation();
+  const sp = new URLSearchParams(search); // /search?category = products
+  const page = sp.get('page') || 1;
+
+  const [{ loading, error, products, pages, countProducts }, dispatch] =
+    useReducer(reducer, {
+      loading: true,
+      error: '',
+    });
 
   useEffect(() => {
     const fetchData = async () => {
-      dispatch({ type: 'FETCH_REQUEST' });
       try {
-        const result = await axios.get('/api/products');
-        dispatch({ type: 'FETCH_SUCCESS', payload: result.data });
+        const { data } = await axios.get(`/api/products/search?page=${page}`);
+        dispatch({ type: 'FETCH_SUCCESS', payload: data });
       } catch (err) {
-        dispatch({ type: 'FETCH_FAIL', payload: err.message });
+        dispatch({
+          type: 'FETCH_FAIL',
+          payload: getError(error),
+        });
       }
     };
     fetchData();
-  }, []);
+  }, [page]);
 
+  const [categories, setCategories] = useState([]);
+  useEffect(() => {
+    const fetchCategories = async () => {
+      try {
+        const { data } = await axios.get(`/api/products/categories`);
+        setCategories(data);
+      } catch (err) {
+        toast.error(getError(err));
+      }
+    };
+    fetchCategories();
+  }, [dispatch]);
+
+  const getFilterUrl = (filter) => {
+    const filterPage = filter.page || page;
+    return `/?&page=${filterPage}`;
+  };
   return (
     <>
       <div className='jumbotron1' alt='tools'>
@@ -61,22 +96,25 @@ function HomeScreen() {
         </Helmet>
         <h1>Featured Pens</h1>
         <div className='box'>
-          <p>
+          <p className='mt-3'>
             ~ I use quality pen kits and pen blanks are hand made by me in my
             shop from Exotic Woods, Acrylics, Ebonite Materials, Bespoke pens
             are not kit pens, they are made completely from scratch except for
             the Jowo #6 nib and converters. ~
           </p>
         </div>
+        <br />
         <Row>
           <Col>
-            {' '}
-            <div className='products'>
-              {loading ? (
-                <LoadingBox />
-              ) : error ? (
-                <MessageBox variant='danger'>{error}</MessageBox>
-              ) : (
+            {loading ? (
+              <LoadingBox></LoadingBox>
+            ) : error ? (
+              <MessageBox variant='danger'>{error}</MessageBox>
+            ) : (
+              <>
+                {products.length === 0 && (
+                  <MessageBox>No Product Found</MessageBox>
+                )}
                 <Row>
                   {products.map((product) => (
                     <Col
@@ -90,13 +128,27 @@ function HomeScreen() {
                     </Col>
                   ))}
                 </Row>
-              )}
-            </div>
+                <div>
+                  {[...Array(pages).keys()].map((x) => (
+                    <LinkContainer
+                      key={x + 1}
+                      className='mx-1'
+                      to={getFilterUrl({ page: x + 1 })}
+                    >
+                      <Button
+                        className={Number(page) === x + 1 ? 'text-bold' : ''}
+                        variant='light'
+                      >
+                        {x + 1}
+                      </Button>
+                    </LinkContainer>
+                  ))}
+                </div>
+              </>
+            )}
           </Col>
         </Row>
       </div>
     </>
   );
 }
-
-export default HomeScreen;

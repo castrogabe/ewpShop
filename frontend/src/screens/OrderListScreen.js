@@ -37,6 +37,7 @@ const reducer = (state, action) => {
       return state;
   }
 };
+
 export default function OrderListScreen() {
   const navigate = useNavigate();
   const { state } = useContext(Store);
@@ -90,9 +91,9 @@ export default function OrderListScreen() {
   return (
     <div className='content'>
       <Helmet>
-        <title>Orders</title>
+        <title>Orders List</title>
       </Helmet>
-      <h1>Orders</h1>
+      <h1>Orders List</h1>
       {loadingDelete && <LoadingBox></LoadingBox>}
       {loading ? (
         <LoadingBox></LoadingBox>

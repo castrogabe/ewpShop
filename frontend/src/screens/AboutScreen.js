@@ -73,6 +73,10 @@ const About = () => {
                 alt='wedge'
               />
             </div>
+          </Col>
+        </Row>
+        <Row>
+          <Col>
             <div className='box'>
               <h2>Exotic Woods, Acrylics, Ebonite Materials.</h2>
               <p>
@@ -83,11 +87,6 @@ const About = () => {
                 with Certificate of Authenticity.
               </p>
             </div>
-            <br />
-          </Col>
-        </Row>
-        <Row>
-          <Col>
             <div className='box'>
               <h2>Steampunk Pen.</h2>
               <p>
@@ -151,7 +150,7 @@ const About = () => {
           </Col>
           <Col md={6}>
             <div className='box'>
-              <h2>Volunteered as a Docent at Sam Maloof's Historic Museum</h2>
+              <h2>Volunteered a Docent at Sam Maloof's Historic Museum</h2>
               <p>
                 My Exotic Wood Pens, their shape inspired by legendary wood
                 worker Sam Maloof. My favorite chair is the Curly Maple and
