@@ -14,6 +14,8 @@ import SignupScreen from './screens/SignupScreen';
 import OrderScreen from './screens/OrderScreen';
 import PlaceOrderScreen from './screens/PlaceOrderScreen';
 import PaymentMethodScreen from './screens/PaymentMethodScreen';
+import OrderHistoryScreen from './screens/OrderHistoryScreen';
+import ProfileScreen from './screens/ProfileScreen';
 
 function App() {
   return (
@@ -29,10 +31,12 @@ function App() {
           <Route path='/jig' element={<JigScreen />} />
           <Route path='/signin' element={<SigninScreen />} />
           <Route path='/signup' element={<SignupScreen />} />
+          <Route path='/profile' element={<ProfileScreen />} />
           <Route path='/placeorder' element={<PlaceOrderScreen />} />
           <Route path='/order/:id' element={<OrderScreen />} />
           <Route path='/shipping' element={<ShippingAddressScreen />} />
           <Route path='/payment' element={<PaymentMethodScreen />} />
+          <Route path='/orderhistory' element={<OrderHistoryScreen />} />
         </Routes>
       </main>
       <Footer />

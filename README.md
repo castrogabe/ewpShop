@@ -68,3 +68,16 @@
 5. implement Place Order Action
 6. Create OrderScreen
 7. Pay Order By PayPal
+
+# Eight Commit-Order History
+
+1. Create OrderScreen, and (order history api backend)
+2. Create OrderHistoryScreen
+3. Create ShippingAddressScreen
+4. Create ProfileScreen
+5. Create SideBar for categories (optional)
+6. Create Categories for categories (optional)
+7. Create Bottom header for categories
+8. Create SearchScreen (optional)
+   components/Header.js without searchBar or sideBar
+   components/Header1.js with searchBar and sideBar (optional)

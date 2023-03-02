@@ -29,7 +29,7 @@ export default function PaymentMethodScreen() {
     navigate('/placeorder');
   };
   return (
-    <div>
+    <div className='content'>
       <CheckoutSteps step1 step2 step3></CheckoutSteps>
       <div className='container small-container'>
         <Helmet>

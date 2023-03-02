@@ -61,7 +61,7 @@ export default function OrderScreen() {
   ) : error ? (
     <MessageBox variant='danger'>{error}</MessageBox>
   ) : (
-    <div>
+    <div className='content'>
       <Helmet>
         <title>Order {orderId}</title>
       </Helmet>
