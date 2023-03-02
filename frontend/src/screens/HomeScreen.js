@@ -144,6 +144,7 @@ export default function SearchScreen() {
                     </LinkContainer>
                   ))}
                 </div>
+                <br />
               </>
             )}
           </Col>

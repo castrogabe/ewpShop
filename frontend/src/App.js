@@ -7,7 +7,6 @@ import JigScreen from './screens/JigScreen';
 import Header from './components/Header';
 import Footer from './components/Footer';
 import CartScreen from './screens/CartScreen';
-import ContactScreen from './screens/ContactScreen';
 import SigninScreen from './screens/SigninScreen';
 import ShippingAddressScreen from './screens/ShippingAddressScreen';
 import SignupScreen from './screens/SignupScreen';
@@ -25,7 +24,6 @@ import ProductEditScreen from './screens/ProductEditScreen';
 import OrderListScreen from './screens/OrderListScreen';
 import UserListScreen from './screens/UserListScreen';
 import UserEditScreen from './screens/UserEditScreen';
-import MapScreen from './screens/MapScreen';
 import BottomFooter from './components/BottomFooter';
 import BottomHeader from './components/BottomHeader';
 
@@ -40,7 +38,6 @@ function App() {
           <Route path='/jig' element={<JigScreen />} />
           <Route path='/product/:slug' element={<ProductMagScreen />} />
           <Route path='/cart' element={<CartScreen />} />
-          <Route path='/contact' element={<ContactScreen />} />
           <Route path='/search' element={<SearchScreen />} />
           <Route path='/signin' element={<SigninScreen />} />
           <Route path='/signup' element={<SignupScreen />} />
@@ -49,14 +46,6 @@ function App() {
             element={
               <ProtectedRoute>
                 <ProfileScreen />
-              </ProtectedRoute>
-            }
-          />
-          <Route
-            path='/map'
-            element={
-              <ProtectedRoute>
-                <MapScreen />
               </ProtectedRoute>
             }
           />

@@ -105,3 +105,8 @@
 5. Upload multiple images ProductScreen
 6. react-image-magnify on ProductScreen
 7. Pagination on HomeScreen
+
+# Eleventh Commit-Remove ContactScreen and MapScreen
+
+1. Remove ContactScreen and MapScreen from App.js and screens
+2. use gmail option in Footer.js

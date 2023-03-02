@@ -205,64 +205,64 @@ function ProductMagScreen() {
           </Row>
         </Col>
         <Col md={6}>
-          <ListGroup variant='flush'>
-            <ListGroup.Item>
-              <Helmet>
-                <title>{product.name}</title>
-              </Helmet>
-              <h1>{product.name}</h1>
-            </ListGroup.Item>
-            <ListGroup.Item>
-              <Rating
-                rating={product.rating}
-                numReviews={product.numReviews}
-              ></Rating>
-            </ListGroup.Item>
-            <ListGroup.Item>Price : ${product.price}</ListGroup.Item>
-            <ListGroup.Item>Style : {product.style}</ListGroup.Item>
-            <ListGroup.Item>Finish : {product.finish}</ListGroup.Item>
-            <ListGroup.Item>
-              Description:
-              <p>{product.description}</p>
-            </ListGroup.Item>
-          </ListGroup>
+          <div className='box'>
+            <ListGroup variant='flush'>
+              <ListGroup.Item>
+                <Helmet>
+                  <title>{product.name}</title>
+                </Helmet>
+                <h4>{product.name}</h4>
+              </ListGroup.Item>
+              <ListGroup.Item>
+                <Rating
+                  rating={product.rating}
+                  numReviews={product.numReviews}
+                ></Rating>
+              </ListGroup.Item>
+              <ListGroup.Item>Price : ${product.price}</ListGroup.Item>
+              <ListGroup.Item>Style : {product.style}</ListGroup.Item>
+              <ListGroup.Item>Finish : {product.finish}</ListGroup.Item>
+              <ListGroup.Item>
+                Description:
+                <p>{product.description}</p>
+              </ListGroup.Item>
+            </ListGroup>
+          </div>
 
           <br />
 
-          <Card>
-            <Card.Body>
-              <ListGroup variant='flush'>
-                <ListGroup.Item>
-                  <Row>
-                    <Col>Price:</Col>
-                    <Col>${product.price}</Col>
-                  </Row>
-                </ListGroup.Item>
-                <ListGroup.Item>
-                  <Row>
-                    <Col>Status:</Col>
-                    <Col>
-                      {product.countInStock > 0 ? (
-                        <Badge bg='success'>In Stock</Badge>
-                      ) : (
-                        <Badge bg='danger'>Unavailable</Badge>
-                      )}
-                    </Col>
-                  </Row>
-                </ListGroup.Item>
+          <div className='box'>
+            <ListGroup variant='flush'>
+              <ListGroup.Item>
+                <Row>
+                  <Col>Price:</Col>
+                  <Col>${product.price}</Col>
+                </Row>
+              </ListGroup.Item>
+              <ListGroup.Item>
+                <Row>
+                  <Col>Status:</Col>
+                  <Col>
+                    {product.countInStock > 0 ? (
+                      <Badge bg='success'>In Stock</Badge>
+                    ) : (
+                      <Badge bg='danger'>Unavailable</Badge>
+                    )}
+                  </Col>
+                </Row>
+              </ListGroup.Item>
 
-                {product.countInStock > 0 && (
-                  <ListGroup.Item>
-                    <div className='d-grid'>
-                      <Button onClick={addToCartHandler} variant='primary'>
-                        Add to Cart
-                      </Button>
-                    </div>
-                  </ListGroup.Item>
-                )}
-              </ListGroup>
-            </Card.Body>
-          </Card>
+              {product.countInStock > 0 && (
+                <ListGroup.Item>
+                  <div className='d-grid'>
+                    <Button onClick={addToCartHandler} variant='primary'>
+                      Add to Cart
+                    </Button>
+                  </div>
+                </ListGroup.Item>
+              )}
+            </ListGroup>
+          </div>
         </Col>
       </Row>
 

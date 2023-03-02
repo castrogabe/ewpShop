@@ -131,9 +131,9 @@ export default function SearchScreen() {
         <title>Search Products</title>
       </Helmet>
       <Row className='mt-3'>
-        <Col md={3}>
-          <h3>Department</h3>
+        <Col md={3} className='search'>
           <div>
+            <h3>Department</h3>
             <ul>
               <li>
                 <Link
