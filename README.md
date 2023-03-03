@@ -116,3 +116,9 @@
 1. Finalize design features
 2. React Tables now responsive
 3. Add font-awesome icons
+
+# Thirteenth Commit-.env.example
+
+1. rename .env.example to .env and add fields to connect backend to frontend
+2. npm install frontend, npm start.
+3. npm install backend, npm start.
