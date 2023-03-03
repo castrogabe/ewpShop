@@ -122,3 +122,7 @@
 1. rename .env.example to .env and add fields to connect backend to frontend
 2. npm install frontend, npm start.
 3. npm install backend, npm start.
+
+# Fourteenth Commit-deploy
+
+1. frontend - npm run build for deployment
