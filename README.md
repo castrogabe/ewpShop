@@ -128,3 +128,8 @@
 1. frontend - npm run build for deployment
 
 # Fifteenth Commit-remove build
+
+# Sixteenth Commit-footer href links
+
+1. fix href links in Footer.js and BottomFooter.js to open in new window tab.
+2. fixing these will keep viewers on your main page.

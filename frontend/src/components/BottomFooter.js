@@ -7,7 +7,13 @@ const BottomFooter = () => {
       <Row>
         <Col className='text-center'>
           MERN stack app developed by{' '}
-          <a href='https://www.gabewd.com/' id='linked'>
+          <a
+            href='https://www.gabewd.com/'
+            target='_blank'
+            rel='noopener'
+            results='noreferrer'
+            id='linked'
+          >
             {' '}
             &copy; gabewd.com
           </a>
