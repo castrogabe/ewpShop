@@ -133,3 +133,8 @@
 
 1. fix href links in Footer.js and BottomFooter.js to open in new window tab.
 2. fixing these will keep viewers on your main page.
+
+# Seventeenth Commit-css modifications
+
+1. fix css for thumbnail images (responsive for mobile) media queries.
+2. fix css for tablet jumbotron lathe turning image media queries.

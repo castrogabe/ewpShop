@@ -14,7 +14,6 @@ const BottomFooter = () => {
             results='noreferrer'
             id='linked'
           >
-            {' '}
             &copy; gabewd.com
           </a>
         </Col>
