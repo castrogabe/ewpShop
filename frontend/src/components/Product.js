@@ -26,7 +26,7 @@ function Product(props) {
       type: 'CART_ADD_ITEM',
       payload: { ...item, quantity },
     });
-    // toast notification
+    // toast notification for add to cart
     toast.success(`${product.name} added to cart`, {
       position: 'bottom-center',
     });
