@@ -26,12 +26,15 @@ import UserListScreen from './screens/UserListScreen';
 import UserEditScreen from './screens/UserEditScreen';
 import BottomFooter from './components/BottomFooter';
 import BottomHeader from './components/BottomHeader';
+import { ToastContainer } from 'react-toastify';
+import 'react-toastify/dist/ReactToastify.css';
 
 function App() {
   return (
     <BrowserRouter>
       <Header />
       <BottomHeader />
+      <ToastContainer />
       <main className='mt-0'>
         <Routes>
           <Route path='/about' element={<AboutScreen />} />

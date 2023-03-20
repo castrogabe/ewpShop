@@ -138,3 +138,8 @@
 
 1. fix css for thumbnail images (responsive for mobile) media queries.
 2. fix css for tablet jumbotron lathe turning image media queries.
+
+# Eighteenth Commit-add toast notification for add to cart
+
+1. Add toast notification to components > Product.js (Line 29-32)
+   app.js (Lines 29-30, 37)
