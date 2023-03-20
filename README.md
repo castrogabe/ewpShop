@@ -143,3 +143,7 @@
 
 1. Add toast notification to components > Product.js (Line 29-32)
    app.js (Lines 29-30, 37)
+
+# Twentieth Commit-npm run build
+
+1. cd frontend npm run build
