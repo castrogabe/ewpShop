@@ -123,14 +123,17 @@ export default function PlaceOrderScreen() {
                   <strong>Address: </strong>
                   {cart.shippingAddress.address}
                   <br />
-                  {cart.shippingAddress.city},{cart.shippingAddress.states},
+                  <strong>Street: </strong> {cart.shippingAddress.city},
+                  {cart.shippingAddress.states},
                   <br />
-                  {cart.shippingAddress.postalCode},
+                  <strong>Zip Code: </strong> {cart.shippingAddress.postalCode},
                   <br />
-                  {cart.shippingAddress.country}
+                  <strong>Country: </strong> {cart.shippingAddress.country}
                 </text>
                 <br />
-                <Link to='/shipping'>Edit</Link>
+                <Link to='/shipping'>
+                  <strong className='youtube'>Edit</strong>
+                </Link>
               </div>
             </div>
 
@@ -141,7 +144,9 @@ export default function PlaceOrderScreen() {
                   <strong>Method:</strong> {cart.paymentMethod}
                 </text>
                 <br />
-                <Link to='/payment'>Edit</Link>
+                <Link to='/payment'>
+                  <strong className='youtube'>Edit</strong>
+                </Link>
               </div>
             </div>
           </Col>

@@ -147,3 +147,35 @@
 # Twentieth Commit-npm run build
 
 1. cd frontend npm run build
+
+# Twenty First Commit-Reset password added
+
+1. FRONTEND
+   folder > screens
+   ForgetPasswordScreen.js added
+   ResetPasswordScreen.js added
+2. App.js modified (Lines 31-32, 50-53)
+3. frontend {} package.json changed port from 8000 to 4000
+4. BACKEND
+   modified models > userModel.js (Line 8) added
+5. modified routes > userRoutes (Lines 99-121) added
+6. .ENV.EXAMPLE modified added (Line 1)
+7. modified config.js (Lines 6-7)
+
+# Twenty Second Commit-Add ContactScreen Components
+
+1. FRONTEND
+   folder > screens
+   ContactScreen.js added
+   MessagesScreen.js added
+2. folder > components
+   Header.js > add messages to '/admin/messages' (Lines 113-115)
+   Footer.js > uncomment (Lines 80-83) for '/contact'
+3. BACKEND
+   folder > models
+   messageModel.js added
+4. folder > routes
+   messageRoutes.js added
+5. server.js
+   app.use(messageRouter); (Line 37)
+6. You can add contact info to page and check your database for messages, also as admin you can check admin dropdown and review message.

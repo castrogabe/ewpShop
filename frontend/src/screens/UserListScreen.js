@@ -37,6 +37,7 @@ const reducer = (state, action) => {
       return state;
   }
 };
+
 export default function UserListScreen() {
   const navigate = useNavigate();
   const [{ loading, error, users, loadingDelete, successDelete }, dispatch] =
@@ -87,6 +88,7 @@ export default function UserListScreen() {
       }
     }
   };
+
   return (
     <div className='content'>
       <Helmet>

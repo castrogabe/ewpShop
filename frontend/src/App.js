@@ -1,46 +1,52 @@
 import { BrowserRouter, Route, Routes } from 'react-router-dom';
 import 'react-toastify/dist/ReactToastify.css';
-import HomeScreen from './screens/HomeScreen';
-import ProductMagScreen from './screens/ProductMagScreen';
-import AboutScreen from './screens/AboutScreen';
-import JigScreen from './screens/JigScreen';
+
+// COMPONENTS
 import Header from './components/Header';
+import BottomHeader from './components/BottomHeader';
 import Footer from './components/Footer';
-import CartScreen from './screens/CartScreen';
-import SigninScreen from './screens/SigninScreen';
-import ShippingAddress2Screen from './screens/ShippingAddress2Screen';
-import SignupScreen from './screens/SignupScreen';
-import PaymentMethod3Screen from './screens/PaymentMethod3Screen';
-import PlaceOrder4Screen from './screens/PlaceOrder4Screen';
-import OrderScreen from './screens/OrderScreen';
-import OrderHistoryScreen from './screens/OrderHistoryScreen';
-import ProfileScreen from './screens/ProfileScreen';
-import SearchScreen from './screens/SearchScreen';
-import ProtectedRoute from './components/ProtectedRoute';
-import DashboardScreen from './screens/DashboardScreen';
+import BottomFooter from './components/BottomFooter';
 import AdminRoute from './components/AdminRoute';
+import ProtectedRoute from './components/ProtectedRoute';
+
+// ADMIN SCREENS
+import DashboardScreen from './screens/DashboardScreen';
 import ProductListScreen from './screens/ProductListScreen';
 import ProductEditScreen from './screens/ProductEditScreen';
 import OrderListScreen from './screens/OrderListScreen';
 import UserListScreen from './screens/UserListScreen';
 import UserEditScreen from './screens/UserEditScreen';
-import BottomFooter from './components/BottomFooter';
-import BottomHeader from './components/BottomHeader';
-import { ToastContainer } from 'react-toastify';
-import 'react-toastify/dist/ReactToastify.css';
+import MessagesScreen from './screens/MessagesScreen';
+
+// SCREENS
+import AboutScreen from './screens/AboutScreen';
+import CartScreen from './screens/CartScreen';
+import ContactScreen from './screens/ContactScreen';
+import HomeScreen from './screens/HomeScreen';
+import JigScreen from './screens/JigScreen';
+import OrderHistoryScreen from './screens/OrderHistoryScreen';
+import OrderScreen from './screens/OrderScreen';
+import PaymentMethod3Screen from './screens/PaymentMethod3Screen';
+import PlaceOrder4Screen from './screens/PlaceOrder4Screen';
+import ProductMagScreen from './screens/ProductMagScreen';
+import ProfileScreen from './screens/ProfileScreen';
+import SearchScreen from './screens/SearchScreen';
+import ShippingAddress2Screen from './screens/ShippingAddress2Screen';
+import SigninScreen from './screens/SigninScreen';
+import SignupScreen from './screens/SignupScreen';
 
 function App() {
   return (
     <BrowserRouter>
       <Header />
       <BottomHeader />
-      <ToastContainer />
       <main className='mt-0'>
         <Routes>
           <Route path='/about' element={<AboutScreen />} />
           <Route path='/jig' element={<JigScreen />} />
           <Route path='/product/:slug' element={<ProductMagScreen />} />
           <Route path='/cart' element={<CartScreen />} />
+          <Route path='/contact' element={<ContactScreen />} />
           <Route path='/search' element={<SearchScreen />} />
           <Route path='/signin' element={<SigninScreen />} />
           <Route path='/signup' element={<SignupScreen />} />
@@ -101,6 +107,14 @@ function App() {
             element={
               <AdminRoute>
                 <ProductListScreen />
+              </AdminRoute>
+            }
+          ></Route>
+          <Route
+            path='/admin/messages'
+            element={
+              <AdminRoute>
+                <MessagesScreen />
               </AdminRoute>
             }
           ></Route>

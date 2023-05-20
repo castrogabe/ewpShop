@@ -110,6 +110,9 @@ function Header() {
                     <LinkContainer to='/admin/users'>
                       <NavDropdown.Item>Users</NavDropdown.Item>
                     </LinkContainer>
+                    <LinkContainer to='/admin/messages'>
+                      <NavDropdown.Item>Messages</NavDropdown.Item>
+                    </LinkContainer>
                   </NavDropdown>
                 )}
                 <Link to='/cart' className='nav-link'>

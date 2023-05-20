@@ -77,13 +77,13 @@ const Footer = () => {
             Pen Questions
             <div className='socialIcon'>
               <ul className='list-unstyled'>
-                {/* <Link to='/contact' className='email'>
-                {' '}
-                <i className='fa fa-envelope'></i> Contact Us
-              </Link> */}
+                <Link to='/contact' className='email'>
+                  {' '}
+                  <i className='fa fa-envelope'></i> Contact Us
+                </Link>
                 <li>
                   <a href='mailto:exoticwoodpen@gmail.com' className='email'>
-                    <i className='fa fa-envelope'></i> Email Me
+                    <i className='fa fa-envelope'></i> Email Me via gmail
                   </a>
                 </li>
               </ul>
