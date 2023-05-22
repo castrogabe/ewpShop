@@ -179,3 +179,21 @@
 5. server.js
    app.use(messageRouter); (Line 37)
 6. You can add contact info to page and check your database for messages, also as admin you can check admin dropdown and review message.
+
+# Twenty Third Commit-Add Date and Delete to MessageScreen
+
+1. BACKEND
+   folder > models
+   messageModel.js added: update_time: (Line 5)
+2. folder > routes
+   messageRoutes.js added: delete a message (Lines 30-50)
+
+3. FRONTEND
+   folder > screens
+   MessagesScreens.js:
+   .actions
+   .update_time
+   .loadingBox
+   .messageBox
+   .deleteHandler
+   .Pagination (Lines 113-117) & (Lines 172-192)

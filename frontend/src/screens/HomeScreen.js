@@ -5,11 +5,10 @@ import axios from 'axios';
 import { toast } from 'react-toastify';
 import { getError } from '../utils';
 import { Helmet } from 'react-helmet-async';
-import { Row, Col, Button } from 'react-bootstrap';
+import { Row, Col, Button, LinkContainer } from 'react-bootstrap';
 import LoadingBox from '../components/LoadingBox';
 import MessageBox from '../components/MessageBox';
 import Product from '../components/Product';
-import LinkContainer from 'react-router-bootstrap/LinkContainer';
 
 const reducer = (state, action) => {
   switch (action.type) {
@@ -76,6 +75,7 @@ export default function SearchScreen() {
     const filterPage = filter.page || page;
     return `/?&page=${filterPage}`;
   };
+
   return (
     <>
       <div className='jumbotron1' alt='tools'>
