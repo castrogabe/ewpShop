@@ -33,97 +33,101 @@ export default function CartScreen() {
   };
 
   return (
-    <div>
+    <div className='content'>
       <Helmet>
         <title>Cart</title>
       </Helmet>
-      <div className='content'>
-        <br />
-        <h1>Cart</h1>
-        <Row>
-          <Col md={8}>
-            {cartItems.length === 0 ? (
-              <MessageBox>
-                Cart is empty. <Link to='/'> Go Shopping</Link>
-              </MessageBox>
-            ) : (
-              <ListGroup>
-                {cartItems.map((item) => (
-                  <ListGroup.Item key={item._id}>
-                    <Row className='align-items-center'>
-                      <Col md={5}>
-                        <img
-                          src={item.image}
-                          alt={item.name}
-                          className='img-fluid rounded img-thumbnail'
-                        ></img>{' '}
-                        <Link to={`/product/${item.slug}`}>{item.name}</Link>
-                      </Col>
-                      <Col md={3}>
-                        <Button
-                          onClick={() =>
-                            updateCartHandler(item, item.quantity - 1)
-                          }
-                          variant='light'
-                          disabled={item.quantity === 1}
-                        >
-                          <i className='fas fa-minus-circle'></i>
-                        </Button>{' '}
-                        <span>{item.quantity}</span>{' '}
-                        <Button
-                          variant='light'
-                          onClick={() =>
-                            updateCartHandler(item, item.quantity + 1)
-                          }
-                          disabled={item.quantity === item.countInStock}
-                        >
-                          <i className='fas fa-plus-circle'></i>
-                        </Button>
-                      </Col>
-                      <Col md={2}>Price: ${item.price}</Col>
-                      <Col md={2}>
-                        <Button
-                          onClick={() => removeItemHandler(item)}
-                          variant='light'
-                        >
-                          <i className='fas fa-trash'></i>
-                        </Button>
-                      </Col>
-                    </Row>
-                  </ListGroup.Item>
-                ))}
-              </ListGroup>
-            )}
-          </Col>
-          <Col md={4}>
-            <Card>
-              <Card.Body>
-                <ListGroup variant='flush'>
-                  <ListGroup.Item>
-                    <h3>
-                      Subtotal ({cartItems.reduce((a, c) => a + c.quantity, 0)}{' '}
-                      items) : $
-                      {cartItems.reduce((a, c) => a + c.price * c.quantity, 0)}
-                    </h3>
-                  </ListGroup.Item>
-                  <ListGroup.Item>
-                    <div className='d-grid'>
+      <br />
+      <h4 className='box'>Cart</h4>
+      <Row>
+        <Col md={8}>
+          {cartItems.length === 0 ? (
+            <MessageBox>
+              Cart is empty. <Link to='/'> Go Shopping</Link>
+            </MessageBox>
+          ) : (
+            <ListGroup>
+              {cartItems.map((item) => (
+                <ListGroup.Item key={item._id}>
+                  <Row className='align-items-center'>
+                    <Col md={5}>
+                      <img
+                        src={item.image}
+                        alt={item.name}
+                        className='img-fluid rounded img-thumbnail'
+                      ></img>{' '}
+                      <Link to={`/product/${item.slug}`}>{item.name}</Link>
+                    </Col>
+                    <Col md={3}>
                       <Button
-                        type='button'
-                        variant='primary'
-                        onClick={checkoutHandler}
-                        disabled={cartItems.length === 0}
+                        onClick={() =>
+                          updateCartHandler(item, item.quantity - 1)
+                        }
+                        variant='light'
+                        disabled={item.quantity === 1}
                       >
-                        Proceed to Checkout
+                        <i className='fas fa-minus-circle'></i>
+                      </Button>{' '}
+                      <span>{item.quantity}</span>{' '}
+                      <Button
+                        variant='light'
+                        onClick={() =>
+                          updateCartHandler(item, item.quantity + 1)
+                        }
+                        disabled={item.quantity === item.countInStock}
+                      >
+                        <i className='fas fa-plus-circle'></i>
                       </Button>
-                    </div>
-                  </ListGroup.Item>
-                </ListGroup>
-              </Card.Body>
-            </Card>
-          </Col>
-        </Row>
-      </div>
+                    </Col>
+                    <Col md={2}>Price: ${item.price}</Col>
+                    <Col md={2}>
+                      <Button
+                        onClick={() => removeItemHandler(item)}
+                        variant='light'
+                      >
+                        <i className='fas fa-trash'></i>
+                      </Button>
+                    </Col>
+                  </Row>
+                </ListGroup.Item>
+              ))}
+            </ListGroup>
+          )}
+        </Col>
+        <Col md={4}>
+          <Card>
+            <Card.Body>
+              <ListGroup variant='flush'>
+                <ListGroup.Item>
+                  <h3>
+                    Subtotal ({cartItems.reduce((a, c) => a + c.quantity, 0)}{' '}
+                    items) : $
+                    {cartItems.reduce((a, c) => a + c.price * c.quantity, 0)}
+                  </h3>
+                </ListGroup.Item>
+                <ListGroup.Item>
+                  <div className='d-grid'>
+                    <Button
+                      type='button'
+                      variant='primary'
+                      onClick={checkoutHandler}
+                      disabled={cartItems.length === 0}
+                    >
+                      Proceed to Checkout
+                    </Button>
+                  </div>
+                </ListGroup.Item>
+              </ListGroup>
+            </Card.Body>
+          </Card>
+        </Col>
+      </Row>
     </div>
   );
 }
+
+// step 1 (CartScreen)  <= CURRENT STEP
+// step 2 (ShippingAddress2Screen)
+// step 3 (PaymentMethod3Screen)
+// step 4 (PreviewOrder4Screen)
+// lands on OrderScreen for payment

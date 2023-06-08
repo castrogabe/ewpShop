@@ -255,6 +255,13 @@ function ProductMagScreen() {
               {product.countInStock > 0 && (
                 <ListGroup.Item>
                   <div className='d-grid'>
+                    {/* low quantity alert 5 or less */}
+                    {product.countInStock <= 5 && (
+                      <p style={{ color: 'red' }}>
+                        Only {product.countInStock} Left, buy Now!
+                      </p>
+                    )}
+                    {/* end low quantity alert */}
                     <Button onClick={addToCartHandler} variant='primary'>
                       Add to Cart
                     </Button>

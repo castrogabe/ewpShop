@@ -1,7 +1,8 @@
 import React, { useContext, useEffect, useReducer } from 'react';
 import axios from 'axios';
-import { Link, useLocation, useNavigate } from 'react-router-dom';
+import { useLocation, useNavigate } from 'react-router-dom';
 import { Row, Col, Button, Table } from 'react-bootstrap';
+import { LinkContainer } from 'react-router-bootstrap';
 import { toast } from 'react-toastify';
 import { Store } from '../Store';
 import LoadingBox from '../components/LoadingBox';
@@ -133,6 +134,12 @@ export default function ProductListScreen() {
     }
   };
 
+  // Pagination
+  const getFilterUrl = (filter) => {
+    const filterPage = filter.page || page;
+    return `/?&page=${filterPage}`;
+  };
+
   return (
     <div className='content'>
       <br />
@@ -202,15 +209,22 @@ export default function ProductListScreen() {
               </tbody>
             </Table>
           </div>
-          <div className='box'>
+
+          {/* Pagination */}
+          <div>
             {[...Array(pages).keys()].map((x) => (
-              <Link
-                className={x + 1 === Number(page) ? 'btn text-bold' : 'btn'}
+              <LinkContainer
                 key={x + 1}
-                to={`/admin/products?page=${x + 1}`}
+                className='mx-1'
+                to={getFilterUrl({ page: x + 1 })}
               >
-                {x + 1}
-              </Link>
+                <Button
+                  className={Number(page) === x + 1 ? 'text-bold' : ''}
+                  variant='light'
+                >
+                  {x + 1}
+                </Button>
+              </LinkContainer>
             ))}
           </div>
           <br />

@@ -3,7 +3,12 @@ import expressAsyncHandler from 'express-async-handler';
 import Order from '../models/orderModel.js';
 import User from '../models/userModel.js';
 import Product from '../models/productModel.js';
-import { isAuth, isAdmin, mailgun, payOrderEmailTemplate } from '../utils.js';
+import {
+  isAuth,
+  isAdmin,
+  nodemailerFunction,
+  payOrderEmailTemplate,
+} from '../utils.js';
 
 const orderRouter = express.Router();
 
@@ -137,12 +142,19 @@ orderRouter.put(
         email_address: req.body.email_address,
       };
 
-      const updatedOrder = await order.save();
-      mailgun()
+      const updatedOrder = await order.save(); // Update count in stock
+      for (const index in updatedOrder.orderItems) {
+        const item = updatedOrder.orderItems[index];
+        const product = await Product.findById(item.product);
+        product.countInStock -= 1;
+        await product.save();
+      }
+
+      nodemailerFunction()
         .messages()
         .send(
           {
-            from: 'Gabe <exoticwoodpen@mg.yourdomain.com>',
+            from: 'Gabe <exoticwoodpen@gmail.com>', // your name and email
             to: `${order.user.name} <${order.user.email}>`,
             subject: `New order ${order._id}`,
             html: payOrderEmailTemplate(order),

@@ -27,15 +27,17 @@ export default function PaymentMethodScreen() {
     localStorage.setItem('paymentMethod', paymentMethodName);
     navigate('/placeorder');
   };
+
   return (
     <div className='content'>
       <br />
       <CheckoutSteps step1 step2 step3></CheckoutSteps>
       <div className='container small-container'>
         <Helmet>
-          <title>PayPal Payment</title>
+          <title>Payment Method</title>
         </Helmet>
-        <h1 className='my-3'>PayPal</h1>
+        <br />
+        <h4 className='box'>Select Payment Method</h4>
         <Form onSubmit={submitHandler}>
           <div className='mb-3'>
             <Form.Check
@@ -47,7 +49,7 @@ export default function PaymentMethodScreen() {
               onChange={(e) => setPaymentMethod(e.target.value)}
             />
           </div>
-          {/* <div className='mb-3'>
+          <div className='mb-3'>
             <Form.Check
               type='radio'
               id='Stripe'
@@ -56,7 +58,7 @@ export default function PaymentMethodScreen() {
               checked={paymentMethodName === 'Stripe'}
               onChange={(e) => setPaymentMethod(e.target.value)}
             />
-          </div> */}
+          </div>
           <div className='mb-3'>
             <Button type='submit'>Continue</Button>
           </div>
@@ -65,3 +67,9 @@ export default function PaymentMethodScreen() {
     </div>
   );
 }
+
+// step 1 (CartScreen)
+// step 2 (ShippingAddress2Screen)
+// step 3 (PaymentMethod3Screen) <= CURRENT STEP
+// step 4 (PlaceOrder4Screen)
+// lands on OrderScreen for payment

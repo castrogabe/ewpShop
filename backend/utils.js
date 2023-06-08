@@ -1,5 +1,12 @@
 import jwt from 'jsonwebtoken';
-import mg from 'mailgun-js';
+import nodemailer from 'nodemailer';
+
+export const baseUrl = () =>
+  process.env.BASE_URL
+    ? process.env.BASE_URL
+    : process.env.NODE_ENV !== 'production'
+    ? 'http://localhost:3000'
+    : 'https://yourdomain.com';
 
 export const generateToken = (user) => {
   return jwt.sign(
@@ -41,11 +48,17 @@ export const isAdmin = (req, res, next) => {
   }
 };
 
-export const mailgun = () =>
-  mg({
-    apiKey: process.env.MAILGUN_API_KEY,
-    domain: process.env.MAILGUN_DOMIAN,
+export const nodemailerFunction = () => {
+  let smtpTransport = nodemailer.createTransport({
+    service: 'Gmail',
+    port: 465,
+    auth: {
+      user: 'username',
+      pass: 'password', // google password
+    },
   });
+  return smtpTransport;
+};
 
 export const payOrderEmailTemplate = (order) => {
   return `<h1>Thanks for shopping with us</h1>

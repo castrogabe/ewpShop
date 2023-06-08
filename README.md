@@ -197,3 +197,42 @@
    .messageBox
    .deleteHandler
    .Pagination (Lines 113-117) & (Lines 172-192)
+
+# Twenty Fourth Commit-Add image to OrderListScreen.js / Add Stripe / switch from mg to nodemon
+
+1. FRONTEND
+   folder > screens
+   OrderListScreen.js (Lines 118-162 modified)
+
+2. BACKEND
+   config.js (Lines 12-13) added NODE_USER & NODE_PASSWORD
+3. .env.example (Lines 14-15) added NODE_USER= & NODE_PASSWORD
+   add (Lines in config.js 15-16)
+4. make the same chances to .env
+5. utils.js (Lines 44-54) changes made
+6. folder > routes
+   orderRoutes.js (Line 146) change mailgun to nodemailerFunction
+
+7. FRONTEND
+   folder > screens
+   ProductMagScreen.js (Lines 258-264) added low quantity alert
+
+8. FRONTEND
+   added pagination => admin screens
+   a. UserListScreen.js (Lines 4, 45, 95-99, 156-173)
+   b. ProductListScreen.js (Lines 5, 137-141, 213-228)
+   c. OrderListScreen.js (Line 4, 105-109, 188-205)
+
+9. BACKEND
+   npm i stripe
+   folder > routes : stripeRouter.js
+   server.js (Lines 6, 37)
+   add .env.example (Lines 5-6)
+   add config.js (Lines 10-12)
+
+10. FRONTEND
+    Add Stripe to OrderScreen.js
+    npm i @stripe/react-stripe-js @stripe/stripe-js
+    folder > components : StripeCheckout.js
+    folder > screens
+    OrderScreen.js (Lines 13-14, 56-57, 94-114, 134-135, 147-200, 228, 340-362)

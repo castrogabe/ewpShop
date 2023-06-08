@@ -85,9 +85,10 @@ export default function PlaceOrderScreen() {
         <Helmet>
           <title>Preview Order</title>
         </Helmet>
-        <h6 className='my-3'>Preview Order</h6>
+        <br />
+        <h4 className='box'>Preview Order</h4>
         <Row>
-          <Col md={8}>
+          <Col md={6}>
             <div className='box'>
               <div className='body'>
                 <title>Items</title>
@@ -111,7 +112,9 @@ export default function PlaceOrderScreen() {
                     </ListGroup.Item>
                   ))}
                 </ListGroup>
-                <Link to='/cart'>Edit</Link>
+                <Link to='/cart' className='youtube'>
+                  Edit
+                </Link>
               </div>
             </div>
 
@@ -128,6 +131,8 @@ export default function PlaceOrderScreen() {
                   <br />
                   <strong>Zip Code: </strong> {cart.shippingAddress.postalCode},
                   <br />
+                  <strong>State: </strong> {cart.shippingAddress.states},
+                  <br />
                   <strong>Country: </strong> {cart.shippingAddress.country}
                 </text>
                 <br />
@@ -136,7 +141,9 @@ export default function PlaceOrderScreen() {
                 </Link>
               </div>
             </div>
+          </Col>
 
+          <Col md={6}>
             <div className='box'>
               <div className='body'>
                 <title>Payment</title>
@@ -149,9 +156,6 @@ export default function PlaceOrderScreen() {
                 </Link>
               </div>
             </div>
-          </Col>
-
-          <Col md={4}>
             <div className='box'>
               <div className='body'>
                 <title>Order Summary</title>
@@ -206,3 +210,9 @@ export default function PlaceOrderScreen() {
     </div>
   );
 }
+
+// step 1 (CartScreen)
+// step 2 (ShippingAddress2Screen)
+// step 3 (PaymentMethod3Screen)
+// step 4 (PlaceOrder4Screen) <= CURRENT STEP
+// lands on OrderScreen for payment

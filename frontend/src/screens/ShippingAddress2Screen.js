@@ -120,3 +120,9 @@ export default function ShippingAddressScreen() {
     </div>
   );
 }
+
+// step 1 (CartScreen)
+// step 2 (ShippingAddress2Screen) <= CURRENT STEP
+// step 3 (PaymentMethod3Screen) select radial button for PayPal or Stripe
+// step 4 (PlaceOrder4Screen)
+// lands on (OrderScreen) 0r (StripeOrderScreen) for payment

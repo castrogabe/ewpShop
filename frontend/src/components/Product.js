@@ -4,6 +4,7 @@ import Rating from './Rating';
 import axios from 'axios';
 import { useContext } from 'react';
 import { Store } from '../Store';
+import { toast } from 'react-toastify';
 
 function Product(props) {
   const { product } = props;
@@ -24,6 +25,11 @@ function Product(props) {
     ctxDispatch({
       type: 'CART_ADD_ITEM',
       payload: { ...item, quantity },
+    });
+    // toast notification for add to cart
+    toast.success(`${product.name} added to cart`, {
+      position: 'bottom-center',
+      autoClose: 1000, // Duration in milliseconds (1 second)
     });
   };
 

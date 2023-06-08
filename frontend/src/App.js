@@ -20,18 +20,18 @@ import MessagesScreen from './screens/MessagesScreen';
 
 // SCREENS
 import AboutScreen from './screens/AboutScreen';
-import CartScreen from './screens/CartScreen';
+import CartScreen from './screens/CartScreen'; // step 1
 import ContactScreen from './screens/ContactScreen';
 import HomeScreen from './screens/HomeScreen';
 import JigScreen from './screens/JigScreen';
 import OrderHistoryScreen from './screens/OrderHistoryScreen';
 import OrderScreen from './screens/OrderScreen';
-import PaymentMethod3Screen from './screens/PaymentMethod3Screen';
-import PlaceOrder4Screen from './screens/PlaceOrder4Screen';
+import PaymentMethod3Screen from './screens/PaymentMethod3Screen'; // step 3
+import PlaceOrder4Screen from './screens/PlaceOrder4Screen'; // step 4
 import ProductMagScreen from './screens/ProductMagScreen';
 import ProfileScreen from './screens/ProfileScreen';
 import SearchScreen from './screens/SearchScreen';
-import ShippingAddress2Screen from './screens/ShippingAddress2Screen';
+import ShippingAddress2Screen from './screens/ShippingAddress2Screen'; // step 2
 import SigninScreen from './screens/SigninScreen';
 import SignupScreen from './screens/SignupScreen';
 

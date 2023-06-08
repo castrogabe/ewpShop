@@ -1,6 +1,7 @@
 import axios from 'axios';
 import React, { useContext, useEffect, useReducer } from 'react';
 import { Button, Table } from 'react-bootstrap';
+import { LinkContainer } from 'react-router-bootstrap';
 import { Helmet } from 'react-helmet-async';
 import { useNavigate } from 'react-router-dom';
 import { toast } from 'react-toastify';
@@ -40,11 +41,13 @@ const reducer = (state, action) => {
 
 export default function UserListScreen() {
   const navigate = useNavigate();
-  const [{ loading, error, users, loadingDelete, successDelete }, dispatch] =
-    useReducer(reducer, {
-      loading: true,
-      error: '',
-    });
+  const [
+    { loading, error, users, loadingDelete, successDelete, page, pages },
+    dispatch,
+  ] = useReducer(reducer, {
+    loading: true,
+    error: '',
+  });
 
   const { state } = useContext(Store);
   const { userInfo } = state;
@@ -87,6 +90,12 @@ export default function UserListScreen() {
         });
       }
     }
+  };
+
+  // Pagination
+  const getFilterUrl = (filter) => {
+    const filterPage = filter.page || page;
+    return `/?&page=${filterPage}`;
   };
 
   return (
@@ -143,6 +152,25 @@ export default function UserListScreen() {
           </Table>
         )}
       </div>
+
+      {/* Pagination */}
+      <div>
+        {[...Array(pages).keys()].map((x) => (
+          <LinkContainer
+            key={x + 1}
+            className='mx-1'
+            to={getFilterUrl({ page: x + 1 })}
+          >
+            <Button
+              className={Number(page) === x + 1 ? 'text-bold' : ''}
+              variant='light'
+            >
+              {x + 1}
+            </Button>
+          </LinkContainer>
+        ))}
+      </div>
+      <br />
     </div>
   );
 }

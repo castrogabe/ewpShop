@@ -3,6 +3,7 @@ import path from 'path';
 import mongoose from 'mongoose';
 import config from './config.js';
 import seedRouter from './routes/seedRoutes.js';
+import stripeRouter from './routes/stripeRoutes.js';
 import productRouter from './routes/productRoutes.js';
 import userRouter from './routes/userRoutes.js';
 import orderRouter from './routes/orderRoutes.js';
@@ -33,7 +34,7 @@ app.use('/api/seed', seedRouter);
 app.use('/api/products', productRouter);
 app.use('/api/users', userRouter);
 app.use('/api/orders', orderRouter);
-// app.use('/api/messages', messageRouter);
+app.use('/api/stripe', stripeRouter);
 app.use(messageRouter);
 
 const __dirname = path.resolve();
