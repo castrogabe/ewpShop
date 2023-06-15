@@ -236,3 +236,14 @@
     folder > components : StripeCheckout.js
     folder > screens
     OrderScreen.js (Lines 13-14, 56-57, 94-114, 134-135, 147-200, 228, 340-362)
+
+## Twenty Fifth Commit-Add Lightbox/Carousel to ProductMagScreen
+
+1. FRONTEND
+   npm i react-responsive-carousel react-responsive react-image-lightbox
+   folder > screens
+   ProductMagScreen.js
+   (modified thumbnail images for left side)
+   (ProductMagScreenRow has previous code for thumbnail images under main image as option)
+   .added mobile view with Carousel
+   .added Lightbox when clicking on image-magnify

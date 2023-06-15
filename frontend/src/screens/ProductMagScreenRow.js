@@ -151,10 +151,6 @@ function ProductMagScreen() {
       textElement.textContent = 'Click to Enlarge or Hover to Zoom';
     }
   };
-  const hoverOffHandler = (i) => {
-    refs.current[i].classList.remove('active1');
-  };
-
   const refs = useRef([]);
   refs.current = [];
   const addRefs = (el) => {
@@ -185,9 +181,11 @@ function ProductMagScreen() {
           </p>
         </Row>
       </div>
+
       <br />
       <Row>
-        <Col md={6} className='container'>
+        <Col md={6}>
+          {/* mobile view */}
           {mobileView ? (
             <Carousel>
               {product.images.map((image, index) => (
@@ -197,47 +195,46 @@ function ProductMagScreen() {
               ))}
             </Carousel>
           ) : (
-            <div className='left'>
-              {/* thumbnail images */}
-              <div className='left_1'>
-                {[product.image, ...product.images].map((image, i) => (
-                  <div
-                    className={i === 0 ? 'img_wrap active' : 'img_wrap'}
-                    key={i}
-                    onMouseOver={() => hoverHandler(image, i)}
-                    onMouseLeave={() => hoverOffHandler(i)}
-                    ref={addRefs}
-                    onClick={() => openLightbox(i + 1)}
-                  >
-                    <Card.Img src={image} alt='' />
-                  </div>
-                ))}
-              </div>
+            //  main image
+            <div className='img-large' onClick={() => openLightbox(0)}>
+              <ReactImageMagnify
+                {...{
+                  smallImage: {
+                    src: selectedImage || product.image,
+                    alt: '',
+                    isFluidWidth: true,
+                  },
+                  largeImage: {
+                    src: selectedImage || product.image,
+                    width: 1200,
+                    height: 1800,
+                  },
+                  enlargedImageContainerDimensions: {
+                    width: '160%',
+                    height: '125%',
+                  },
+                }}
+              />
+              <p className='img-text'>
+                Roll over image to zoom in or Click to enlarge
+              </p>
 
-              {/* main image */}
-              <div className='img-large' onClick={() => openLightbox(0)}>
-                <ReactImageMagnify
-                  {...{
-                    smallImage: {
-                      src: selectedImage || product.image,
-                      alt: '',
-                      isFluidWidth: true,
-                    },
-                    largeImage: {
-                      src: selectedImage || product.image,
-                      width: 1200,
-                      height: 1800,
-                    },
-                    enlargedImageContainerDimensions: {
-                      width: '160%',
-                      height: '125%',
-                    },
-                  }}
-                />
-                <p className='text'>
-                  Roll over image to zoom in or Click to enlarge
-                </p>
-              </div>
+              {/* thumbnails under main image in row */}
+              <Row>
+                {[product.image, ...product.images].map((image, i) => (
+                  <Col>
+                    <div
+                      className='thumbnail'
+                      key={i}
+                      onMouseOver={() => hoverHandler(image, i)}
+                      ref={addRefs}
+                      onClick={() => openLightbox(i + 1)}
+                    >
+                      <Card.Img src={image} alt='' />
+                    </div>
+                  </Col>
+                ))}
+              </Row>
             </div>
           )}
         </Col>
@@ -316,7 +313,7 @@ function ProductMagScreen() {
       <br />
 
       <div className='box'>
-        <h4 ref={reviewsRef}>Reviews</h4>
+        <h2 ref={reviewsRef}>Reviews</h2>
         <div className='mb-3'>
           {product.reviews.length === 0 && (
             <MessageBox>There is no review</MessageBox>
@@ -334,7 +331,7 @@ function ProductMagScreen() {
         </ListGroup>
         <div className='my-3'>
           {userInfo ? (
-            <Form onSubmit={submitHandler}>
+            <form onSubmit={submitHandler}>
               <h2>Write a customer review</h2>
               <Form.Group className='mb-3' controlId='rating'>
                 <Form.Label>Rating</Form.Label>
@@ -364,21 +361,18 @@ function ProductMagScreen() {
                   onChange={(e) => setComment(e.target.value)}
                 />
               </FloatingLabel>
-
-              <div className='mb-3'>
-                <Button disabled={loadingCreateReview} type='submit'>
-                  Submit
-                </Button>
-                {loadingCreateReview && <LoadingBox></LoadingBox>}
-              </div>
-            </Form>
+              <Button
+                type='submit'
+                variant='primary'
+                disabled={loadingCreateReview}
+              >
+                Submit
+              </Button>
+              {loadingCreateReview && <LoadingBox />}
+            </form>
           ) : (
             <MessageBox>
-              Please{' '}
-              <Link to={`/signin?redirect=/product/${product.slug}`}>
-                Sign In
-              </Link>{' '}
-              to write a review
+              Please <Link to='/login'>Sign In</Link> to write a review
             </MessageBox>
           )}
         </div>
