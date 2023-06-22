@@ -1,12 +1,12 @@
 import React, { useContext, useEffect, useReducer } from 'react';
 import { Helmet } from 'react-helmet-async';
-import { Table, Button } from 'react-bootstrap';
+import { Table, Button, Row, Col } from 'react-bootstrap';
 import axios from 'axios';
 import { useNavigate, Link } from 'react-router-dom';
-import LoadingBox from '../components/LoadingBox';
 import MessageBox from '../components/MessageBox';
 import { Store } from '../Store';
 import { getError } from '../utils';
+import SkeletonOrderHistoryScreen from '../components/skeletons/SkeletonOrderHistoryScreen';
 
 const reducer = (state, action) => {
   switch (action.type) {
@@ -33,6 +33,9 @@ export default function OrderHistoryScreen() {
   useEffect(() => {
     const fetchData = async () => {
       dispatch({ type: 'FETCH_REQUEST' });
+      // Simulate delay for 1.5 seconds
+      await new Promise((resolve) => setTimeout(resolve, 1500));
+
       try {
         const { data } = await axios.get(
           `/api/orders/mine`,
@@ -56,17 +59,25 @@ export default function OrderHistoryScreen() {
       </Helmet>
       <br />
       <div className='box'>
-        <h1>Order History</h1>
+        <h4>Order History</h4>
         <p className='lead'>
           Your orders on one place, click details for more information.
         </p>
         <p className='text-muted'>
           If you have any questions, please feel free to{' '}
-          <Link to='/contact'>Contact Us.</Link>
+          <Link to='/contact'>
+            <strong>Contact Us.</strong>
+          </Link>
         </p>
         <hr />
         {loading ? (
-          <LoadingBox></LoadingBox>
+          <Row>
+            {[...Array(8).keys()].map((i) => (
+              <Col key={i} md={12} className='mb-3'>
+                <SkeletonOrderHistoryScreen />
+              </Col>
+            ))}
+          </Row>
         ) : error ? (
           <MessageBox variant='danger'>{error}</MessageBox>
         ) : (

@@ -4,10 +4,10 @@ import { Container, Form, Button } from 'react-bootstrap';
 import { Helmet } from 'react-helmet-async';
 import { useNavigate, useParams } from 'react-router-dom';
 import { toast } from 'react-toastify';
-import LoadingBox from '../components/LoadingBox';
 import MessageBox from '../components/MessageBox';
 import { Store } from '../Store';
 import { getError } from '../utils';
+import SkeletonUserEditScreen from '../components/skeletons/SkeletonUserEditScreen';
 
 const reducer = (state, action) => {
   switch (action.type) {
@@ -47,6 +47,9 @@ export default function UserEditScreen() {
 
   useEffect(() => {
     const fetchData = async () => {
+      // Simulate delay for 1.5 seconds
+      await new Promise((resolve) => setTimeout(resolve, 1500));
+
       try {
         dispatch({ type: 'FETCH_REQUEST' });
         const { data } = await axios.get(`/api/users/${userId}`, {
@@ -95,7 +98,7 @@ export default function UserEditScreen() {
       <h1>Edit User {userId}</h1>
 
       {loading ? (
-        <LoadingBox></LoadingBox>
+        <SkeletonUserEditScreen />
       ) : error ? (
         <MessageBox variant='danger'>{error}</MessageBox>
       ) : (
@@ -131,7 +134,7 @@ export default function UserEditScreen() {
             <Button disabled={loadingUpdate} type='submit'>
               Update
             </Button>
-            {loadingUpdate && <LoadingBox></LoadingBox>}
+            {loadingUpdate && <SkeletonUserEditScreen />}
           </div>
         </Form>
       )}

@@ -1,0 +1,189 @@
+.skeleton {
+  background-color: #ddd;
+  border-radius: 4px;
+  height: 20px;
+  width: 100%;
+}
+.skeleton.title {
+  height: 1.25rem;
+  margin-bottom: 1rem;
+}
+.skeleton.text {
+  height: 1rem;
+  margin-bottom: 0.5rem;
+}
+.skeleton.button {
+  height: 1rem;
+  margin-bottom: 0.5rem;
+}
+.skeleton.width-100 {
+  width: 100%;
+}
+.skeleton.width-75 {
+  width: 75%;
+}
+.skeleton.width-50 {
+  width: 50%;
+}
+.skeleton.width-25 {
+  width: 25%;
+}
+.skeleton.width-15 {
+  width: 15%;
+}
+
+.skeleton.square {
+  width: 80px;
+  height: 80px;
+}
+
+.skeleton.circle {
+  width: 100%;
+  height: 150px;
+  border-radius: 50%;
+}
+
+.skeleton.pie {
+  text-align: center;
+  height: 200px;
+  width: 200px;
+  border-radius: 50%;
+  margin-left: auto; /* Adjust the positioning of the Pie Chart */
+  margin-right: auto; /* Adjust the positioning of the Pie Chart */
+  margin-top: 3rem;
+  margin-bottom: 3rem;
+  background-color: #ddd;
+}
+
+/* product card */
+.skeleton.card {
+  display: flex;
+  flex-direction: column;
+  text-align: left;
+  min-width: 14rem;
+  padding: 1rem;
+}
+.skeleton.card .left-col {
+  margin-right: 1 rem;
+}
+.skeleton.card .right-col {
+  flex: 1;
+}
+
+/****** adjust height as needed for desktop view ******/
+
+/* ProductMagScreen main image */
+.skeleton.img-large {
+  height: 625px;
+  width: 500px;
+  background-color: #fff;
+  margin-right: 12rem;
+  margin-bottom: 1rem;
+  border: 2px solid #ddd;
+}
+.skeleton.img-thumbnail {
+  height: 80px;
+  width: 50px;
+  background-color: #fff;
+  margin-bottom: 1rem;
+  border: 2px solid #ddd;
+}
+.skeleton.image {
+  height: 400px;
+  background-color: #ddd;
+  margin-bottom: 0.3rem;
+}
+.skeleton.card-body {
+  flex: 1;
+}
+
+/****** Skeleton pulse animation ******/
+@keyframes pulse {
+  0% {
+    opacity: 0.6;
+  }
+  50% {
+    opacity: 1;
+  }
+  100% {
+    opacity: 0.6;
+  }
+}
+.animate-pulse {
+  animation: pulse 1.5s infinite ease-in-out;
+}
+
+/* Update the mobile Skeleton product card image on left and details on right */
+@media screen and (max-width: 768px) {
+  .mobile-image-card {
+    display: flex;
+    flex-direction: row;
+    text-align: center;
+    max-width: 28rem;
+    max-height: 300px;
+  }
+  .card-body {
+    max-height: 220px;
+  }
+  .card-img-top {
+    overflow: hidden;
+    min-height: 200px;
+    max-height: 200px;
+    min-width: 110px;
+    max-width: 120px;
+  }
+
+  .skeleton.img-large {
+    height: 400px;
+    width: 325px;
+    background-color: #fff;
+    margin-right: 12rem;
+    margin-bottom: 1rem;
+    border: 2px solid #ddd;
+  }
+  .skeleton.img-thumbnail {
+    height: 80px;
+    width: 50px;
+    margin-left: 1rem;
+    background-color: #fff;
+    margin-bottom: 1rem;
+    border: 2px solid #ddd;
+  }
+
+  .skeleton.title {
+    height: 1.25rem;
+    margin-bottom: 0.5rem;
+    width: 100%;
+  }
+  .skeleton.text {
+    height: 1rem;
+    margin-bottom: 0.5rem;
+    width: 100%;
+  }
+  .skeleton.button {
+    height: 1rem;
+    margin-bottom: 0.5rem;
+  }
+
+  .skeleton.width-50 {
+    width: 50%;
+    margin-top: 1rem;
+    margin-left: 1rem;
+  }
+  .skeleton.width-25 {
+    width: 25%;
+    margin-left: 1rem;
+  }
+
+  .skeleton.pie {
+    text-align: center;
+    height: 125px;
+    width: 125px;
+    border-radius: 50%;
+    margin-left: auto; /* Adjust the positioning of the Pie Chart */
+    margin-right: auto; /* Adjust the positioning of the Pie Chart */
+    margin-top: 3rem;
+    margin-bottom: 3rem;
+    background-color: #ddd;
+  }
+}

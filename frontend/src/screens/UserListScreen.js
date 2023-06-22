@@ -1,14 +1,14 @@
 import axios from 'axios';
 import React, { useContext, useEffect, useReducer } from 'react';
-import { Button, Table } from 'react-bootstrap';
+import { Button, Table, Row, Col } from 'react-bootstrap';
 import { LinkContainer } from 'react-router-bootstrap';
 import { Helmet } from 'react-helmet-async';
 import { useNavigate } from 'react-router-dom';
 import { toast } from 'react-toastify';
-import LoadingBox from '../components/LoadingBox';
 import MessageBox from '../components/MessageBox';
 import { Store } from '../Store';
 import { getError } from '../utils';
+import SkeletonUserListScreen from '../components/skeletons/SkeletonUserListScreen';
 
 const reducer = (state, action) => {
   switch (action.type) {
@@ -54,6 +54,9 @@ export default function UserListScreen() {
 
   useEffect(() => {
     const fetchData = async () => {
+      // Simulate delay for 1.5 seconds
+      await new Promise((resolve) => setTimeout(resolve, 1500));
+
       try {
         dispatch({ type: 'FETCH_REQUEST' });
         const { data } = await axios.get(`/api/users`, {
@@ -106,9 +109,15 @@ export default function UserListScreen() {
       <br />
       <h1 className='box'>Users</h1>
       <div className='box'>
-        {loadingDelete && <LoadingBox></LoadingBox>}
+        {loadingDelete && <SkeletonUserListScreen />}
         {loading ? (
-          <LoadingBox></LoadingBox>
+          <Row>
+            {[...Array(8).keys()].map((i) => (
+              <Col key={i} md={12} className='mb-3'>
+                <SkeletonUserListScreen />
+              </Col>
+            ))}
+          </Row>
         ) : error ? (
           <MessageBox variant='danger'>{error}</MessageBox>
         ) : (

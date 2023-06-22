@@ -2,7 +2,7 @@ import Axios from 'axios';
 import React, { useContext, useEffect, useReducer } from 'react';
 import { Helmet } from 'react-helmet-async';
 import { Link, useNavigate } from 'react-router-dom';
-import { Row, Col, Card, Button, ListGroup } from 'react-bootstrap';
+import { Row, Col, Button, ListGroup } from 'react-bootstrap';
 import { toast } from 'react-toastify';
 import { getError } from '../utils';
 import { Store } from '../Store';

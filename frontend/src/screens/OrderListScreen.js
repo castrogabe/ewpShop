@@ -1,14 +1,14 @@
 import axios from 'axios';
 import React, { useContext, useEffect, useReducer } from 'react';
-import { Button, Table } from 'react-bootstrap';
+import { Button, Table, Col } from 'react-bootstrap';
 import { LinkContainer } from 'react-router-bootstrap';
 import { Helmet } from 'react-helmet-async';
 import { useNavigate, Link } from 'react-router-dom';
-import LoadingBox from '../components/LoadingBox';
 import MessageBox from '../components/MessageBox';
 import { Store } from '../Store';
 import { getError } from '../utils';
 import { toast } from 'react-toastify';
+import SkeletonOrderListScreen from '../components/skeletons/SkeletonOrderListScreen';
 
 const reducer = (state, action) => {
   switch (action.type) {
@@ -54,6 +54,9 @@ export default function OrderListScreen() {
 
   useEffect(() => {
     const fetchData = async () => {
+      // Simulate delay for 1.5 seconds
+      await new Promise((resolve) => setTimeout(resolve, 1500));
+
       try {
         dispatch({ type: 'FETCH_REQUEST' });
         const { data } = await axios.get(`/api/orders`, {
@@ -114,11 +117,17 @@ export default function OrderListScreen() {
         <title>Orders List</title>
       </Helmet>
       <br />
-      <h1 className='box'>Orders List</h1>
+      <h4 className='box'>Orders List</h4>
       <div className='box'>
-        {loadingDelete && <LoadingBox></LoadingBox>}
+        {loadingDelete && <SkeletonOrderListScreen />}
         {loading ? (
-          <LoadingBox></LoadingBox>
+          <div>
+            {[...Array(8).keys()].map((i) => (
+              <Col key={i} className='mb-1'>
+                <SkeletonOrderListScreen />
+              </Col>
+            ))}
+          </div>
         ) : error ? (
           <MessageBox variant='danger'>{error}</MessageBox>
         ) : (

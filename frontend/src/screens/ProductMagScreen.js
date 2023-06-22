@@ -14,7 +14,6 @@ import {
 import ReactImageMagnify from 'react-image-magnify';
 import Rating from '../components/Rating';
 import { Helmet } from 'react-helmet-async';
-import LoadingBox from '../components/LoadingBox';
 import MessageBox from '../components/MessageBox';
 import { getError } from '../utils';
 import { Store } from '../Store';
@@ -24,6 +23,7 @@ import 'react-image-lightbox/style.css';
 import { Carousel } from 'react-responsive-carousel';
 import 'react-responsive-carousel/lib/styles/carousel.min.css';
 import { useMediaQuery } from 'react-responsive';
+import SkeletonProductMagScreen from '../components/skeletons/SkeletonProductMagScreen';
 
 const reducer = (state, action) => {
   switch (action.type) {
@@ -68,6 +68,9 @@ function ProductMagScreen() {
     const fetchData = async () => {
       dispatch({ type: 'FETCH_REQUEST' });
       try {
+        // Simulate delay for 1.5 seconds
+        await new Promise((resolve) => setTimeout(resolve, 1500));
+
         const result = await axios.get(`/api/products/slug/${slug}`);
         dispatch({ type: 'FETCH_SUCCESS', payload: result.data });
       } catch (err) {
@@ -167,24 +170,22 @@ function ProductMagScreen() {
   const mobileView = useMediaQuery({ maxWidth: 768 });
 
   return loading ? (
-    <LoadingBox />
+    <SkeletonProductMagScreen />
   ) : error ? (
     <MessageBox variant='danger'>{error}</MessageBox>
   ) : (
     <div className='content'>
       <br />
-      <div className='box'>
-        <Row>
-          <p className='mt-3'>
-            ~ All of the pens shown are handmade and designed by me, no two pens
-            are identical but can be similar to each other. If there is
-            something you like about one pen and it is not available on another
-            pen please contact me using the email me link below and I will
-            gladly do my best to work with you on what type of kit pen or
-            bespoke pen will suit your needs. ~
-          </p>
-        </Row>
-      </div>
+      <Row className='box'>
+        <p className='mt-3'>
+          ~ All of the pens shown are handmade and designed by me, no two pens
+          are identical but can be similar to each other. If there is something
+          you like about one pen and it is not available on another pen please
+          contact me using the email me link below and I will gladly do my best
+          to work with you on what type of kit pen or bespoke pen will suit your
+          needs. ~
+        </p>
+      </Row>
       <br />
       <Row>
         <Col md={6} className='container'>
@@ -369,7 +370,9 @@ function ProductMagScreen() {
                 <Button disabled={loadingCreateReview} type='submit'>
                   Submit
                 </Button>
-                {loadingCreateReview && <LoadingBox></LoadingBox>}
+                {loadingCreateReview && (
+                  <SkeletonProductMagScreen></SkeletonProductMagScreen>
+                )}
               </div>
             </Form>
           ) : (

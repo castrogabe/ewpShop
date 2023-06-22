@@ -5,9 +5,9 @@ import { Row, Col, Button, Table } from 'react-bootstrap';
 import { LinkContainer } from 'react-router-bootstrap';
 import { toast } from 'react-toastify';
 import { Store } from '../Store';
-import LoadingBox from '../components/LoadingBox';
 import MessageBox from '../components/MessageBox';
 import { getError } from '../utils';
+import SkeletonProductListScreen from '../components/skeletons/SkeletonProductListScreen';
 
 const reducer = (state, action) => {
   switch (action.type) {
@@ -78,6 +78,9 @@ export default function ProductListScreen() {
 
   useEffect(() => {
     const fetchData = async () => {
+      // Simulate delay for 1.5 seconds
+      await new Promise((resolve) => setTimeout(resolve, 1500));
+
       try {
         const { data } = await axios.get(`/api/products/admin?page=${page} `, {
           headers: { Authorization: `Bearer ${userInfo.token}` },
@@ -145,7 +148,7 @@ export default function ProductListScreen() {
       <br />
       <Row className='box'>
         <Col md={6}>
-          <h1>Product List Screen</h1>
+          <h4>Product List Screen</h4>
         </Col>
         <Col md={6} className='col text-end'>
           <Button type='button' onClick={createHandler}>
@@ -154,11 +157,17 @@ export default function ProductListScreen() {
         </Col>
       </Row>
 
-      {loadingCreate && <LoadingBox></LoadingBox>}
-      {loadingDelete && <LoadingBox></LoadingBox>}
+      {loadingCreate && <SkeletonProductListScreen />}
+      {loadingDelete && <SkeletonProductListScreen />}
 
       {loading ? (
-        <LoadingBox></LoadingBox>
+        <Row>
+          {[...Array(8).keys()].map((i) => (
+            <Col key={i} md={12} className='mb-3'>
+              <SkeletonProductListScreen />
+            </Col>
+          ))}
+        </Row>
       ) : error ? (
         <MessageBox variant='danger'>{error}</MessageBox>
       ) : (

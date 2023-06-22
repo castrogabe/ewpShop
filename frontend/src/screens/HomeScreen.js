@@ -7,9 +7,9 @@ import { getError } from '../utils';
 import { Helmet } from 'react-helmet-async';
 import { Row, Col, Button } from 'react-bootstrap';
 import { LinkContainer } from 'react-router-bootstrap';
-import LoadingBox from '../components/LoadingBox';
 import MessageBox from '../components/MessageBox';
 import Product from '../components/Product';
+import SkeletonHomeScreen from '../components/skeletons/SkeletonHomeScreen';
 
 const reducer = (state, action) => {
   switch (action.type) {
@@ -46,6 +46,9 @@ export default function SearchScreen() {
 
   useEffect(() => {
     const fetchData = async () => {
+      // Simulate delay for 1.5 seconds
+      await new Promise((resolve) => setTimeout(resolve, 1500));
+
       try {
         const { data } = await axios.get(`/api/products/search?page=${page}`);
         dispatch({ type: 'FETCH_SUCCESS', payload: data });
@@ -96,8 +99,8 @@ export default function SearchScreen() {
         <Helmet>
           <title>Exotic Wood Pen</title>
         </Helmet>
-        <h5>Hand Made</h5>
         <div className='box'>
+          <h5>Always Hand Made</h5>
           <p className='mt-3'>
             ~ I use quality pen kits and pen blanks are hand made by me in my
             shop from Exotic Woods, Acrylics, Ebonite Materials, Bespoke pens
@@ -108,8 +111,15 @@ export default function SearchScreen() {
         <br />
         <Row>
           <Col>
+            {/* react skeleton for product card */}
             {loading ? (
-              <LoadingBox></LoadingBox>
+              <Row>
+                {[...Array(12).keys()].map((i) => (
+                  <Col key={i} sm={6} md={4} lg={3} className='mb-3'>
+                    <SkeletonHomeScreen />
+                  </Col>
+                ))}
+              </Row>
             ) : error ? (
               <MessageBox variant='danger'>{error}</MessageBox>
             ) : (

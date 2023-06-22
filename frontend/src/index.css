@@ -495,12 +495,18 @@ button.thumbnail {
     height: auto;
   }
 
+  .content {
+    padding-right: auto;
+  }
   .card {
     display: flex;
     flex-direction: row;
     text-align: center;
     max-width: 28rem;
     max-height: 300px;
+  }
+  .card-body {
+    max-height: 220px;
   }
   .card-title {
     font-size: 10px;
@@ -512,14 +518,6 @@ button.thumbnail {
     max-height: 200px;
     min-width: 110px;
     max-width: 120px;
-  }
-  .card-body {
-    max-height: 220px;
-  }
-
-  .content {
-    padding-left: auto;
-    padding-right: auto;
   }
 
   h1 {

@@ -247,3 +247,32 @@
    (ProductMagScreenRow has previous code for thumbnail images under main image as option)
    .added mobile view with Carousel
    .added Lightbox when clicking on image-magnify
+
+## Twenty Sixth Commit-Add Skeleton and replace LoadingBox component
+
+1. FRONTEND
+   npm i react-loading-skeleton
+   css > add css marked for Skeleton.css
+
+   folder > components:
+   Skeleton.js
+   SkeletonDashboardScreen.js
+   SkeletonHomeScreen.js
+   SkeletonMessageScreen.js
+   SkeletonOrderHistoryScreen.js
+   SkeletonOrderListScreen.js.js
+   SkeletonProductListScreen.js
+   SkeletonProductMagScreen.js
+   SkeletonUseEditScreen.js
+   SkeletonUserListScreen.js
+
+   folder > screens:
+   DashboardScreen.js (Lines 8, 37-39, 60)
+   HomeScreen.js (Lines 12, 49-50, 114-122)
+   MessagesScreen.js (Lines 9, 71-73, 130-138)
+   OrderHistoryScreen.js (Lines 3, 9, 36-38, 74-80)
+   OrderListScreen.js (Lines 3, 11, 57-59, 122-130)
+   ProductListScreen.js (Lines 10, 81-83, 160-170)
+   ProductMagScreen.js (Lines 26, 71-73, 173)
+   UserEditScreen.js (Lines 10, 50-52, 101, 137)
+   UserListScreen.js (Lines 3, 11, 57-59, 112-120)

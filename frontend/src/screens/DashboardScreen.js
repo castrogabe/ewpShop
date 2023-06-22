@@ -3,9 +3,9 @@ import Chart from 'react-google-charts';
 import axios from 'axios';
 import { Store } from '../Store';
 import { getError } from '../utils';
-import LoadingBox from '../components/LoadingBox';
 import MessageBox from '../components/MessageBox';
 import { Row, Col, Card } from 'react-bootstrap';
+import SkeletonDashboardScreen from '../components/skeletons/SkeletonDashboardScreen';
 
 const reducer = (state, action) => {
   switch (action.type) {
@@ -34,6 +34,9 @@ export default function DashboardScreen() {
 
   useEffect(() => {
     const fetchData = async () => {
+      // Simulate delay for 1.5 seconds
+      await new Promise((resolve) => setTimeout(resolve, 1500));
+
       try {
         const { data } = await axios.get('/api/orders/summary', {
           headers: { Authorization: `Bearer ${userInfo.token}` },
@@ -54,7 +57,7 @@ export default function DashboardScreen() {
       <br />
       <h1 className='box'>Dashboard</h1>
       {loading ? (
-        <LoadingBox />
+        <SkeletonDashboardScreen />
       ) : error ? (
         <MessageBox variant='danger'>{error}</MessageBox>
       ) : (

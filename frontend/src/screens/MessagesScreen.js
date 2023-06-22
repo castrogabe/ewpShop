@@ -1,12 +1,12 @@
 import React, { useEffect, useState, useReducer } from 'react';
-import { Table, Button } from 'react-bootstrap';
+import { Table, Button, Row, Col } from 'react-bootstrap';
 import { Helmet } from 'react-helmet-async';
 import { LinkContainer } from 'react-router-bootstrap';
 import { toast } from 'react-toastify';
-import LoadingBox from '../components/LoadingBox';
 import MessageBox from '../components/MessageBox';
 import axios from 'axios';
 import { getError } from '../utils';
+import SkeletonMessageScreen from '../components/skeletons/SkeletonMessageScreen';
 
 const reducer = (state, action) => {
   switch (action.type) {
@@ -68,6 +68,9 @@ export default function MessagesScreen() {
   // delete messages
   useEffect(() => {
     const fetchData = async () => {
+      // Simulate delay for 1.5 seconds
+      await new Promise((resolve) => setTimeout(resolve, 1500));
+
       try {
         dispatch({ type: 'FETCH_REQUEST' });
         const message = await axios.get(`/messages`);
@@ -124,9 +127,15 @@ export default function MessagesScreen() {
       <br />
       <h1 className='box'>Your Messages</h1>
       <div className='box'>
-        {loadingDelete && <LoadingBox></LoadingBox>}
+        {loadingDelete && <SkeletonMessageScreen />}
         {loading ? (
-          <LoadingBox></LoadingBox>
+          <Row>
+            {[...Array(8).keys()].map((i) => (
+              <Col key={i} md={12} className='mb-3'>
+                <SkeletonMessageScreen />
+              </Col>
+            ))}
+          </Row>
         ) : error ? (
           <MessageBox variant='danger'>{error}</MessageBox>
         ) : (
