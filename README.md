@@ -276,3 +276,26 @@
    ProductMagScreen.js (Lines 26, 71-73, 173)
    UserEditScreen.js (Lines 10, 50-52, 101, 137)
    UserListScreen.js (Lines 3, 11, 57-59, 112-120)
+
+## Twenty Seventh Commit-Fix Screens and CSS
+
+FRONTEND
+index.css re-named .small-container to .small-screen (Lines 301-308)
+
+folder > screens
+ProfileScreen.js centered the content: (Lines 3, 64-66, 71, 106-108)
+UserEditScreen.js centered the content: (Lines 3, 94, 98-99, 106, 140-143)
+
+Add low Quantity to product card and (image to toast notifications) to Product.js
+
+## Twenty Eighth Commit-Add Sidebar notification in HomeScreen and Sidebar.js, in mobile view use toast notifications
+
+FRONTEND
+index.css (Lines 172-194) for Sidebar and auto close
+
+folder > components:
+Sidebar.js
+Product.js (Lines 5, 8, 17-18, 21-23, 35-56, 77-93)
+
+folder > screens:
+HomeScreen.js (Lines 5, 13-14, 37-50, 56-59, 77, 153-158, 162-174)

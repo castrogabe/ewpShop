@@ -2,7 +2,7 @@ import React, { useEffect, useReducer, useState } from 'react';
 import Jumbotron from '../components/Jumbotron';
 import { useNavigate, useLocation } from 'react-router-dom';
 import axios from 'axios';
-import { toast } from 'react-toastify';
+import { toast, ToastContainer } from 'react-toastify';
 import { getError } from '../utils';
 import { Helmet } from 'react-helmet-async';
 import { Row, Col, Button } from 'react-bootstrap';
@@ -10,6 +10,8 @@ import { LinkContainer } from 'react-router-bootstrap';
 import MessageBox from '../components/MessageBox';
 import Product from '../components/Product';
 import SkeletonHomeScreen from '../components/skeletons/SkeletonHomeScreen';
+import Sidebar from '../components/Sidebar';
+import { useMediaQuery } from 'react-responsive';
 
 const reducer = (state, action) => {
   switch (action.type) {
@@ -32,17 +34,29 @@ const reducer = (state, action) => {
   }
 };
 
-export default function SearchScreen() {
+export default function HomeScreen() {
+  const isMobile = useMediaQuery({ maxWidth: 767 });
+  const [isSidebarOpen, setIsSidebarOpen] = useState(false);
+
+  const handleSidebarOpen = () => {
+    setIsSidebarOpen(true);
+    setTimeout(() => {
+      setIsSidebarOpen(false);
+    }, 2000); // Close sidebar 2000 milliseconds (2 second)
+  };
+  // By adding the setTimeout callback inside the handleSidebarOpen function,
+  // it will open the sidebar by setting isSidebarOpen to true and then close it by
+  // setting isSidebarOpen back to false after the specified duration.
+
   const navigate = useNavigate();
   const { search } = useLocation();
   const sp = new URLSearchParams(search); // /search?category = products
   const page = sp.get('page') || 1;
 
-  const [{ loading, error, products, pages, countProducts }, dispatch] =
-    useReducer(reducer, {
-      loading: true,
-      error: '',
-    });
+  const [{ loading, error, products, pages }, dispatch] = useReducer(reducer, {
+    loading: true,
+    error: '',
+  });
 
   useEffect(() => {
     const fetchData = async () => {
@@ -60,7 +74,7 @@ export default function SearchScreen() {
       }
     };
     fetchData();
-  }, [page]);
+  }, [page, error]);
 
   const [categories, setCategories] = useState([]);
   useEffect(() => {
@@ -136,10 +150,28 @@ export default function SearchScreen() {
                       lg={3}
                       className='mb-3'
                     >
-                      <Product product={product}></Product>
+                      {/* Product comes from components > Product.js */}
+                      <Product
+                        key={product.id}
+                        product={product}
+                        handleSidebarOpen={handleSidebarOpen}
+                      />
                     </Col>
                   ))}
                 </Row>
+
+                {/* Desktop renders sidebar, if mobile do not show sidebar and get toast notifications */}
+                {!isMobile ? (
+                  isSidebarOpen && (
+                    <div className='sidebar'>
+                      <Sidebar handleSidebarOpen={handleSidebarOpen} />
+                    </div>
+                  )
+                ) : (
+                  <ToastContainer position='bottom-center' />
+                )}
+
+                {/* pagination */}
                 <div>
                   {[...Array(pages).keys()].map((x) => (
                     <LinkContainer

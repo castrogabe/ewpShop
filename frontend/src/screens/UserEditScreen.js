@@ -1,6 +1,6 @@
 import axios from 'axios';
 import React, { useContext, useEffect, useReducer, useState } from 'react';
-import { Container, Form, Button } from 'react-bootstrap';
+import { Col, Form, Button } from 'react-bootstrap';
 import { Helmet } from 'react-helmet-async';
 import { useNavigate, useParams } from 'react-router-dom';
 import { toast } from 'react-toastify';
@@ -91,53 +91,55 @@ export default function UserEditScreen() {
     }
   };
   return (
-    <Container className='small-container'>
+    <div className='small-screen'>
       <Helmet>
         <title>Edit User ${userId}</title>
       </Helmet>
-      <h1>Edit User {userId}</h1>
+      <Col>
+        <h4 className='box'>Edit User {userId}</h4>
 
-      {loading ? (
-        <SkeletonUserEditScreen />
-      ) : error ? (
-        <MessageBox variant='danger'>{error}</MessageBox>
-      ) : (
-        <Form onSubmit={submitHandler}>
-          <Form.Group className='mb-3' controlId='name'>
-            <Form.Label>Name</Form.Label>
-            <Form.Control
-              value={name}
-              onChange={(e) => setName(e.target.value)}
-              required
+        {loading ? (
+          <SkeletonUserEditScreen />
+        ) : error ? (
+          <MessageBox variant='danger'>{error}</MessageBox>
+        ) : (
+          <Form onSubmit={submitHandler}>
+            <Form.Group className='mb-3' controlId='name'>
+              <Form.Label>Name</Form.Label>
+              <Form.Control
+                value={name}
+                onChange={(e) => setName(e.target.value)}
+                required
+              />
+            </Form.Group>
+            <Form.Group className='mb-3' controlId='email'>
+              <Form.Label>Email</Form.Label>
+              <Form.Control
+                value={email}
+                type='email'
+                onChange={(e) => setEmail(e.target.value)}
+                required
+              />
+            </Form.Group>
+
+            <Form.Check
+              className='mb-3'
+              type='checkbox'
+              id='isAdmin'
+              label='isAdmin'
+              checked={isAdmin}
+              onChange={(e) => setIsAdmin(e.target.checked)}
             />
-          </Form.Group>
-          <Form.Group className='mb-3' controlId='email'>
-            <Form.Label>Email</Form.Label>
-            <Form.Control
-              value={email}
-              type='email'
-              onChange={(e) => setEmail(e.target.value)}
-              required
-            />
-          </Form.Group>
 
-          <Form.Check
-            className='mb-3'
-            type='checkbox'
-            id='isAdmin'
-            label='isAdmin'
-            checked={isAdmin}
-            onChange={(e) => setIsAdmin(e.target.checked)}
-          />
-
-          <div className='mb-3'>
-            <Button disabled={loadingUpdate} type='submit'>
-              Update
-            </Button>
-            {loadingUpdate && <SkeletonUserEditScreen />}
-          </div>
-        </Form>
-      )}
-    </Container>
+            <div className='mb-3'>
+              <Button disabled={loadingUpdate} type='submit'>
+                Update
+              </Button>
+              {loadingUpdate && <SkeletonUserEditScreen />}
+            </div>
+          </Form>
+        )}
+      </Col>
+    </div>
   );
 }
