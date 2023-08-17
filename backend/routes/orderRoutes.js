@@ -6,8 +6,10 @@ import Product from '../models/productModel.js';
 import {
   isAuth,
   isAdmin,
-  nodemailerFunction,
   payOrderEmailTemplate,
+  shipOrderEmailTemplate,
+  sendShippingConfirmationEmail,
+  transporter,
 } from '../utils.js';
 
 const orderRouter = express.Router();
@@ -109,28 +111,12 @@ orderRouter.get(
 );
 
 orderRouter.put(
-  '/:id/deliver',
-  isAuth,
-  expressAsyncHandler(async (req, res) => {
-    const order = await Order.findById(req.params.id);
-    if (order) {
-      order.isDelivered = true;
-      order.deliveredAt = Date.now();
-      await order.save();
-      res.send({ message: 'Order Delivered' });
-    } else {
-      res.status(404).send({ message: 'Order Not Found' });
-    }
-  })
-);
-
-orderRouter.put(
   '/:id/pay',
   isAuth,
   expressAsyncHandler(async (req, res) => {
     const order = await Order.findById(req.params.id).populate(
       'user',
-      'email name'
+      'name email'
     );
     if (order) {
       order.isPaid = true;
@@ -142,37 +128,96 @@ orderRouter.put(
         email_address: req.body.email_address,
       };
 
-      const updatedOrder = await order.save(); // Update count in stock
+      // Update count in stock
+      const updatedOrder = await order.save();
       for (const index in updatedOrder.orderItems) {
         const item = updatedOrder.orderItems[index];
         const product = await Product.findById(item.product);
         product.countInStock -= 1;
+        product.sold += item.qty;
         await product.save();
       }
+      // end count in stock
 
-      nodemailerFunction()
-        .messages()
-        .send(
-          {
-            from: 'Gabe <exoticwoodpen@gmail.com>', // your name and email
-            to: `${order.user.name} <${order.user.email}>`,
-            subject: `New order ${order._id}`,
-            html: payOrderEmailTemplate(order),
-          },
-          (error, body) => {
-            if (error) {
-              console.log(error);
-            } else {
-              console.log(body);
-            }
-          }
-        );
+      const customerEmail = order.user.email;
+      const purchaseDetails = payOrderEmailTemplate(order);
+
+      // ***************** send purchase receipt email ***********************
+      const emailContent = {
+        from: 'exoticwoodpen@gmail.com',
+        to: customerEmail,
+        subject: 'PayPal Purchase Receipt from exoticwoodpen', // email subject
+        html: purchaseDetails,
+      };
+
+      try {
+        // Send the email using the `transporter`
+        const info = await transporter.sendMail(emailContent);
+      } catch (error) {
+        console.error('Error sending email:', error);
+      }
+
       res.send({ message: 'Order Paid', order: updatedOrder });
     } else {
       res.status(404).send({ message: 'Order Not Found' });
     }
   })
 );
+
+// ****************** send shipping confirmation email ************************************
+orderRouter.put(
+  '/:id/shipped',
+  isAuth,
+  expressAsyncHandler(async (req, res) => {
+    const orderId = req.params.id;
+    const order = await Order.findById(orderId).populate('user', 'name email');
+
+    if (!order) {
+      res.status(404).send({ message: 'Order Not Found' });
+      return;
+    }
+
+    order.isShipped = true;
+    order.shippedAt = Date.now();
+    order.deliveryDays = req.body.deliveryDays;
+    order.carrierName = req.body.carrierName;
+    order.trackingNumber = req.body.trackingNumber;
+
+    // send shipping confirmation email to customer when the order ships
+    const customerEmail = order.user.email;
+    const shippingDetails = shipOrderEmailTemplate(order);
+
+    // Create email content for the shipping confirmation
+    const emailContent = {
+      from: 'exoticwoodpen@gmail.com',
+      to: customerEmail,
+      subject: 'Shipping notification from exoticwoodpen', // email subject
+      html: shippingDetails,
+    };
+
+    try {
+      // Update and save the order
+      const updatedOrder = await order.save();
+
+      // console.log('Delivery Days:', order.deliveryDays);
+      // console.log('Carrier Name:', order.carrierName);
+      // console.log('Tracking Number:', order.trackingNumber);
+
+      // Call the sendShippingConfirmationEmail function with the updatedOrder as an argument
+      await sendShippingConfirmationEmail(req, updatedOrder);
+
+      // Log a success message or do something else
+      // console.log('Shipping confirmation email sent successfully.');
+
+      res.send({ message: 'Order Shipped', order: updatedOrder });
+    } catch (error) {
+      console.error('Error updating order:', error);
+      res.status(500).send({ message: 'Failed to ship order' });
+    }
+  })
+);
+
+// ***********************************************************************************
 
 orderRouter.delete(
   '/:id',

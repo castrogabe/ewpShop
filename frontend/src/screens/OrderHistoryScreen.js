@@ -52,6 +52,17 @@ export default function OrderHistoryScreen() {
     };
     fetchData();
   }, [userInfo]);
+
+  // MM-DD-YYYY
+  function formatDate(dateString) {
+    const dateObject = new Date(dateString);
+    const month = String(dateObject.getMonth() + 1).padStart(2, '0'); // Months are 0-based
+    const day = String(dateObject.getDate()).padStart(2, '0');
+    const year = dateObject.getFullYear();
+
+    return `${month}-${day}-${year}`;
+  }
+
   return (
     <div className='content'>
       <Helmet>
@@ -59,7 +70,7 @@ export default function OrderHistoryScreen() {
       </Helmet>
       <br />
       <div className='box'>
-        <h4>Order History</h4>
+        <h4>{userInfo.name}'s Order History</h4>
         <p className='lead'>
           Your orders on one place, click details for more information.
         </p>
@@ -84,26 +95,63 @@ export default function OrderHistoryScreen() {
           <Table responsive striped bordered className='noWrap'>
             <thead className='thead'>
               <tr>
-                <th>ID</th>
+                <th>ID / PRODUCT</th>
                 <th>DATE</th>
                 <th>TOTAL</th>
+                <th>QTY</th>
                 <th>PAID</th>
-                <th>DELIVERED</th>
+                <th>SHIPPED DATE</th>
+                <th>SHIPPED ADDRESS</th>
+                <th>DELIVERY DAYS</th>
+                <th>CARRIER NAME</th>
+                <th>TRACKING NUMBER</th>
                 <th>ACTIONS</th>
               </tr>
             </thead>
             <tbody>
               {orders.map((order) => (
                 <tr key={order._id}>
-                  <td>{order._id}</td>
-                  <td>{order.createdAt.substring(0, 10)}</td>
-                  <td>{order.totalPrice.toFixed(2)}</td>
-                  <td>{order.isPaid ? order.paidAt.substring(0, 10) : 'No'}</td>
                   <td>
-                    {order.isDelivered
-                      ? order.deliveredAt.substring(0, 10)
-                      : 'No'}
+                    {order._id}{' '}
+                    {order.orderItems.map((item) => (
+                      <div key={item._id}>
+                        <img
+                          src={item.image}
+                          alt={item.name}
+                          className='img-fluid rounded img-thumbnail'
+                        />
+                        <Link to={`/product/${item.slug}`}>{item.name}</Link>
+                      </div>
+                    ))}
                   </td>
+                  <td>{formatDate(order.createdAt)}</td>
+                  <td>{order.totalPrice.toFixed(2)}</td>
+                  <td>
+                    {order.orderItems.reduce(
+                      (total, item) => total + item.quantity,
+                      0
+                    )}
+                  </td>
+                  <td>
+                    {order.isPaid ? formatDate(order.paidAt) : 'No'}
+                    <br />
+                    {order.paymentMethod}
+                  </td>
+                  <td>
+                    <div>{formatDate(order.shippedAt)}</div>
+                  </td>
+                  <td>
+                    <div>
+                      {order.shippingAddress.address} <br />
+                      {order.shippingAddress.city},{' '}
+                      {order.shippingAddress.states},{' '}
+                      {order.shippingAddress.postalCode} <br />
+                      {order.shippingAddress.country}
+                    </div>
+                  </td>
+                  <td>{order.deliveryDays}</td>
+                  <td>{order.carrierName}</td>
+                  <td>{order.trackingNumber}</td>
                   <td>
                     <Button
                       type='button'

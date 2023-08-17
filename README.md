@@ -263,7 +263,7 @@
    SkeletonOrderListScreen.js.js
    SkeletonProductListScreen.js
    SkeletonProductMagScreen.js
-   SkeletonUseEditScreen.js
+   SkeletonUserEditScreen.js
    SkeletonUserListScreen.js
 
    folder > screens:
@@ -299,3 +299,31 @@ Product.js (Lines 5, 8, 17-18, 21-23, 35-56, 77-93)
 
 folder > screens:
 HomeScreen.js (Lines 5, 13-14, 37-50, 56-59, 77, 153-158, 162-174)
+
+## Twenty Ninth Commit-Add admin tracking in OrderScreen.js and second shipping confirmation email to customer
+
+FRONTEND
+folder > screens:
+OrderScreen.js (Lines 59-63, 214-241, 421-456) deliveryDays, carrierName, trackingNumber
+MessageBox (Lines 299-313) made it easier to read "Shipped On" date.
+MessageBox (Lines 325-338) made it easier to read "Paid at" date.
+
+OrderListScreen.js (38-46, 80-98, , 189-200) added users name to h1, shipped date, delivery days, carrier name, tracking number table data
+in table data: user added email, and address with user name (Lines 205-225).
+MM-DD-YYYY formatDate toString for easier reading (Lines 137-146).
+
+OrderHistoryScreen.js (Lines 73, 103-106, 206-241) added shipped date, shipped address, delivery days, carrier name, tracking number
+MM-DD-YYYY formatDate toString for easier reading (Lines 55-65).
+
+folder > skeletons:
+SkeletonProductMagScreen.js (Line 68) fixed Skeleton
+
+BACKEND
+folder > models:
+orderModel.js (Lines 41-45) added deliveryDays, carrierName, trackingNumber.
+
+folder > routes:
+orderRoutes.js (Lines 9-12, 167-218) added send shipping confirmation email.
+userRoutes.js (Lines 109-118) add email routing to OrderListScreen
+
+utils.js (Lines 142-256) second email for shipping confirmation.

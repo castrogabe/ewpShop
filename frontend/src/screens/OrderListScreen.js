@@ -35,6 +35,15 @@ const reducer = (state, action) => {
       return { ...state, loadingDelete: false };
     case 'DELETE_RESET':
       return { ...state, loadingDelete: false, successDelete: false };
+    // return deliveryDays, carrierName, trackingNumber
+    case 'SHIPPING_REQUEST':
+      return { ...state, loadingShipped: true };
+    case 'SHIPPING_SUCCESS':
+      return { ...state, loadingShipped: false, successShipped: true };
+    case 'SHIPPING_FAIL':
+      return { ...state, loadingShipped: false };
+    case 'SHIPPING_RESET':
+      return { ...state, loadingShipped: false, successShipped: false };
     default:
       return state;
   }
@@ -45,7 +54,16 @@ export default function OrderListScreen() {
   const { state } = useContext(Store);
   const { userInfo } = state;
   const [
-    { loading, error, orders, loadingDelete, successDelete, page, pages },
+    {
+      loading,
+      error,
+      orders,
+      users,
+      loadingDelete,
+      successDelete,
+      page,
+      pages,
+    },
     dispatch,
   ] = useReducer(reducer, {
     loading: true,
@@ -59,10 +77,25 @@ export default function OrderListScreen() {
 
       try {
         dispatch({ type: 'FETCH_REQUEST' });
-        const { data } = await axios.get(`/api/orders`, {
+        const { data: ordersData } = await axios.get(`/api/orders`, {
           headers: { Authorization: `Bearer ${userInfo.token}` },
         });
-        dispatch({ type: 'FETCH_SUCCESS', payload: data });
+
+        // Extract user IDs from the orders
+        const userIds = ordersData.map((order) => order.user._id);
+
+        // Fetch user data for the extracted user IDs
+        const { data: usersData } = await axios.post(`/api/users/usersByIds`, {
+          userIds,
+        });
+
+        // Update orders with user information
+        const ordersWithUsers = ordersData.map((order) => {
+          const user = usersData.find((user) => user._id === order.user._id);
+          return { ...order, user };
+        });
+
+        dispatch({ type: 'FETCH_SUCCESS', payload: ordersWithUsers });
       } catch (err) {
         dispatch({
           type: 'FETCH_FAIL',
@@ -73,13 +106,10 @@ export default function OrderListScreen() {
 
     if (successDelete) {
       dispatch({ type: 'DELETE_RESET' });
-      setTimeout(() => {
-        dispatch({ type: 'DELETE_SUCCESS_RESET' });
-      }, state.autoClose || 1000); // Use state.autoClose or default to 1000ms (1 seconds)
     } else {
       fetchData();
     }
-  }, [userInfo, successDelete, state.autoClose]);
+  }, [userInfo, successDelete]);
 
   const deleteHandler = async (order) => {
     if (window.confirm('Are you sure to delete?')) {
@@ -104,6 +134,16 @@ export default function OrderListScreen() {
       }
     }
   };
+
+  // MM-DD-YYYY
+  function formatDate(dateString) {
+    const dateObject = new Date(dateString);
+    const month = String(dateObject.getMonth() + 1).padStart(2, '0'); // Months are 0-based
+    const day = String(dateObject.getDate()).padStart(2, '0');
+    const year = dateObject.getFullYear();
+
+    return `${month}-${day}-${year}`;
+  }
 
   // Pagination
   const getFilterUrl = (filter) => {
@@ -134,12 +174,16 @@ export default function OrderListScreen() {
           <Table responsive striped bordered className='noWrap'>
             <thead className='thead'>
               <tr>
-                <th>ID</th>
+                <th>ID / PRODUCT</th>
                 <th>USER</th>
                 <th>DATE</th>
                 <th>TOTAL</th>
+                <th>QTY</th>
                 <th>PAID</th>
-                <th>DELIVERED</th>
+                <th>SHIPPED DATE</th>
+                <th>DELIVERY DAYS</th>
+                <th>CARRIER NAME</th>
+                <th>TRACKING NUMBER</th>
                 <th>ACTIONS</th>
               </tr>
             </thead>
@@ -159,15 +203,46 @@ export default function OrderListScreen() {
                       </div>
                     ))}
                   </td>
-                  <td>{order.user ? order.user.name : 'DELETED USER'}</td>
-                  <td>{order.createdAt.substring(0, 10)}</td>
-                  <td>{order.totalPrice.toFixed(2)}</td>
-                  <td>{order.isPaid ? order.paidAt.substring(0, 10) : 'No'}</td>
                   <td>
-                    {order.isDelivered
-                      ? order.deliveredAt.substring(0, 10)
-                      : 'No'}
+                    <div>
+                      <strong>Name:</strong>{' '}
+                      {order.user ? order.user.name : 'DELETED USER'}
+                    </div>
+                    {order.user && (
+                      <>
+                        <div>
+                          <strong>Email:</strong> {order.user.email}
+                        </div>
+                        <div>
+                          <strong>Address:</strong> <br />
+                          {order.shippingAddress.address} <br />
+                          {order.shippingAddress.city},{' '}
+                          {order.shippingAddress.states},{' '}
+                          {order.shippingAddress.postalCode} <br />
+                          {order.shippingAddress.country}
+                        </div>
+                      </>
+                    )}
                   </td>
+                  <td>{formatDate(order.createdAt)}</td>
+                  <td>{order.totalPrice.toFixed(2)}</td>
+                  <td>
+                    {order.orderItems.reduce(
+                      (total, item) => total + item.quantity,
+                      0
+                    )}
+                  </td>
+                  <td>
+                    {order.isPaid ? formatDate(order.paidAt) : 'No'}
+                    <br />
+                    {order.paymentMethod}
+                  </td>
+                  <td>
+                    <div>{formatDate(order.shippedAt)}</div>
+                  </td>
+                  <td>{order.deliveryDays}</td>
+                  <td>{order.carrierName}</td>
+                  <td>{order.trackingNumber}</td>
                   <td>
                     <Button
                       type='button'

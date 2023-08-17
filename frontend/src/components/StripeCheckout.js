@@ -13,6 +13,11 @@ function CheckoutForm(props) {
   const stripe = useStripe();
   const elements = useElements();
 
+  const handleStripeSuccess = (paymentResult) => {
+    // Call the parent component's callback to handle the successful payment
+    props.handleStripeSuccess(paymentResult);
+  };
+
   const handleSubmit = async (event) => {
     // We don't want to let default form submission happen here,
     // which would refresh the page.
@@ -26,8 +31,8 @@ function CheckoutForm(props) {
     setProcessing(true);
     const { data } = await Axios(`/api/stripe/secret/${props.orderId}`);
     const clientSecret = data.client_secret;
-    // Call stripe.confirmCardPayment() with the client secret.
 
+    // Call stripe.confirmCardPayment() with the client secret.
     const result = await stripe.confirmCardPayment(clientSecret, {
       payment_method: {
         card: elements.getElement(CardElement),
@@ -45,9 +50,7 @@ function CheckoutForm(props) {
     } else {
       // The payment has been processed!
       if (result.paymentIntent.status === 'succeeded') {
-        props.handleSuccessPayment(result.paymentIntent);
-        console.log(result.paymentIntent);
-        // alert(result.paymentIntent.status);
+        handleStripeSuccess(result.paymentIntent); // Call the callback function
       }
     }
     setProcessing(false);
@@ -71,8 +74,9 @@ const StripeCheckout = (props) => (
   <Elements stripe={props.stripe}>
     <CheckoutForm
       orderId={props.orderId}
-      handleSuccessPayment={props.handleSuccessPayment}
+      handleStripeSuccess={props.handleSuccessPayment} // Pass the callback function
     />
   </Elements>
 );
+
 export default StripeCheckout;

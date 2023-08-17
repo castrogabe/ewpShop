@@ -2,12 +2,12 @@ import React, { useContext, useEffect, useReducer, useState } from 'react';
 import { PayPalButtons, usePayPalScriptReducer } from '@paypal/react-paypal-js';
 import { Helmet } from 'react-helmet-async';
 import { useNavigate, useParams } from 'react-router-dom';
-import { Button, Col, Row, ListGroup } from 'react-bootstrap';
+import { Button, Col, Row, ListGroup, Form } from 'react-bootstrap';
 import { Link } from 'react-router-dom';
 import LoadingBox from '../components/LoadingBox';
 import MessageBox from '../components/MessageBox';
 import { Store } from '../Store';
-import { getError } from '../utils';
+import { getError } from '../utils'; // frontend utils.js
 import { toast } from 'react-toastify';
 import axios from 'axios';
 import { loadStripe } from '@stripe/stripe-js/pure';
@@ -29,18 +29,17 @@ function reducer(state, action) {
       return { ...state, loadingPay: false };
     case 'PAY_RESET':
       return { ...state, loadingPay: false, successPay: false };
-
-    case 'DELIVER_REQUEST':
-      return { ...state, loadingDeliver: true };
-    case 'DELIVER_SUCCESS':
-      return { ...state, loadingDeliver: false, successDeliver: true };
-    case 'DELIVER_FAIL':
-      return { ...state, loadingDeliver: false };
-    case 'DELIVER_RESET':
+    case 'SHIPPED_REQUEST':
+      return { ...state, loadingShipped: true };
+    case 'SHIPPED_SUCCESS':
+      return { ...state, loadingShipped: false, successShipped: true };
+    case 'SHIPPED_FAIL':
+      return { ...state, loadingShipped: false };
+    case 'SHIPPED_RESET':
       return {
         ...state,
-        loadingDeliver: false,
-        successDeliver: false,
+        loadingShipped: false,
+        successShipped: false,
       };
     default:
       return state;
@@ -57,6 +56,11 @@ export default function OrderScreen() {
   const { id: orderId } = params;
   const navigate = useNavigate();
 
+  // shipping email confirmation
+  const [deliveryDays, setDeliveryDays] = useState('');
+  const [carrierName, setCarrierName] = useState('');
+  const [trackingNumber, setTrackingNumber] = useState('');
+
   const [
     {
       loading,
@@ -64,8 +68,10 @@ export default function OrderScreen() {
       error,
       order,
       successPay,
-      loadingDeliver,
-      successDeliver,
+      loadingShipped,
+      successShipped,
+      shipEmailTemplate,
+      transporter,
     },
     dispatch,
   ] = useReducer(reducer, {
@@ -119,20 +125,20 @@ export default function OrderScreen() {
     if (
       !order._id ||
       successPay ||
-      successDeliver ||
+      successShipped ||
       (order._id && order._id !== orderId)
     ) {
       fetchOrder();
       if (successPay) {
         dispatch({ type: 'PAY_RESET' });
       }
-      if (successDeliver) {
-        dispatch({ type: 'DELIVER_RESET' });
+      if (successShipped) {
+        dispatch({ type: 'SHIPPED_RESET' });
       }
     } else {
       loadPaypalScript();
       addStripeScript();
-      setPaymentMethod(order.paymentMethod); // Set the paymentMethod based on order.paymentMethod
+      setPaymentMethod(order.paymentMethod);
     }
   }, [
     order,
@@ -141,7 +147,9 @@ export default function OrderScreen() {
     navigate,
     paypalDispatch,
     successPay,
-    successDeliver,
+    successShipped,
+    shipEmailTemplate,
+    transporter,
   ]);
 
   const createOrder = (data, actions) => {
@@ -170,7 +178,9 @@ export default function OrderScreen() {
           }
         );
         dispatch({ type: 'PAY_SUCCESS', payload: data });
-        toast.success('Order is paid');
+        toast.success('Order is paid', {
+          autoClose: 1000, // Duration in milliseconds (1 second)
+        });
       } catch (err) {
         dispatch({ type: 'PAY_FAIL', payload: getError(err) });
         toast.error(getError(err));
@@ -181,7 +191,7 @@ export default function OrderScreen() {
     toast.error(getError(err));
   };
 
-  const handleSuccessPayment = async (paymentResult) => {
+  const handleStripeSuccess = async (paymentResult) => {
     try {
       dispatch({ type: 'PAY_REQUEST' });
       const { data } = await axios.put(
@@ -192,30 +202,43 @@ export default function OrderScreen() {
         }
       );
       dispatch({ type: 'PAY_SUCCESS', payload: data });
-      toast.success('Order is paid');
+      if (successPay) {
+        dispatch({ type: 'PAY_RESET' });
+      }
+      toast.success('Order is paid', {
+        autoClose: 1000,
+      });
     } catch (err) {
       dispatch({ type: 'PAY_FAIL', payload: getError(err) });
       toast.error(getError(err));
     }
   };
 
-  async function deliverOrderHandler() {
+  const submitHandler = async (e) => {
+    e.preventDefault();
     try {
-      dispatch({ type: 'DELIVER_REQUEST' });
+      dispatch({ type: 'SHIPPED_REQUEST' });
+      // Make an API call to update the order with the shipping information
       const { data } = await axios.put(
-        `/api/orders/${order._id}/deliver`,
-        {},
+        `/api/orders/${order._id}/shipped`,
+        {
+          deliveryDays,
+          carrierName,
+          trackingNumber,
+        },
         {
           headers: { authorization: `Bearer ${userInfo.token}` },
         }
       );
-      dispatch({ type: 'DELIVER_SUCCESS', payload: data });
-      toast.success('Order is delivered');
+      dispatch({ type: 'SHIPPED_SUCCESS', payload: data });
+      toast.success('Order has shipped', {
+        autoClose: 1000, // Duration in milliseconds (1 second)
+      });
     } catch (err) {
+      dispatch({ type: 'SHIPPED_FAIL', payload: getError(err) });
       toast.error(getError(err));
-      dispatch({ type: 'DELIVER_FAIL' });
     }
-  }
+  };
 
   return loading ? (
     <LoadingBox></LoadingBox>
@@ -272,12 +295,21 @@ export default function OrderScreen() {
                 <br />
                 <strong>Country:</strong> {order.shippingAddress.country}
               </text>
-              {order.isDelivered ? (
+              {order.isShipped ? (
                 <MessageBox variant='success'>
-                  Delivered at {order.deliveredAt}
+                  Shipped On{' '}
+                  {new Date(order.shippedAt).toLocaleString('en-US', {
+                    year: 'numeric',
+                    month: '2-digit',
+                    day: '2-digit',
+                    hour: 'numeric',
+                    minute: 'numeric',
+                    second: 'numeric',
+                    hour12: true,
+                  })}
                 </MessageBox>
               ) : (
-                <MessageBox variant='danger'>Not Delivered</MessageBox>
+                <MessageBox variant='danger'>Not Shipped</MessageBox>
               )}
             </div>
           </div>
@@ -290,7 +322,16 @@ export default function OrderScreen() {
               </text>
               {order.isPaid ? (
                 <MessageBox variant='success'>
-                  Paid at {order.paidAt}
+                  Paid at{' '}
+                  {new Date(order.paidAt).toLocaleString('en-US', {
+                    year: 'numeric',
+                    month: '2-digit',
+                    day: '2-digit',
+                    hour: 'numeric',
+                    minute: 'numeric',
+                    second: 'numeric',
+                    hour12: true,
+                  })}
                 </MessageBox>
               ) : (
                 <MessageBox variant='danger'>Not Paid</MessageBox>
@@ -306,7 +347,19 @@ export default function OrderScreen() {
               <ListGroup variant='flush'>
                 <ListGroup.Item>
                   <Row>
-                    <Col>Items</Col>
+                    <Col>Quantity</Col>
+                    <Col>
+                      {/* Calculate and display the total quantity of all items */}
+                      {order.orderItems.reduce(
+                        (acc, item) => acc + item.quantity,
+                        0
+                      )}
+                    </Col>
+                  </Row>
+                </ListGroup.Item>
+                <ListGroup.Item>
+                  <Row>
+                    <Col>Order Price</Col>
                     <Col>${order.itemsPrice.toFixed(2)}</Col>
                   </Row>
                 </ListGroup.Item>
@@ -325,7 +378,7 @@ export default function OrderScreen() {
                 <ListGroup.Item>
                   <Row>
                     <Col>
-                      <strong> Order Total</strong>
+                      <strong>Order Total</strong>
                     </Col>
                     <Col>
                       <strong>${order.totalPrice.toFixed(2)}</strong>
@@ -345,17 +398,19 @@ export default function OrderScreen() {
                             onApprove={onApprove}
                             onError={onError}
                           />
+                          {/* Send payment receipt when item is paid */}
                           {loadingPay && <LoadingBox></LoadingBox>}
                         </div>
                       )
                     ) : (
                       <div>
+                        {/* Send payment receipt when item is paid */}
                         {!order.isPaid && !stripe && <LoadingBox />}
                         {!order.isPaid && stripe && (
                           <StripeCheckout
                             stripe={stripe}
-                            orderID={order._id}
-                            handleSuccessPayment={handleSuccessPayment}
+                            orderId={order._id}
+                            handleStripeSuccess={handleStripeSuccess}
                           />
                         )}
                       </div>
@@ -363,12 +418,42 @@ export default function OrderScreen() {
                   </ListGroup.Item>
                 )}
 
-                {userInfo.isAdmin && order.isPaid && !order.isDelivered && (
+                {userInfo.isAdmin && order.isPaid && !order.isShipped && (
                   <ListGroup.Item>
-                    {loadingDeliver && <LoadingBox></LoadingBox>}
+                    {loadingShipped && <LoadingBox />}
                     <div className='d-grid'>
-                      <Button type='button' onClick={deliverOrderHandler}>
-                        Deliver Order
+                      {/* send shipping confirmation email when order ships */}
+                      <h6>
+                        Admin fill in the fields below to send to customer
+                      </h6>
+                      <Form>
+                        <Form.Group className='mb-3' controlId='days'>
+                          <Form.Label>Delivery Days</Form.Label>
+                          <Form.Control
+                            value={deliveryDays}
+                            onChange={(e) => setDeliveryDays(e.target.value)}
+                            required
+                          />
+                        </Form.Group>
+                        <Form.Group className='mb-3' controlId='name'>
+                          <Form.Label>Carrier Name</Form.Label>
+                          <Form.Control
+                            value={carrierName}
+                            onChange={(e) => setCarrierName(e.target.value)}
+                            required
+                          />
+                        </Form.Group>
+                        <Form.Group className='mb-3' controlId='slug'>
+                          <Form.Label>Tracking Number</Form.Label>
+                          <Form.Control
+                            value={trackingNumber}
+                            onChange={(e) => setTrackingNumber(e.target.value)}
+                            required
+                          />
+                        </Form.Group>
+                      </Form>
+                      <Button type='button' onClick={submitHandler}>
+                        Order Shipped
                       </Button>
                     </div>
                   </ListGroup.Item>

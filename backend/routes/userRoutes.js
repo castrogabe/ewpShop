@@ -106,6 +106,15 @@ userRouter.post(
   })
 );
 
+userRouter.post(
+  '/usersByIds',
+  expressAsyncHandler(async (req, res) => {
+    const userIds = req.body.userIds;
+    const users = await User.find({ _id: { $in: userIds } });
+    res.send(users);
+  })
+);
+
 userRouter.put(
   '/profile',
   isAuth,

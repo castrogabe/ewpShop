@@ -23,14 +23,6 @@ const orderSchema = new mongoose.Schema(
       states: { type: String, required: true },
       postalCode: { type: String, required: true },
       country: { type: String, required: true },
-      location: {
-        lat: Number,
-        lng: Number,
-        address: String,
-        name: String,
-        vicinity: String,
-        googleAddressId: String,
-      },
     },
     paymentMethod: { type: String, required: true },
     paymentResult: {
@@ -46,8 +38,11 @@ const orderSchema = new mongoose.Schema(
     user: { type: mongoose.Schema.Types.ObjectId, ref: 'User', required: true },
     isPaid: { type: Boolean, default: false },
     paidAt: { type: Date },
-    isDelivered: { type: Boolean, default: false },
-    deliveredAt: { type: Date },
+    isShipped: { type: Boolean, default: false },
+    shippedAt: { type: Date },
+    deliveryDays: { type: String },
+    carrierName: { type: String },
+    trackingNumber: { type: String },
   },
   {
     timestamps: true,
@@ -55,4 +50,5 @@ const orderSchema = new mongoose.Schema(
 );
 
 const Order = mongoose.model('Order', orderSchema);
+
 export default Order;

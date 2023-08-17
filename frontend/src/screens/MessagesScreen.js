@@ -142,6 +142,7 @@ export default function MessagesScreen() {
           <Table responsive striped bordered className='noWrap'>
             <thead>
               <tr>
+                <th>DATE</th>
                 <th>NAME</th>
                 <th>EMAIL</th>
                 <th>SUBJECT</th>
@@ -155,7 +156,7 @@ export default function MessagesScreen() {
                     <td>
                       {message.createdAt
                         ? message.createdAt.substring(0, 10)
-                        : ''}
+                        : message.update_time}
                     </td>
                     <td>{message.fullName}</td>
                     <td>{message.email}</td>

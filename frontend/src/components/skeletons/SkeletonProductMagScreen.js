@@ -66,7 +66,7 @@ const SkeletonProductMagScreen = () => {
           </Row>
           <br />
           <Row md={12}>
-            <div className='container col-6'>
+            <Col className='container col-6'>
               <Col className='left-col'>
                 <Skeleton classes='img-thumbnail' />
                 <Skeleton classes='img-thumbnail' />
@@ -77,9 +77,9 @@ const SkeletonProductMagScreen = () => {
                 <Skeleton classes='img-large' />
                 <Skeleton classes='text width-50 skeleton-text' />
               </Col>
-            </div>
+            </Col>
 
-            <Col md={6}>
+            <Col>
               <div className='box'>
                 <Skeleton classes='title width-50 skeleton-title' />
                 <Skeleton classes='title width-50 skeleton-title' />

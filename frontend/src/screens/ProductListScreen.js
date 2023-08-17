@@ -1,13 +1,13 @@
 import React, { useContext, useEffect, useReducer } from 'react';
 import axios from 'axios';
-import { useLocation, useNavigate } from 'react-router-dom';
+import { useLocation, useNavigate, Link } from 'react-router-dom';
 import { Row, Col, Button, Table } from 'react-bootstrap';
 import { LinkContainer } from 'react-router-bootstrap';
 import { toast } from 'react-toastify';
 import { Store } from '../Store';
+import LoadingBox from '../components/LoadingBox';
 import MessageBox from '../components/MessageBox';
 import { getError } from '../utils';
-import SkeletonProductListScreen from '../components/skeletons/SkeletonProductListScreen';
 
 const reducer = (state, action) => {
   switch (action.type) {
@@ -78,9 +78,6 @@ export default function ProductListScreen() {
 
   useEffect(() => {
     const fetchData = async () => {
-      // Simulate delay for 1.5 seconds
-      await new Promise((resolve) => setTimeout(resolve, 1500));
-
       try {
         const { data } = await axios.get(`/api/products/admin?page=${page} `, {
           headers: { Authorization: `Bearer ${userInfo.token}` },
@@ -108,7 +105,9 @@ export default function ProductListScreen() {
             headers: { Authorization: `Bearer ${userInfo.token}` },
           }
         );
-        toast.success('product created successfully');
+        toast.success('product created successfully', {
+          autoClose: 1000, // Display success message for 1 second
+        });
         dispatch({ type: 'CREATE_SUCCESS' });
         navigate(`/admin/product/${data.product._id}`);
       } catch (err) {
@@ -137,12 +136,6 @@ export default function ProductListScreen() {
     }
   };
 
-  // Pagination
-  const getFilterUrl = (filter) => {
-    const filterPage = filter.page || page;
-    return `/?&page=${filterPage}`;
-  };
-
   return (
     <div className='content'>
       <br />
@@ -157,17 +150,11 @@ export default function ProductListScreen() {
         </Col>
       </Row>
 
-      {loadingCreate && <SkeletonProductListScreen />}
-      {loadingDelete && <SkeletonProductListScreen />}
+      {loadingCreate && <LoadingBox delay={1000} />}
+      {loadingDelete && <LoadingBox delay={1000} />}
 
       {loading ? (
-        <Row>
-          {[...Array(8).keys()].map((i) => (
-            <Col key={i} md={12} className='mb-3'>
-              <SkeletonProductListScreen />
-            </Col>
-          ))}
-        </Row>
+        <LoadingBox delay={1000} />
       ) : error ? (
         <MessageBox variant='danger'>{error}</MessageBox>
       ) : (
@@ -178,6 +165,7 @@ export default function ProductListScreen() {
                 <tr>
                   <th>ID</th>
                   <th>NAME</th>
+                  <th>QTY</th>
                   <th>PRICE</th>
                   <th>CATEGORY</th>
                   <th>STYLE</th>
@@ -188,8 +176,19 @@ export default function ProductListScreen() {
               <tbody>
                 {products.map((product) => (
                   <tr key={product._id}>
-                    <td>{product._id}</td>
+                    <td>
+                      {product._id}
+                      <div key={product._id}>
+                        <img
+                          src={product.image}
+                          alt={product.name}
+                          className='img-fluid rounded img-thumbnail'
+                        />
+                        <Link to={`/product/${product.slug}`}></Link>
+                      </div>
+                    </td>
                     <td>{product.name}</td>
+                    <td>{product.countInStock}</td>
                     <td>{product.price}</td>
                     <td>{product.category}</td>
                     <td>{product.style}</td>
@@ -225,7 +224,7 @@ export default function ProductListScreen() {
               <LinkContainer
                 key={x + 1}
                 className='mx-1'
-                to={getFilterUrl({ page: x + 1 })}
+                to={`/admin/products?page=${x + 1}`}
               >
                 <Button
                   className={Number(page) === x + 1 ? 'text-bold' : ''}
