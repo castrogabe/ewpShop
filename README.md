@@ -327,3 +327,9 @@ orderRoutes.js (Lines 9-12, 167-218) added send shipping confirmation email.
 userRoutes.js (Lines 109-118) add email routing to OrderListScreen
 
 utils.js (Lines 142-256) second email for shipping confirmation.
+
+## Thirtieth Commit-Change Stripe label to Credit Card
+
+FRONTEND
+folder > screens:
+PaymentMethod3Screen.js (Line 57) Change Stripe to Credit Card to make it easier for customer to understand.

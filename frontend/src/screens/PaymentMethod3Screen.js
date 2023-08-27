@@ -54,7 +54,7 @@ export default function PaymentMethodScreen() {
               <Form.Check
                 type='radio'
                 id='Stripe'
-                label='Stripe'
+                label='Credit Card' // shows credit card so customer understands Credit Card instead of Stripe
                 value='Stripe'
                 checked={paymentMethodName === 'Stripe'}
                 onChange={(e) => setPaymentMethod(e.target.value)}
