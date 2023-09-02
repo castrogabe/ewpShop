@@ -333,3 +333,11 @@ utils.js (Lines 142-256) second email for shipping confirmation.
 FRONTEND
 folder > screens:
 PaymentMethod3Screen.js (Line 57) Change Stripe to Credit Card to make it easier for customer to understand.
+
+## Thirty First Commit-Update ProductMagScreen.js
+
+FRONTEND
+folder > screens:
+ProductMagScreen.js (Lines 170) changed breakpoint.
+
+index.css (Lines 461-479) added breakpoint for jumbotron gif.

@@ -167,7 +167,7 @@ function ProductMagScreen() {
   };
   // end zoom magnifier
 
-  const mobileView = useMediaQuery({ maxWidth: 768 });
+  const mobileView = useMediaQuery({ maxWidth: 992 });
 
   return loading ? (
     <SkeletonProductMagScreen />
