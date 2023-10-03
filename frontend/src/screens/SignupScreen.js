@@ -77,6 +77,9 @@ export default function SignupScreen() {
                 type='password'
                 required
                 onChange={(e) => setPassword(e.target.value)}
+                placeholder='Minimum 8 characters with at least one digit, one uppercase letter, one lowercase letter, and one special character'
+                pattern='^(?=.*\d)(?=.*[a-z])(?=.*[A-Z])(?=.*[^a-zA-Z\d]).{8,}$'
+                title='Minimum 8 characters with at least one digit, one uppercase letter, one lowercase letter, and one special character'
               />
               <Form.Group className='mb-3' controlId='confirmPassword'>
                 <Form.Label>Confirm Password</Form.Label>

@@ -341,3 +341,48 @@ folder > screens:
 ProductMagScreen.js (Lines 170) changed breakpoint.
 
 index.css (Lines 461-479) added breakpoint for jumbotron gif.
+
+## Thirtieth Commit-Change Stripe label to Credit Card
+
+FRONTEND
+folder > screens:
+PaymentMethod3Screen.js (Line 57) Change Stripe to Credit Card to make it easier for customer to understand.
+
+## Thirty First Commit-Update ProductMagScreen.js
+
+FRONTEND
+folder > screens:
+ProductMagScreen.js (Lines 170) changed breakpoint.
+
+index.css (Lines 461-479) added breakpoint for jumbotron gif.
+
+# Thirty Second Commit-Reset password added
+
+1. FRONTEND
+   folder > screens
+   ForgetPasswordScreen.js added
+   ResetPasswordScreen.js added
+2. App.js modified (Lines 31-32, 50-53)
+
+3. BACKEND
+   modified models > userModel.js (Line 8) added
+4. modified routes > userRoutes (Lines 99-121) added
+5. .ENV.EXAMPLE modified added
+6. modified config.js
+
+# Thirty Third Commit-Fix Backend routes, Regex complexity for password
+
+BACKEND
+folder > routes
+userRoutes > updated (Regex)
+
+FRONTEND
+folder > components
+Product.js > updated
+
+folder > screens
+SignupScreen.js > updated
+SigninScreen.js > updated
+UserEditScreen.js > updated
+UserListScreen.js > updated
+ResetPasswordScreen.js > updated

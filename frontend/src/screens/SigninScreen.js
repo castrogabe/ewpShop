@@ -42,7 +42,7 @@ export default function SigninScreen() {
   return (
     <div className='content'>
       <Helmet>
-        <title>Sign Up</title>
+        <title>Sign In</title>
       </Helmet>
       <Row>
         <Col md={6}>
@@ -72,6 +72,10 @@ export default function SigninScreen() {
               <Link to={`/signup?redirect=${redirect}`}>
                 Create your account
               </Link>
+            </div>
+            <div className='mb-3'>
+              Forget Password?{' '}
+              <Link to={`/forget-password`}>Reset Password</Link>
             </div>
           </Form>
         </Col>

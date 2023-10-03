@@ -34,6 +34,8 @@ import SearchScreen from './screens/SearchScreen';
 import ShippingAddress2Screen from './screens/ShippingAddress2Screen'; // step 2
 import SigninScreen from './screens/SigninScreen';
 import SignupScreen from './screens/SignupScreen';
+import ForgetPasswordScreen from './screens/ForgetPasswordScreen';
+import ResetPasswordScreen from './screens/ResetPasswordScreen';
 
 function App() {
   return (
@@ -50,6 +52,11 @@ function App() {
           <Route path='/search' element={<SearchScreen />} />
           <Route path='/signin' element={<SigninScreen />} />
           <Route path='/signup' element={<SignupScreen />} />
+          <Route path='/forget-password' element={<ForgetPasswordScreen />} />
+          <Route
+            path='/reset-password/:token'
+            element={<ResetPasswordScreen />}
+          />
           <Route
             path='/profile'
             element={

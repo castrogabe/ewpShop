@@ -64,7 +64,7 @@ function CheckoutForm(props) {
         className='btn-block'
         disabled={!stripe || processing}
       >
-        Pay With Stripe
+        Pay With Credit Card
       </Button>
     </form>
   );

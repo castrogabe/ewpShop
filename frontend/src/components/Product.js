@@ -1,4 +1,4 @@
-import { Card, Button } from 'react-bootstrap';
+import { Card, Button, Row, Col } from 'react-bootstrap';
 import { Link } from 'react-router-dom';
 import Rating from './Rating';
 import axios from 'axios';
@@ -64,7 +64,7 @@ function Product(props) {
       <Card.Body>
         <Link to={`/product/${product.slug}`}>
           <Card.Title>{product.name}</Card.Title>
-          <Card.Title>Style: {product.style}</Card.Title>
+          <Card.Title>From: {product.from}</Card.Title>
           <Card.Title>Finish: {product.finish}</Card.Title>
         </Link>
         <Rating rating={product.rating} numReviews={product.numReviews} />
@@ -74,14 +74,15 @@ function Product(props) {
             Out of stock
           </Button>
         ) : (
-          <>
-            {product.countInStock <= 5 && (
-              <p style={{ color: 'red' }}>
-                Only {product.countInStock} Left, buy Now!
-              </p>
-            )}
-
-            <div className='sidebarIsOpen'>
+          <Row>
+            <Col xs={8}>
+              {product.countInStock <= 5 && (
+                <p style={{ color: 'red' }}>
+                  Only {product.countInStock} Left, buy Now!
+                </p>
+              )}
+            </Col>
+            <Col xs={4}>
               <Button
                 className='btn btn-primary btn-sm'
                 onClick={() => addToCartHandler(product)}
@@ -89,8 +90,8 @@ function Product(props) {
               >
                 {product.quantity < 1 ? 'Out of stock' : 'Add to cart'}
               </Button>
-            </div>
-          </>
+            </Col>
+          </Row>
         )}
       </Card.Body>
     </Card>

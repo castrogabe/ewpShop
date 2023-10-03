@@ -59,8 +59,8 @@ export const transporter = nodemailer.createTransport({
   port: 587,
   secure: false, // set to true if using SSL/TLS
   auth: {
-    user: 'exoticwoodpen',
-    pass: 'xacdqxgktktlftdv', // actual password used in testing
+    user: process.env.NODE_USER,
+    pass: process.env.NODE_PASSWORD,
   },
 });
 
@@ -69,11 +69,18 @@ export const payOrderEmailTemplate = (order) => {
   // Calculate the total quantity
   const totalQuantity = calculateTotalQuantity(order);
 
+  const formattedDate = `${(order.createdAt.getMonth() + 1)
+    .toString()
+    .padStart(2, '0')}-${order.createdAt
+    .getDate()
+    .toString()
+    .padStart(2, '0')}-${order.createdAt.getFullYear()}`;
+
   return `<h1>Thanks for shopping with exoticwoodpen.com, we will send a confirmation when your order ships</h1>
     <p>
     Hi ${order.user.name},</p>
     <p>We are processing your order.</p>
-    <h2>Order ${order._id} (${order.createdAt.toString().substring(0, 10)})</h2>
+    <h2>Purchase Order ${order._id} (${formattedDate})</h2>
     <table>
       <thead>
         <tr>
@@ -153,6 +160,13 @@ export const shipOrderEmailTemplate = (order) => {
   const carrierName = order.orderItems[0]?.carrierName || 'N/A';
   const trackingNumber = order.orderItems[0]?.trackingNumber || 'N/A';
 
+  const formattedDate = `${(order.createdAt.getMonth() + 1)
+    .toString()
+    .padStart(2, '0')}-${order.createdAt
+    .getDate()
+    .toString()
+    .padStart(2, '0')}-${order.createdAt.getFullYear()}`;
+
   return `<h1>Thanks for shopping with exoticwoodpen.com</h1>
     <p>
     Hi ${order.user.name},</p>
@@ -163,9 +177,8 @@ export const shipOrderEmailTemplate = (order) => {
     <p>Your tracking number is: <strong>${order.trackingNumber}</strong></p>
     <p>Please email me at exoticwoodpen@gmail.com if you have any questions.</p>
     
-    <h2>Order ${order._id} (${order.createdAt
-    .toISOString()
-    .substring(0, 10)})</h2>
+    <h2>Purchase Order ${order._id} (${formattedDate})</h2>
+    <h2>Shipped Order ${order._id} (${formattedDate})</h2>
     <table>
       <thead>
         <tr>
