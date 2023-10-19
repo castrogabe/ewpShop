@@ -1,6 +1,7 @@
 import { Card, Button, Row, Col } from 'react-bootstrap';
 import { Link } from 'react-router-dom';
 import Rating from './Rating';
+import LazyLoad from 'react-lazyload';
 import axios from 'axios';
 import { useContext, useState } from 'react';
 import { Store } from '../Store';
@@ -41,11 +42,14 @@ function Product(props) {
     if (isMobile) {
       toast.success(
         <div>
-          <img
-            src={product.image}
-            alt={product.name}
-            style={{ width: '50px', height: '50px', marginRight: '10px' }}
-          />
+          <LazyLoad>
+            <img
+              src={product.image}
+              alt={product.name}
+              style={{ width: '50px', height: '50px', marginRight: '10px' }}
+              loading='lazy'
+            />
+          </LazyLoad>
           <span>{product.name} added to cart</span>
         </div>,
         {
@@ -59,7 +63,14 @@ function Product(props) {
   return (
     <Card className='home-card'>
       <Link to={`/product/${product.slug}`}>
-        <img src={product.image} className='card-img-top' alt={product.name} />
+        <LazyLoad height={200} offset={100}>
+          <img
+            src={product.image}
+            className='card-img-top'
+            alt={product.name}
+            loading='lazy'
+          />
+        </LazyLoad>
       </Link>
       <Card.Body>
         <Link to={`/product/${product.slug}`}>

@@ -386,3 +386,11 @@ SigninScreen.js > updated
 UserEditScreen.js > updated
 UserListScreen.js > updated
 ResetPasswordScreen.js > updated
+
+# Thirty Fourth Commit React-Lazyload
+
+FRONTEND
+npm install react-lazyload
+
+folder > components
+Product.js > updated for Lazyloading images
