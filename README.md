@@ -394,3 +394,9 @@ npm install react-lazyload
 
 folder > components
 Product.js > updated for Lazyloading images
+
+# Thirty Fifth Commit Final
+
+BACKEND
+.env.example > updated with correct newsecretword for jwt
+utils.js > updated with website: exoticwoodpen.com
