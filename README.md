@@ -411,3 +411,7 @@ Footer.js > updated for potential security vulnerabilities
 
 FRONTEND
 package.json > update line 4 and remove "/react"
+
+# Thirty Eight Commit Update caniuse-lite is updated
+
+npx browserslist@latest --update-db
