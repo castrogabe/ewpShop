@@ -406,3 +406,8 @@ utils.js > updated with website: exoticwoodpen.com
 FRONTEND
 folder > components
 Footer.js > updated for potential security vulnerabilities
+
+# Thirty Seventh Commit Change frontend package.json for error
+
+FRONTEND
+package.json > update line 4 and remove "/react"

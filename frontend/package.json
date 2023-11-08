@@ -1,6 +1,7 @@
 {
   "name": "frontend",
   "proxy": "http://localhost:8000",
+  "homepage": "https://exoticwoodpen.com",
   "version": "0.1.0",
   "private": true,
   "dependencies": {
