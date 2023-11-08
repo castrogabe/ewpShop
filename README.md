@@ -415,3 +415,8 @@ package.json > update line 4 and remove "/react"
 # Thirty Eight Commit Update caniuse-lite is updated
 
 npx browserslist@latest --update-db
+
+# Thirty Ninth Commit update Package.json
+
+FRONTEND
+package.json > updated removed https website information
