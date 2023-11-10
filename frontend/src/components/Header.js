@@ -66,7 +66,12 @@ function Header() {
                   <Nav className='flex-column p-2'>
                     {categories.map((category) => (
                       <Nav.Item key={category}>
-                        <LinkContainer to={`/search?category=${category}`}>
+                        <LinkContainer
+                          to={{
+                            pathname: '/search',
+                            search: `category=${category}`,
+                          }}
+                        >
                           <Nav.Link className='text-dark'>{category}</Nav.Link>
                         </LinkContainer>
                       </Nav.Item>

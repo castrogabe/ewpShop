@@ -420,3 +420,18 @@ npx browserslist@latest --update-db
 
 FRONTEND
 package.json > updated removed https website information
+
+# Fortieth Commit update to react 18
+
+FRONTEND
+folder > components
+Header.js > updated
+BottomHeader.js > updated
+
+folder > screens
+HomeScreen.js > updated
+SearchScreen.js > updated
+
+remove package-lock.json
+index.js > updated
+package.json > updated

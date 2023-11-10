@@ -28,7 +28,12 @@ const BottomHeader = () => {
             <Nav className='bottom-header'>
               {categories.map((category) => (
                 <Nav.Item key={category}>
-                  <LinkContainer to={`/search?category=${category}`}>
+                  <LinkContainer
+                    to={{
+                      pathname: '/search',
+                      search: `category=${category}`,
+                    }}
+                  >
                     <Nav.Link className='text-light'>{category}</Nav.Link>
                   </LinkContainer>
                 </Nav.Item>
