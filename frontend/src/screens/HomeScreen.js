@@ -177,10 +177,7 @@ export default function HomeScreen() {
                     <LinkContainer
                       key={x + 1}
                       className='mx-1'
-                      to={{
-                        pathname: '/search',
-                        search: getFilterUrl({ page: x + 1 }, true),
-                      }}
+                      to={getFilterUrl({ page: x + 1 })}
                     >
                       <Button
                         className={Number(page) === x + 1 ? 'text-bold' : ''}

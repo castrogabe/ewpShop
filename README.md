@@ -435,3 +435,18 @@ SearchScreen.js > updated
 remove package-lock.json
 index.js > updated
 package.json > updated
+
+# Forty First Commit downgrade to React 17
+
+FRONTEND
+folder > components
+Header.js > updated
+BottomHeader.js > updated
+
+folder > screens
+HomeScreen.js > updated
+SearchScreen.js > updated
+
+remove package-lock.json
+index.js > updated
+package.json > updated
