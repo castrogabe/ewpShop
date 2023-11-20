@@ -211,7 +211,7 @@ function ProductMagScreen() {
                     ref={addRefs}
                     onClick={() => openLightbox(i + 1)}
                   >
-                    <Card.Img src={image} alt='' loading='lazy' />
+                    <Card.Img src={image} alt='' />
                   </div>
                 ))}
               </div>

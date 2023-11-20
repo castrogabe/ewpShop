@@ -103,6 +103,19 @@ main {
   transform: scale(1.1);
 }
 
+/* *********************** Header ************************ */
+.header {
+  padding-top: 2rem;
+  padding-bottom: 2rem;
+  background: var(--bold);
+}
+.navbar-brand > img {
+  height: 100px;
+  width: 250px;
+  margin-top: -2rem;
+  margin-bottom: -2rem;
+}
+
 /****** Dropdown ******/
 .dropdown {
   display: block;
@@ -499,6 +512,16 @@ button.thumbnail {
 /* ************************************************************* */
 
 @media screen and (max-width: 767px) {
+  .header {
+    padding-top: 1rem;
+    padding-bottom: 1rem;
+    background: var(--bold);
+  }
+  .navbar-brand > img {
+    height: 50px;
+    width: 100px;
+  }
+
   .about {
     display: flex;
     flex-direction: column;

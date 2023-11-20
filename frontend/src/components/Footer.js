@@ -16,7 +16,7 @@ const Footer = () => {
                     href='https://www.facebook.com/Exotic-Wood-Pen-460928980709091'
                     className='facebookIcon'
                     target='_blank'
-                    rel='noreferrer'
+                    rel='noopener noreferrer'
                   >
                     <i className='fab fa-facebook'></i> Facebook "Exotic Wood
                     Pen"
@@ -28,7 +28,7 @@ const Footer = () => {
                     href='https://www.facebook.com/profile.php?id=100045945043682'
                     className='facebookIcon'
                     target='_blank'
-                    rel='noreferrer'
+                    rel='noopener noreferrer'
                   >
                     <i className='fab fa-facebook'></i> Facebook "Gilded Age
                     Pens"
@@ -40,7 +40,7 @@ const Footer = () => {
                     href='https://www.youtube.com/channel/UCVdwaT1LF4iv6q5okes29tA'
                     className='youtubeIcon'
                     target='_blank'
-                    rel='noreferrer'
+                    rel='noopener noreferrer'
                   >
                     <i className='fab fa-youtube'></i> YouTube
                   </a>

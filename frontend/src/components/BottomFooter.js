@@ -10,8 +10,7 @@ const BottomFooter = () => {
           <a
             href='https://www.gabewd.com/'
             target='_blank'
-            rel='noopener'
-            results='noreferrer'
+            rel='noopener noreferrer'
             id='linked'
           >
             &copy; gabewd.com

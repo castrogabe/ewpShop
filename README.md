@@ -450,3 +450,18 @@ SearchScreen.js > updated
 remove package-lock.json
 index.js > updated
 package.json > updated
+
+# Forty Second Commit downgrade to React 16
+
+FRONTEND
+package.json > updated : "react": "^16.14.0", "react-dom": "^16.14.0",
+
+folder: components
+Footer.js > updated
+BottomFooter.js > updated
+Header.js > updated (New Logo)
+
+folder: screens
+ProductMagScreen.js > updated
+
+index.css > updated for logo

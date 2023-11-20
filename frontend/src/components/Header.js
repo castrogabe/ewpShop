@@ -42,7 +42,8 @@ function Header() {
           <Container>
             <LinkContainer to='/'>
               <Navbar.Brand>
-                <i class='fas fa-pen-nib'></i> Exotic Wood Pen
+                {/* <i class='fas fa-pen-nib'></i> Exotic Wood Pen */}
+                <img src='/images/logo.png' alt='logo'></img>
               </Navbar.Brand>
             </LinkContainer>
 
