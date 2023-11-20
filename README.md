@@ -465,3 +465,8 @@ folder: screens
 ProductMagScreen.js > updated
 
 index.css > updated for logo
+
+# Forty Third Commit upgrade to React 17
+
+FRONTEND
+package.json > updated ("react": "^17.0.2", "react-dom": "^17.0.2",)
