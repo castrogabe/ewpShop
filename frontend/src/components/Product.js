@@ -75,7 +75,7 @@ function Product(props) {
       <Card.Body>
         <Link to={`/product/${product.slug}`}>
           <Card.Title>{product.name}</Card.Title>
-          <Card.Title>From: {product.from}</Card.Title>
+          <Card.Title>Style: {product.style}</Card.Title>
           <Card.Title>Finish: {product.finish}</Card.Title>
         </Link>
         <Rating rating={product.rating} numReviews={product.numReviews} />

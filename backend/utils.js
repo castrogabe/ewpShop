@@ -167,9 +167,9 @@ export const shipOrderEmailTemplate = (order) => {
     .toString()
     .padStart(2, '0')}-${order.createdAt.getFullYear()}`;
 
-  return `<h1>Thanks for shopping with exoticwoodpen.com</h1>
+  return `<h1>Your order is on the way!</h1>
     <p>
-    Hi ${order.user.name},</p>
+    Hi ${order.user.name}, thanks for shopping with exoticwoodpen.com</p>
     <p>Great News, your order has been shipped, and will arrive within <strong>${
       order.deliveryDays
     }</strong> days.</p>
