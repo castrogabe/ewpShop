@@ -108,6 +108,8 @@ main {
   padding-top: 2rem;
   padding-bottom: 2rem;
   background: var(--bold);
+  padding-left: 5%;
+  padding-right: 5%;
 }
 .navbar-brand > img {
   height: 100px;

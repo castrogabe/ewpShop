@@ -100,7 +100,6 @@ function ProductMagScreen() {
     navigate('/cart');
   };
 
-  // react-image-lightbox
   const openLightbox = (index) => {
     setLightboxIndex(index);
     setLightboxOpen(true);
@@ -194,7 +193,12 @@ function ProductMagScreen() {
             <Carousel>
               {product.images.map((image, index) => (
                 <div key={index}>
-                  <img src={image} alt={product.name} className='img-large' />
+                  <img
+                    src={image}
+                    alt={product.name}
+                    className='img-large'
+                    loading='lazy'
+                  />
                 </div>
               ))}
             </Carousel>
@@ -242,30 +246,6 @@ function ProductMagScreen() {
               </div>
             </div>
           )}
-
-          {/* Lightbox */}
-          <div className='lightbox'>
-            {lightboxOpen && (
-              <Lightbox
-                mainSrc={
-                  lightboxIndex === 0
-                    ? product.image
-                    : product.images[lightboxIndex - 1]
-                }
-                nextSrc={
-                  lightboxIndex === product.images.length
-                    ? null
-                    : product.images[lightboxIndex]
-                }
-                prevSrc={
-                  lightboxIndex === 0 ? null : product.images[lightboxIndex - 2]
-                }
-                onCloseRequest={() => setLightboxOpen(false)}
-                onMovePrevRequest={() => setLightboxIndex(lightboxIndex - 1)}
-                onMoveNextRequest={() => setLightboxIndex(lightboxIndex + 1)}
-              />
-            )}
-          </div>
         </Col>
 
         <Col md={6}>
@@ -410,6 +390,30 @@ function ProductMagScreen() {
             </MessageBox>
           )}
         </div>
+      </div>
+
+      {/* Lightbox */}
+      <div className='lightbox'>
+        {lightboxOpen && (
+          <Lightbox
+            mainSrc={
+              lightboxIndex === 0
+                ? product.image
+                : product.images[lightboxIndex - 1]
+            }
+            nextSrc={
+              lightboxIndex === product.images.length
+                ? null
+                : product.images[lightboxIndex]
+            }
+            prevSrc={
+              lightboxIndex === 0 ? null : product.images[lightboxIndex - 2]
+            }
+            onCloseRequest={() => setLightboxOpen(false)}
+            onMovePrevRequest={() => setLightboxIndex(lightboxIndex - 1)}
+            onMoveNextRequest={() => setLightboxIndex(lightboxIndex + 1)}
+          />
+        )}
       </div>
       <br />
     </div>

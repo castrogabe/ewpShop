@@ -470,3 +470,12 @@ index.css > updated for logo
 
 FRONTEND
 package.json > updated ("react": "^17.0.2", "react-dom": "^17.0.2",)
+
+# Forty Fourth Commit package-lock.json replace
+
+FRONTEND
+folder: components
+Header.js > removed the Container and added 5% padding
+
+folder: screens
+ProductMagScreen.js > updated (loading='lazy')

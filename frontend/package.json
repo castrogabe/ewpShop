@@ -1,7 +1,6 @@
 {
   "name": "frontend",
   "proxy": "http://localhost:8000",
-  "homepage": "https://exoticwoodpen.com",
   "version": "0.1.0",
   "private": true,
   "dependencies": {
@@ -13,12 +12,12 @@
     "@testing-library/react": "^12.1.2",
     "@testing-library/user-event": "^13.5.0",
     "axios": "^0.24.0",
+    "bootstrap": "^5.1.3",
     "react": "^17.0.2",
     "react-bootstrap": "^2.1.0",
     "react-dom": "^17.0.2",
     "react-google-charts": "^4.0.0",
     "react-helmet-async": "^1.2.2",
-    "react-image-gallery": "^1.3.0",
     "react-image-lightbox": "^5.1.4",
     "react-image-magnify": "^2.7.4",
     "react-lazyload": "^3.2.0",
