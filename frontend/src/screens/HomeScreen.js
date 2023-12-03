@@ -143,11 +143,22 @@ export default function HomeScreen() {
                 )}
                 <Row>
                   {products.map((product) => (
+                    // 4 columns
+                    // <Col
+                    //   key={product.slug}
+                    //   sm={6}
+                    //   md={4}
+                    //   lg={3}
+                    //   className='mb-3'
+                    // >
+
+                    // 6 columns
                     <Col
                       key={product.slug}
                       sm={6}
                       md={4}
-                      lg={3}
+                      lg={2}
+                      xl={2}
                       className='mb-3'
                     >
                       {/* Product comes from components > Product.js */}

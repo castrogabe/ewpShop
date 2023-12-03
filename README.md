@@ -495,3 +495,9 @@ utils.js > updated
 FRONTEND
 folder: components
 Header.js > updated with new logo.png
+
+# Forty Seventh Commit modify home screen
+
+FRONTEND
+folder: screens
+HomeScreen.js > updated for 6 columns
