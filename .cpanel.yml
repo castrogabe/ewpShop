@@ -1,6 +1,0 @@
----
-deployment:
-  tasks:
-    - export DEPLOYPATH=/home/castrogabe/ewpShop/public_html
-    - /bin/cp -r $REPODIR/* $DEPLOYPATH
-    - /bin/npm --prefix $DEPLOYPATH install --production
