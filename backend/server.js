@@ -11,6 +11,8 @@ import uploadRouter from './routes/uploadRoutes.js';
 import messageRouter from './routes/messageRoutes.js';
 import cors from 'cors';
 
+const __dirname = path.resolve();
+
 mongoose
   .connect(process.env.MONGODB_URI)
   .then(() => {
@@ -36,6 +38,9 @@ app.use(
   })
 );
 
+// Serve static files from the frontend build directory
+app.use(express.static(path.join(__dirname, 'frontend', 'build')));
+
 // routes
 app.use('/api/upload', uploadRouter);
 app.use('/api/seed', seedRouter);
@@ -45,10 +50,9 @@ app.use('/api/orders', orderRouter);
 app.use('/api/stripe', stripeRouter);
 app.use(messageRouter);
 
-const __dirname = path.resolve();
-app.use(express.static(path.join(__dirname, '/frontend/build')));
+// For any other routes, serve the index.html file from the frontend build directory
 app.get('*', (req, res) =>
-  res.sendFile(path.join(__dirname, '/frontend/build/index.html'))
+  res.sendFile(path.join(__dirname, 'frontend', 'build', 'index.html'))
 );
 
 app.use((err, req, res, next) => {

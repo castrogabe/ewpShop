@@ -505,3 +505,8 @@ HomeScreen.js > updated for 6 columns
 # Forty Eighth Commit add yml file in root
 
 # Forty Ninth Commit remove yml file in root
+
+# Fiftieth Commit updated to serve static files
+
+BACKEND
+server.js > updated to serving both API routes and static files from the frontend build directory using Express.
