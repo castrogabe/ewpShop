@@ -33,7 +33,8 @@ app.get('/api/keys/paypal', (req, res) => {
 
 app.use(
   cors({
-    origin: 'http://localhost:3000',
+    // origin: 'http://localhost:3000',  testing
+    origin: 'http://146.190.132.25', // deployment
     credentials: true,
   })
 );

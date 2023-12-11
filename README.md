@@ -515,3 +515,8 @@ server.js > updated to serving both API routes and static files from the fronten
 
 BACKEND
 .env.example > updated added added base url // digitalocean droplet id
+
+# Fifty Second Commit updated server.js
+
+BACKEND
+server.js > updated added added base url // digitalocean droplet id
