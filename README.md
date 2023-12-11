@@ -510,3 +510,8 @@ HomeScreen.js > updated for 6 columns
 
 BACKEND
 server.js > updated to serving both API routes and static files from the frontend build directory using Express.
+
+# Fifty First Commit updated .env.example
+
+BACKEND
+.env.example > updated added added base url // digitalocean droplet id
