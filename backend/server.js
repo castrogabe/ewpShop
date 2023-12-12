@@ -33,8 +33,7 @@ app.get('/api/keys/paypal', (req, res) => {
 
 app.use(
   cors({
-    // origin: 'http://localhost:3000',  testing
-    origin: 'http://146.190.132.25', // deployment
+    origin: ['http://localhost:3000', 'http://137.184.45.236'], // Allow both localhost and your droplet IP
     credentials: true,
   })
 );
