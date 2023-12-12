@@ -525,3 +525,11 @@ server.js > updated added added base url // digitalocean droplet id
 
 BACKEND
 server.js > updated added added base url // digitalocean droplet id
+
+# Fifty Fourth Commit updated for deployment
+
+FRONTEND
+package.json > updated with DigitalOcean droplet id
+
+BACKEND
+.env.example > updated with DigitalOcean droplet id (need to make the same changes in actual .env)
