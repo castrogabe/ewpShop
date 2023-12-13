@@ -538,3 +538,7 @@ BACKEND
 
 FRONTEND
 .env.example > added DigitalOcean droplet id:8000
+
+# Fifty Seventy Commit updated
+
+# Fifty Eight Commit reverted back to 48th commit
