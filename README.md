@@ -533,3 +533,8 @@ package.json > updated with DigitalOcean droplet id
 
 BACKEND
 .env.example > updated with DigitalOcean droplet id (need to make the same changes in actual .env)
+
+# Fifty Fifth Commit updated frontend for deployment
+
+FRONTEND
+.env.example > added DigitalOcean droplet id:8000
