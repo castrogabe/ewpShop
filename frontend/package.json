@@ -1,6 +1,6 @@
 {
   "name": "frontend",
-  "proxy": "http://137.184.45.236:8000",
+  "proxy": "http://165.232.147.8",
   "version": "0.1.0",
   "private": true,
   "dependencies": {
@@ -35,7 +35,7 @@
     "web-vitals": "^2.1.2"
   },
   "scripts": {
-    "start": "REACT_APP_BACKEND_URL=http://128.199.14.250:8000 react-scripts start",
+    "start": "react-scripts start",
     "build": "react-scripts build",
     "test": "react-scripts test",
     "eject": "react-scripts eject"

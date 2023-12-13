@@ -11,8 +11,6 @@ import uploadRouter from './routes/uploadRoutes.js';
 import messageRouter from './routes/messageRoutes.js';
 import cors from 'cors';
 
-const __dirname = path.resolve();
-
 mongoose
   .connect(process.env.MONGODB_URI)
   .then(() => {
@@ -33,13 +31,10 @@ app.get('/api/keys/paypal', (req, res) => {
 
 app.use(
   cors({
-    origin: ['http://localhost:3000', 'http://128.199.14.250'], // Allow both localhost and your droplet IP
+    origin: 'http://localhost:3000',
     credentials: true,
   })
 );
-
-// Serve static files from the frontend build directory
-app.use(express.static(path.join(__dirname, 'frontend', 'build')));
 
 // routes
 app.use('/api/upload', uploadRouter);
@@ -50,9 +45,10 @@ app.use('/api/orders', orderRouter);
 app.use('/api/stripe', stripeRouter);
 app.use(messageRouter);
 
-// For any other routes, serve the index.html file from the frontend build directory
+const __dirname = path.resolve();
+app.use(express.static(path.join(__dirname, '/frontend/build')));
 app.get('*', (req, res) =>
-  res.sendFile(path.join(__dirname, 'frontend', 'build', 'index.html'))
+  res.sendFile(path.join(__dirname, '/frontend/build/index.html'))
 );
 
 app.use((err, req, res, next) => {
