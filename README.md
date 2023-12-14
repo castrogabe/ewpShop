@@ -542,3 +542,7 @@ FRONTEND
 # Fifty Seventy Commit updated
 
 # Fifty Eight Commit reverted back to 48th commit
+
+# Fifty Ninth Commit edit package.json for deployment
+
+create package.json for build script in root folder
