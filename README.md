@@ -546,3 +546,13 @@ FRONTEND
 # Fifty Ninth Commit edit package.json for deployment
 
 create package.json for build script in root folder
+
+# Sixtieth Commit add pen gallery screen
+
+FRONTEND
+folder: screens
+GalleryScreen.js > added
+
+App.js > updated for GalleryScreen.js
+Footer.js > updates for GalleryScreen.js
+index.css updated for gallery screens

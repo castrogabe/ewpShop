@@ -66,6 +66,12 @@ const Footer = () => {
                     Jigs
                   </Link>
                 </li>
+                <li>
+                  <Link to='/gallery' className='email'>
+                    {' '}
+                    <i className='fa fa-info'></i> Pen Gallery
+                  </Link>
+                </li>
               </ul>
             </div>
           </Col>

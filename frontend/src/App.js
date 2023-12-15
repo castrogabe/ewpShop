@@ -22,6 +22,7 @@ import MessagesScreen from './screens/MessagesScreen';
 import AboutScreen from './screens/AboutScreen';
 import CartScreen from './screens/CartScreen'; // step 1
 import ContactScreen from './screens/ContactScreen';
+import GalleryScreen from './screens/GalleryScreen';
 import HomeScreen from './screens/HomeScreen';
 import JigScreen from './screens/JigScreen';
 import OrderHistoryScreen from './screens/OrderHistoryScreen';
@@ -49,6 +50,7 @@ function App() {
           <Route path='/product/:slug' element={<ProductMagScreen />} />
           <Route path='/cart' element={<CartScreen />} />
           <Route path='/contact' element={<ContactScreen />} />
+          <Route path='/gallery' element={<GalleryScreen />} />
           <Route path='/search' element={<SearchScreen />} />
           <Route path='/signin' element={<SigninScreen />} />
           <Route path='/signup' element={<SignupScreen />} />
