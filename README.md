@@ -556,3 +556,12 @@ GalleryScreen.js > added
 App.js > updated for GalleryScreen.js
 Footer.js > updates for GalleryScreen.js
 index.css updated for gallery screens
+
+# Sixty First Commit Stripe Fix
+
+FRONTEND
+folder: components
+StripeCheckout.js > updated to show Payment Successful and in order history
+
+folder: screens
+OrderScreen.js > updated for successPay

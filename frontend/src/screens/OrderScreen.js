@@ -411,6 +411,7 @@ export default function OrderScreen() {
                             stripe={stripe}
                             orderId={order._id}
                             handleStripeSuccess={handleStripeSuccess}
+                            successPay={successPay}
                           />
                         )}
                       </div>
