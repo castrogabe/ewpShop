@@ -577,6 +577,8 @@ MessagesScreen.js > updated to add Reply form to users email
 OrderScreen.js > updated to read Credit Card for the customer
 PlaceOrderScreen.js > updated to read Credit Card for the customer
 
+# Sixty third Commit increased message functionality, forgot to add the backend changes
+
 BACKEND
 folder: models
 messageModels.js > updated to the replyContent, replyEmail, replySentAt
