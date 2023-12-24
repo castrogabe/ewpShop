@@ -85,15 +85,14 @@ messageRouter.post('/messages/reply', async (req, res) => {
       subject: `Re: ${subject}`, // Append 'Re: ' to the original subject
       html: `
         <h1>Reply to Your Message</h1>
-        <p>You wrote:</p>
         <p><strong>Subject:</strong> ${subject}</p>
-        <p><strong>Message:</strong> ${message}</p>
-        <p>Our Reply:</p>
-        <p>${replyContent}</p>
+        <p><strong>Message Reply:</strong> ${message}</p>
         <p>Thank you,</p>
         <p>exoticwoodpen.com</p>
       `,
     };
+
+    console.log('Reply Content:', replyContent); // Log the replyContent value
 
     // Send the email using the transporter
     const info = await transporter.sendMail(emailContent);
