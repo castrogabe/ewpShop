@@ -16,9 +16,9 @@ export default {
   CLOUDINARY_URL: process.env.cloudinary || 'secretKey',
   CLOUDINARY_API_SECRET: process.envCloudinary || 'secretAccessKey',
 
-  STRIPE_SECRET_KEY: process.env.STRIPE_SECRET_KEY || 'your_stripe_secret_key',
   STRIPE_PUBLISHABLE_KEY:
     process.env.STRIPE_PUBLISHABLE_KEY || 'your_stripe_publishable_key',
+  STRIPE_SECRET_KEY: process.env.STRIPE_SECRET_KEY || 'your_stripe_secret_key',
 
   auth: process.env.NODE_USER,
   auth: process.env.NODE_PASSWORD,

@@ -149,7 +149,10 @@ export default function PlaceOrderScreen() {
               <div className='body'>
                 <title>Payment</title>
                 <text>
-                  <strong>Method:</strong> {cart.paymentMethod}
+                  <strong>Method:</strong>{' '}
+                  {cart.paymentMethod === 'Stripe'
+                    ? 'Credit Card'
+                    : cart.paymentMethod}
                 </text>
                 <br />
                 <Link to='/payment'>

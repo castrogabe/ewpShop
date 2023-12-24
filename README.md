@@ -565,3 +565,24 @@ StripeCheckout.js > updated to show Payment Successful and in order history
 
 folder: screens
 OrderScreen.js > updated for successPay
+
+# Sixty Second Commit increased message functionality, Stripe
+
+FRONTEND
+folder: components
+Header.js > updated to add Search container
+
+folder: screens
+MessagesScreen.js > updated to add Reply form to users email
+OrderScreen.js > updated to read Credit Card for the customer
+PlaceOrderScreen.js > updated to read Credit Card for the customer
+
+BACKEND
+folder: models
+messageModels.js > updated to the replyContent, replyEmail, replySentAt
+
+folder: routes
+messageRoutes.js > updated with the message reply using nodemailer
+
+config.js > updated
+.env.example > updated

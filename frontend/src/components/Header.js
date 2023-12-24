@@ -7,7 +7,7 @@ import { useContext, useEffect, useState } from 'react';
 import { Store } from '../Store';
 import { getError } from '../utils';
 import axios from 'axios';
-// import SearchBox from '../components/SearchBox';
+import SearchBox from '../components/SearchBox';
 
 function Header() {
   const { state, dispatch: ctxDispatch } = useContext(Store);
@@ -48,7 +48,7 @@ function Header() {
 
           <Navbar.Toggle aria-controls='basic-navbar-nav' />
           <Navbar.Collapse id='basic-navbar-nav'>
-            {/* <SearchBox /> */}
+            <SearchBox />
 
             <Nav className='me-auto  w-100  justify-content-end'>
               <LinkContainer to='/about'>
@@ -101,15 +101,19 @@ function Header() {
                   <LinkContainer to='/admin/dashboard'>
                     <NavDropdown.Item>Dashboard</NavDropdown.Item>
                   </LinkContainer>
+
                   <LinkContainer to='/admin/products'>
                     <NavDropdown.Item>Products</NavDropdown.Item>
                   </LinkContainer>
+
                   <LinkContainer to='/admin/orders'>
                     <NavDropdown.Item>Orders</NavDropdown.Item>
                   </LinkContainer>
+
                   <LinkContainer to='/admin/users'>
                     <NavDropdown.Item>Users</NavDropdown.Item>
                   </LinkContainer>
+
                   <LinkContainer to='/admin/messages'>
                     <NavDropdown.Item>Messages</NavDropdown.Item>
                   </LinkContainer>

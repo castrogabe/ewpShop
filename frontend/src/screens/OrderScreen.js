@@ -318,7 +318,10 @@ export default function OrderScreen() {
             <div className='body'>
               <title>Payment</title>
               <text>
-                <strong>Method:</strong> {order.paymentMethod}
+                <strong>Method:</strong>{' '}
+                {order.paymentMethod === 'Stripe'
+                  ? 'Credit Card'
+                  : order.paymentMethod}
               </text>
               {order.isPaid ? (
                 <MessageBox variant='success'>
