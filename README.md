@@ -594,3 +594,9 @@ config.js > updated
 BACKEND
 folder: routes
 messageRoutes > updated the email for the messages reply
+
+# Sixty Fifth Commit add Questions / Contact Us to ProductMagScreen.js
+
+FRONTEND
+folder: screens
+ProductMagScreen.js > updated for Questions about a product
