@@ -170,6 +170,8 @@ export default function MessagesScreen() {
         <title>Messages</title>
       </Helmet>
       <div className='content'>
+        <br />
+        <h4 className='box'>Messages</h4>
         <div className='box'>
           {loadingDelete && <SkeletonMessageScreen />}
           {loading ? (

@@ -589,7 +589,7 @@ messageRoutes.js > updated with the message reply using nodemailer
 config.js > updated
 .env.example > updated
 
-# # Sixty Fourth Commit fix and undefined in the email
+# Sixty Fourth Commit fix and undefined in the email
 
 BACKEND
 folder: routes

@@ -7,7 +7,7 @@ export default {
   JWT_SECRET: process.env.JWT_SECRET || 'newsecretword',
   MONGODB_URL: process.env.MONGODB_URI || 'mongodb://localhost/frontend',
 
-  PAYPAL_CLIENT_ID: process.env.PAYPAL_CLIENT_ID || 'sb',
+  PAYPAL_CLIENT_ID: process.env.PAYPAL_CLIENT_ID,
 
   STRIPE_PUBLISHABLE_KEY:
     process.env.STRIPE_PUBLISHABLE_KEY || 'your_stripe_publishable_key',

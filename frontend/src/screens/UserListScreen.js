@@ -109,7 +109,7 @@ export default function UserListScreen() {
         <title>Users</title>
       </Helmet>
       <br />
-      <h1 className='box'>Users</h1>
+      <h4 className='box'>Users</h4>
       <div className='box'>
         {loadingDelete && <SkeletonUserListScreen />}
         {loading ? (
