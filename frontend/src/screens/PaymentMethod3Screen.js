@@ -12,8 +12,11 @@ export default function PaymentMethodScreen() {
     cart: { shippingAddress, paymentMethod },
   } = state;
 
-  const [paymentMethodName, setPaymentMethod] = useState(
-    paymentMethod || 'PayPal'
+  const [isPayPalSelected, setIsPayPalSelected] = useState(
+    paymentMethod === 'PayPal'
+  );
+  const [isStripeSelected, setIsStripeSelected] = useState(
+    paymentMethod === 'Stripe'
   );
 
   useEffect(() => {
@@ -21,10 +24,14 @@ export default function PaymentMethodScreen() {
       navigate('/shipping');
     }
   }, [shippingAddress, navigate]);
+
   const submitHandler = (e) => {
     e.preventDefault();
-    ctxDispatch({ type: 'SAVE_PAYMENT_METHOD ', payload: paymentMethodName });
-    localStorage.setItem('paymentMethod', paymentMethodName);
+
+    const selectedMethod = isPayPalSelected ? 'PayPal' : 'Stripe';
+
+    ctxDispatch({ type: 'SAVE_PAYMENT_METHOD', payload: selectedMethod });
+    localStorage.setItem('paymentMethod', selectedMethod);
     navigate('/placeorder');
   };
 
@@ -41,25 +48,36 @@ export default function PaymentMethodScreen() {
           <h4 className='box'>Select Payment Method</h4>
           <Form onSubmit={submitHandler}>
             <div className='mb-3'>
-              <Form.Check
-                type='radio'
-                id='PayPal'
-                label='PayPal'
-                value='PayPal'
-                checked={paymentMethodName === 'PayPal'}
-                onChange={(e) => setPaymentMethod(e.target.value)}
-              />
+              <div className='payment-option'>
+                <Form.Check
+                  type='radio'
+                  id='PayPal'
+                  label='PayPal'
+                  checked={isPayPalSelected}
+                  onChange={() => {
+                    setIsPayPalSelected(true);
+                    setIsStripeSelected(false);
+                  }}
+                />
+                <i className='fab fa-cc-paypal'></i>
+              </div>
             </div>
             <div className='mb-3'>
-              <Form.Check
-                type='radio'
-                id='Stripe'
-                label='Credit Card' // shows credit card so customer understands Credit Card instead of Stripe
-                value='Stripe'
-                checked={paymentMethodName === 'Stripe'}
-                onChange={(e) => setPaymentMethod(e.target.value)}
-              />
+              <div className='payment-option'>
+                <Form.Check
+                  type='radio'
+                  id='Stripe'
+                  label='Credit Card'
+                  checked={isStripeSelected}
+                  onChange={() => {
+                    setIsStripeSelected(true);
+                    setIsPayPalSelected(false);
+                  }}
+                />
+                <i className='fab fa-cc-stripe'></i>
+              </div>
             </div>
+
             <div className='mb-3'>
               <Button type='submit'>Continue</Button>
             </div>

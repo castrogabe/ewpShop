@@ -43,7 +43,7 @@ messageRouter.post('/contact', (req, res) => {
 });
 
 // Retrieve all messages
-messageRouter.get('/messages', (req, res) => {
+messageRouter.get('/', (req, res) => {
   Message.find()
     .then((foundMessages) => res.json(foundMessages))
     .catch((error) => {
@@ -54,7 +54,7 @@ messageRouter.get('/messages', (req, res) => {
 });
 
 // Delete a message
-messageRouter.delete('/messages', (req, res) => {
+messageRouter.delete('/', (req, res) => {
   const { update_time, fullName, email, subject, message } = req.body;
 
   Message.findOneAndDelete({ update_time, fullName, email, subject, message })
@@ -73,7 +73,7 @@ messageRouter.delete('/messages', (req, res) => {
 });
 
 // Send a reply to a message
-messageRouter.post('/messages/reply', async (req, res) => {
+messageRouter.post('/reply', async (req, res) => {
   const { email, subject, message, replyContent } = req.body; // Reply data from frontend
 
   try {

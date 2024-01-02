@@ -265,7 +265,7 @@ function ProductMagScreen() {
               </ListGroup.Item>
               <ListGroup.Item>
                 <Link to='/contact' className='email'>
-                  Product Question
+                  Product Question?
                 </Link>
               </ListGroup.Item>
               <ListGroup.Item>Price : ${product.price}</ListGroup.Item>

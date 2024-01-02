@@ -23,7 +23,7 @@ export default function ContactScreen() {
       };
       setLoading(true);
       toast.success('Success, message sent!', { autoClose: 1000 }); // Display success message for 1 second
-      await axios.post(`/contact`, newMessage); // Make the API request
+      await axios.post(`/api/messages/contact`, newMessage); // Make the API request
     } catch (err) {
       toast.error('Message not sent', { autoClose: 1000 }); // Display error message for 1 second
     }

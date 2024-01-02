@@ -43,7 +43,7 @@ app.use('/api/products', productRouter);
 app.use('/api/users', userRouter);
 app.use('/api/orders', orderRouter);
 app.use('/api/stripe', stripeRouter);
-app.use(messageRouter);
+app.use('/api/messages', messageRouter);
 
 const __dirname = path.resolve();
 app.use(express.static(path.join(__dirname, '/frontend/build')));

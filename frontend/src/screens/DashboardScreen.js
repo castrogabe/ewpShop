@@ -38,10 +38,19 @@ export default function DashboardScreen() {
       await new Promise((resolve) => setTimeout(resolve, 1500));
 
       try {
-        const { data } = await axios.get('/api/orders/summary', {
+        const { data: summaryData } = await axios.get('/api/orders/summary', {
           headers: { Authorization: `Bearer ${userInfo.token}` },
         });
-        dispatch({ type: 'FETCH_SUCCESS', payload: data });
+
+        const { data: messagesData } = await axios.get('/api/messages'); // Fetch messages
+
+        dispatch({
+          type: 'FETCH_SUCCESS',
+          payload: {
+            ...summaryData, // Existing summary data
+            messages: messagesData, // Add messages to payload
+          },
+        });
       } catch (err) {
         dispatch({
           type: 'FETCH_FAIL',
@@ -63,7 +72,7 @@ export default function DashboardScreen() {
       ) : (
         <>
           <Row className='mt-3'>
-            <Col md={4}>
+            <Col md={3}>
               <Card>
                 <Card.Body>
                   <Card.Title>
@@ -76,7 +85,7 @@ export default function DashboardScreen() {
               </Card>
             </Col>
 
-            <Col md={4}>
+            <Col md={3}>
               <Card>
                 <Card.Body>
                   <Card.Title>
@@ -89,7 +98,7 @@ export default function DashboardScreen() {
               </Card>
             </Col>
 
-            <Col md={4}>
+            <Col md={3}>
               <Card>
                 <Card.Body>
                   <Card.Title>
@@ -102,7 +111,19 @@ export default function DashboardScreen() {
                 </Card.Body>
               </Card>
             </Col>
+
+            <Col md={3}>
+              <Card>
+                <Card.Body>
+                  <Card.Title>
+                    {summary.messages ? summary.messages.length : 0}
+                  </Card.Title>
+                  <Card.Text> Messages</Card.Text>
+                </Card.Body>
+              </Card>
+            </Col>
           </Row>
+
           <div className='my-3'>
             <h2>Sales</h2>
             {summary.dailyOrders.length === 0 ? (

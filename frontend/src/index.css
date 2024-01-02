@@ -31,6 +31,23 @@ body {
   box-shadow: 0 1px 5px rgba(0, 0, 0, 0.1);
 }
 
+body {
+  font-size: 20px; /* Adjust the base font size for the entire body */
+}
+h1 {
+  font-size: 24px; /* Adjust the font size for h1 tags */
+}
+h2 {
+  font-size: 20px; /* Adjust the font size for h2 tags */
+}
+p,
+.content,
+.about,
+.search h3,
+.jumbotron1 {
+  font-size: 20px; /* Adjust the font size for paragraphs and specific elements */
+}
+
 .bg-info {
   color: var(--medium);
   background-color: var(--dark) !important;
@@ -347,6 +364,16 @@ a.email {
 
 .pointer {
   cursor: pointer;
+}
+
+/* paypal and stripe logo */
+.payment-option {
+  display: flex;
+  align-items: center;
+}
+.payment-option .fab {
+  margin-left: 10px; /* Adjust the margin as needed */
+  font-size: 30px; /* Adjust the font size as desired */
 }
 
 /* Pagination */

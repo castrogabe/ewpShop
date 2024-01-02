@@ -600,3 +600,25 @@ messageRoutes > updated the email for the messages reply
 FRONTEND
 folder: screens
 ProductMagScreen.js > updated for Questions about a product
+
+# Sixty Sixth Commit final changes and fix Messages
+
+BACKEND
+server.js > updated for /api/messages
+
+folder: routes
+messageRoutes > updated for /api/messages
+
+FRONTEND
+folder: components
+StripeCheckout.js > updated
+skeleton > SkeletonDashboardScreen.js > updated for messages
+
+folder: screens
+ContactScreen.js > updated for /api/messages
+DashboardScreen.js > updated for /api/messages - getting messages notice
+MessagesScreen.js > updated for /api/messages
+PaymentMethod3Screen.js > updated for PayPal and Stripe logos
+ProductMag3Screen.js > updated for contact us
+
+index.css > updated for PayPal and Stripe, adjust font sizes

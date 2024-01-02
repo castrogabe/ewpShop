@@ -30,6 +30,12 @@ const SkeletonDashboardScreen = () => {
                   <Skeleton classes='title width-25 skeleton-title' />
                 </Col>
               </Row>
+              <Row className='box'>
+                <Col>
+                  <Skeleton classes='title width-25 skeleton-title' />
+                  <Skeleton classes='title width-25 skeleton-title' />
+                </Col>
+              </Row>
             </Col>
 
             <Skeleton classes='title width-25 skeleton-title' />
@@ -64,15 +70,19 @@ const SkeletonDashboardScreen = () => {
         {!isMobile && (
           <>
             <Row md={12}>
-              <Col md={4} className='box'>
+              <Col md={3} className='box'>
                 <Skeleton classes='title width-25 skeleton-title' />
                 <Skeleton classes='title width-25 skeleton-title' />
               </Col>
-              <Col md={4} className='box'>
+              <Col md={3} className='box'>
                 <Skeleton classes='title width-25 skeleton-title' />
                 <Skeleton classes='title width-25 skeleton-title' />
               </Col>
-              <Col md={4} className='box'>
+              <Col md={3} className='box'>
+                <Skeleton classes='title width-25 skeleton-title' />
+                <Skeleton classes='title width-25 skeleton-title' />
+              </Col>
+              <Col md={3} className='box'>
                 <Skeleton classes='title width-25 skeleton-title' />
                 <Skeleton classes='title width-25 skeleton-title' />
               </Col>

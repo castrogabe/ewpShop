@@ -67,15 +67,10 @@ export default function MessagesScreen() {
   // Function to handle opening the reply form
   const sendReply = async () => {
     try {
-      const response = await axios.post('/messages/reply', {
+      const response = await axios.post('/api/messages/reply', {
         email: replyMessage.email,
         subject: replyMessage.subject,
         message: replyMessage.replyContent, // Assuming this is the reply message content from the form
-      });
-
-      // Display a success toast message when the reply is sent successfully
-      toast.success('Reply sent successfully', {
-        autoClose: 1500, // Adjust the duration as needed (in milliseconds)
       });
 
       console.log(response.data); // Log the response from the backend
@@ -88,7 +83,7 @@ export default function MessagesScreen() {
   };
 
   useEffect(() => {
-    fetch('/messages')
+    fetch('/api/messages')
       .then((res) => {
         if (res.ok) {
           return res.json();
@@ -111,7 +106,7 @@ export default function MessagesScreen() {
 
       try {
         dispatch({ type: 'FETCH_REQUEST' });
-        const message = await axios.get(`/messages`);
+        const message = await axios.get(`/api/messages`);
         dispatch({ type: 'FETCH_SUCCESS', payload: message });
       } catch (err) {
         dispatch({
@@ -131,7 +126,7 @@ export default function MessagesScreen() {
     if (window.confirm('Are you sure to delete?')) {
       try {
         dispatch({ type: 'DELETE_REQUEST' });
-        await axios.delete('/messages', {
+        await axios.delete('/api/messages', {
           data: {
             update_time: messageToDelete.update_time,
             fullName: messageToDelete.fullName,
@@ -201,8 +196,12 @@ export default function MessagesScreen() {
                     <tr key={message}>
                       <td>
                         {message.createdAt
-                          ? message.createdAt.substring(0, 10)
-                          : message.update_time}
+                          ? new Date(message.createdAt).toLocaleDateString(
+                              'en-US'
+                            )
+                          : new Date(message.update_time).toLocaleDateString(
+                              'en-US'
+                            )}
                       </td>
                       <td>{message.fullName}</td>
                       <td>{message.email}</td>

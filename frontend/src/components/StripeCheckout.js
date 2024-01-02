@@ -33,7 +33,12 @@ const CheckoutForm = (props) => {
     }
 
     setProcessing(true);
-    const { data } = await Axios(`/api/stripe/secret/${props.orderId}`);
+    // Call stripe.confirmCardPayment() with the client secret.
+    const { data } = await Axios(`/api/stripe/secret/${props.orderId}`, {
+      headers: {
+        Authorization: `Bearer YOUR_STRIPE_SECRET_KEY`,
+      },
+    });
     const clientSecret = data.client_secret;
 
     const result = await stripe.confirmCardPayment(clientSecret, {
