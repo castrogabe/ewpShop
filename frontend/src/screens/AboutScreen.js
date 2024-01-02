@@ -60,7 +60,7 @@ const About = () => {
                   {' '}
                   <span className='youtube'> Youtube</span>
                 </a>{' '}
-                and watch for free with adds or you can purchase them, after
+                and watch for free with ads or you can purchase them, after
                 purchasing and downloading videos please back up videos to a
                 flash drive.
               </p>
