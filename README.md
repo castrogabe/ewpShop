@@ -622,3 +622,9 @@ PaymentMethod3Screen.js > updated for PayPal and Stripe logos
 ProductMag3Screen.js > updated for contact us
 
 index.css > updated for PayPal and Stripe, adjust font sizes
+
+# Sixty Seventh Commit fix orderRoutes countInStock
+
+BACKEND
+folder: routes
+orderRoutes.js > updated for countInStock "item.quantity"
