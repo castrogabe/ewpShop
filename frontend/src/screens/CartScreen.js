@@ -89,6 +89,14 @@ export default function CartScreen() {
                       </Button>
                     </Col>
                   </Row>
+                  <br />
+                  {/* Low quantity alert */}
+                  {item.countInStock <= 5 && (
+                    <p style={{ color: 'red' }}>
+                      Only {item.countInStock} Left for {item.name}!
+                    </p>
+                  )}
+                  {/* End of low quantity alert */}
                 </ListGroup.Item>
               ))}
             </ListGroup>

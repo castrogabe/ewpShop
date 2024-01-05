@@ -262,14 +262,22 @@ export default function MessagesScreen() {
                   }
                 />
               </div>
+              <br />
               {/* Submit button and close button */}
-              <Button type='submit' variant='primary' onClick={sendReply}>
+              <Button
+                type='submit'
+                variant='primary'
+                onClick={sendReply}
+                className='send-reply-button'
+              >
                 Send Reply
               </Button>
+
               <Button
                 type='button'
                 variant='secondary'
                 onClick={() => setReplyVisible(false)}
+                className='send-reply-button'
               >
                 Close
               </Button>

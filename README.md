@@ -628,3 +628,11 @@ index.css > updated for PayPal and Stripe, adjust font sizes
 BACKEND
 folder: routes
 orderRoutes.js > updated for countInStock "item.quantity"
+
+# Sixty Eight Commit Low Quantity in CartScreen
+
+FRONTEND
+folder: pages
+AboutUsScreen.js > updated with ContactUs and fix YouTube, FaceBook links with noopener noreferrer
+CartScreen.js > updated for low quantity alert
+MessagesScreen.js > updated for padding between Send Reply Button and Close Button

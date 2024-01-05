@@ -31,23 +31,6 @@ body {
   box-shadow: 0 1px 5px rgba(0, 0, 0, 0.1);
 }
 
-body {
-  font-size: 20px; /* Adjust the base font size for the entire body */
-}
-h1 {
-  font-size: 24px; /* Adjust the font size for h1 tags */
-}
-h2 {
-  font-size: 20px; /* Adjust the font size for h2 tags */
-}
-p,
-.content,
-.about,
-.search h3,
-.jumbotron1 {
-  font-size: 20px; /* Adjust the font size for paragraphs and specific elements */
-}
-
 .bg-info {
   color: var(--medium);
   background-color: var(--dark) !important;
@@ -273,6 +256,10 @@ a.email {
   transform: rotate(-45deg);
 }
 /* end sidebar */
+
+.send-reply-button {
+  margin-right: 20px; /* Adjust the value to increase/decrease the gap */
+}
 
 .hrLine {
   border-color: var(--medium);

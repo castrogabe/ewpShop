@@ -1,5 +1,6 @@
 import React from 'react';
 import { Row, Col, Card } from 'react-bootstrap';
+import { Link } from 'react-router-dom';
 
 const About = () => {
   return (
@@ -24,26 +25,25 @@ const About = () => {
                 techniques and segmenting videos that have been sold to hundreds
                 of pen turners all over the world. Each pen comes with a free
                 refill. Like us on{' '}
-                <a href='https://www.facebook.com/Exotic-Wood-Pen-460928980709091/?view_public_for=460928980709091'>
+                <a
+                  href='https://www.facebook.com/Exotic-Wood-Pen-460928980709091/?view_public_for=460928980709091'
+                  className='facebookIcon'
+                  target='_blank'
+                  rel='noopener noreferrer'
+                >
                   <span className='facebook'>Facebook</span>
                 </a>{' '}
                 and Subscribe to my{' '}
-                <a href='https://www.youtube.com/channel/UCVdwaT1LF4iv6q5okes29tA'>
-                  <span className='youtube'>YouTube</span>
+                <a
+                  href='https://www.youtube.com/channel/UCVdwaT1LF4iv6q5okes29tA'
+                  className='youtubeIcon'
+                  target='_blank'
+                  rel='noopener noreferrer'
+                >
+                  <span className='youtube'> YouTube</span>
                 </a>{' '}
                 Exotic Wood Pen channel.
               </p>
-
-              <h6>
-                <a href='https://www.facebook.com/Exotic-Wood-Pen-460928980709091/?view_public_for=460928980709091'>
-                  <span className='facebook'>Facebook</span>
-                </a>{' '}
-              </h6>
-              <h6>
-                <a href='https://www.youtube.com/channel/UCVdwaT1LF4iv6q5okes29tA'>
-                  <span className='youtube'>YouTube</span>
-                </a>{' '}
-              </h6>
             </div>
 
             <div className='box'>
@@ -56,11 +56,15 @@ const About = () => {
                 of video instruction combined in Part 1,2,3. Sorry no fancy
                 graphics or music, just wood and tools. You can view the
                 SEGMENTING VIDEOS SERIES on
-                <a href='https://www.youtube.com/watch?v=Wfxa4WPEq1k'>
-                  {' '}
-                  <span className='youtube'> Youtube</span>
+                <a
+                  href='https://www.youtube.com/channel/UCVdwaT1LF4iv6q5okes29tA'
+                  className='youtubeIcon'
+                  target='_blank'
+                  rel='noopener noreferrer'
+                >
+                  <span className='youtube'> YouTube</span>
                 </a>{' '}
-                and watch for free with ads or you can purchase them, after
+                and watch for free with adds or you can purchase them, after
                 purchasing and downloading videos please back up videos to a
                 flash drive.
               </p>
@@ -72,6 +76,13 @@ const About = () => {
                 className='img-responsive'
                 alt='wedge'
               />
+            </div>
+
+            <div className='box'>
+              <h1>Contact Us</h1>
+              <Link to='/contact' className='productEmail'>
+                Questions about a pen? Click me!
+              </Link>
             </div>
           </Col>
         </Row>
