@@ -643,8 +643,11 @@ FRONTEND
 folder: public
 index.html > updated for SEO optimization
 
-folder: components
-Header.js > updated admin section for orders and messages pill
-
 folder: screens
 DashboardScreen.js > updated for New Orders and Order Value
+
+# Seventy Commit Orders and Messages Pill in Admin Header
+
+FRONTEND
+folder: components
+Header.js > updated admin section for orders and messages pill
