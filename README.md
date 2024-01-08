@@ -636,3 +636,15 @@ folder: pages
 AboutUsScreen.js > updated with ContactUs and fix YouTube, FaceBook links with noopener noreferrer
 CartScreen.js > updated for low quantity alert
 MessagesScreen.js > updated for padding between Send Reply Button and Close Button
+
+# Sixty Ninth Commit SEO index.html
+
+FRONTEND
+folder: public
+index.html > updated for SEO optimization
+
+folder: components
+Header.js > updated admin section for orders and messages pill
+
+folder: screens
+DashboardScreen.js > updated for New Orders and Order Value
