@@ -651,3 +651,9 @@ DashboardScreen.js > updated for New Orders and Order Value
 FRONTEND
 folder: components
 Header.js > updated admin section for orders and messages pill
+
+# Seventy First Commit update index.html for SEO
+
+FRONTEND
+folder: public
+index.html > updated for SEO optimization
