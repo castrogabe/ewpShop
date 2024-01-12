@@ -41,24 +41,25 @@ export default function ForgetPasswordScreen() {
         <title>Forget Password</title>
       </Helmet>
       <br />
-
       <Row>
         <Col md={6}>
-          <h1 className='my-3'>Forget Password</h1>
-          <Form onSubmit={submitHandler}>
-            <Form.Group className='mb-3' controlId='email'>
-              <Form.Label>Email</Form.Label>
-              <Form.Control
-                type='email'
-                required
-                onChange={(e) => setEmail(e.target.value)}
-              />
-            </Form.Group>
+          <h1 className='box'>Forget Password</h1>
+          <div className='box'>
+            <Form onSubmit={submitHandler}>
+              <Form.Group className='mb-3' controlId='email'>
+                <Form.Label>Email</Form.Label>
+                <Form.Control
+                  type='email'
+                  required
+                  onChange={(e) => setEmail(e.target.value)}
+                />
+              </Form.Group>
 
-            <div className='mb-3'>
-              <Button type='submit'>submit</Button>
-            </div>
-          </Form>
+              <div className='mb-3'>
+                <Button type='submit'>submit</Button>
+              </div>
+            </Form>
+          </div>
         </Col>
         <Col md={6} className='mt-3'>
           <img src='/images/forget.jpg' alt='signin' />

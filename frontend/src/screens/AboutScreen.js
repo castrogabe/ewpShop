@@ -1,11 +1,15 @@
 import React from 'react';
 import { Row, Col, Card } from 'react-bootstrap';
 import { Link } from 'react-router-dom';
+import { Helmet } from 'react-helmet-async';
 
 const About = () => {
   return (
     <>
       <div className='content'>
+        <Helmet>
+          <title>About Us</title>
+        </Helmet>
         <br />
         <Row>
           <Col md={6}>

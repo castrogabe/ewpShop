@@ -51,53 +51,57 @@ export default function SignupScreen() {
       <Helmet>
         <title>Sign Up</title>
       </Helmet>
+
+      <br />
       <Row>
         <Col md={6}>
-          <h1 className='my-3'>Sign Up</h1>
-          <Form onSubmit={submitHandler}>
-            <Form.Group className='mb-3' controlId='name'>
-              <Form.Label>Name</Form.Label>
-              <Form.Control
-                onChange={(e) => setName(e.target.value)}
-                required
-              />
-            </Form.Group>
-
-            <Form.Group className='mb-3' controlId='email'>
-              <Form.Label>Email</Form.Label>
-              <Form.Control
-                type='email'
-                required
-                onChange={(e) => setEmail(e.target.value)}
-              />
-            </Form.Group>
-            <Form.Group className='mb-3' controlId='password'>
-              <Form.Label>Password</Form.Label>
-              <Form.Control
-                type='password'
-                required
-                onChange={(e) => setPassword(e.target.value)}
-                placeholder='Minimum 8 characters with at least one digit, one uppercase letter, one lowercase letter, and one special character'
-                pattern='^(?=.*\d)(?=.*[a-z])(?=.*[A-Z])(?=.*[^a-zA-Z\d]).{8,}$'
-                title='Minimum 8 characters with at least one digit, one uppercase letter, one lowercase letter, and one special character'
-              />
-              <Form.Group className='mb-3' controlId='confirmPassword'>
-                <Form.Label>Confirm Password</Form.Label>
+          <h1 className='box'>Sign Up</h1>
+          <div className='box'>
+            <Form onSubmit={submitHandler}>
+              <Form.Group className='mb-3' controlId='name'>
+                <Form.Label>Name</Form.Label>
                 <Form.Control
-                  type='password'
-                  onChange={(e) => setConfirmPassword(e.target.value)}
+                  onChange={(e) => setName(e.target.value)}
                   required
                 />
               </Form.Group>
-            </Form.Group>
-            <div className='mb-3'>
-              <Button type='submit'>Sign Up</Button>
-            </div>
-            <div className='mb-3'>
-              Already have an account?{' '}
-              <Link to={`/signin?redirect=${redirect}`}>Sign-In</Link>
-            </div>
-          </Form>
+
+              <Form.Group className='mb-3' controlId='email'>
+                <Form.Label>Email</Form.Label>
+                <Form.Control
+                  type='email'
+                  required
+                  onChange={(e) => setEmail(e.target.value)}
+                />
+              </Form.Group>
+              <Form.Group className='mb-3' controlId='password'>
+                <Form.Label>Password</Form.Label>
+                <Form.Control
+                  type='password'
+                  required
+                  onChange={(e) => setPassword(e.target.value)}
+                  placeholder='Minimum 8 characters with at least one digit, one uppercase letter, one lowercase letter, and one special character'
+                  pattern='^(?=.*\d)(?=.*[a-z])(?=.*[A-Z])(?=.*[^a-zA-Z\d]).{8,}$'
+                  title='Minimum 8 characters with at least one digit, one uppercase letter, one lowercase letter, and one special character'
+                />
+                <Form.Group className='mb-3' controlId='confirmPassword'>
+                  <Form.Label>Confirm Password</Form.Label>
+                  <Form.Control
+                    type='password'
+                    onChange={(e) => setConfirmPassword(e.target.value)}
+                    required
+                  />
+                </Form.Group>
+              </Form.Group>
+              <div className='mb-3'>
+                <Button type='submit'>Sign Up</Button>
+              </div>
+              <div className='mb-3'>
+                Already have an account?{' '}
+                <Link to={`/signin?redirect=${redirect}`}>Sign-In</Link>
+              </div>
+            </Form>
+          </div>
         </Col>
 
         <Col md={6} className='mt-3'>

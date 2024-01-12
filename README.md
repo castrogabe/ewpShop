@@ -657,3 +657,17 @@ Header.js > updated admin section for orders and messages pill
 FRONTEND
 folder: public
 index.html > updated for SEO optimization
+
+# Seventy Second Commit add a product count in the ProductList
+
+BACKEND
+folder: routes
+productRoutes.js > updated to show totalProducts
+
+FRONTEND
+folder: pages
+ProductListScreen.js > updated to show the count of products in the page title
+SigninScreen.js > updated with box
+SignupScreen.js > updated with box
+ForgetPasswordScreen.js > updated with box
+AboutUsScreen.js > updated with Helmet

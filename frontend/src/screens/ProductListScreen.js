@@ -17,6 +17,7 @@ const reducer = (state, action) => {
       return {
         ...state,
         products: action.payload.products,
+        totalProducts: action.payload.totalProducts, // Include totalProducts in the state
         page: action.payload.page,
         pages: action.payload.pages,
         loading: false,
@@ -57,6 +58,7 @@ export default function ProductListScreen() {
       loading,
       error,
       products,
+      totalProducts, // totalProducts display in h4
       pages,
       loadingCreate,
       loadingDelete,
@@ -66,6 +68,7 @@ export default function ProductListScreen() {
   ] = useReducer(reducer, {
     loading: true,
     error: '',
+    products: [], // Ensure products is initialized as an empty array
   });
 
   const navigate = useNavigate();
@@ -141,8 +144,13 @@ export default function ProductListScreen() {
       <br />
       <Row className='box'>
         <Col md={6}>
-          <h4>Product List Screen</h4>
+          <h4>
+            Product List Page (
+            {totalProducts !== undefined ? totalProducts : 'Loading...'}{' '}
+            Products Database)
+          </h4>
         </Col>
+
         <Col md={6} className='col text-end'>
           <Button type='button' onClick={createHandler}>
             Create Product

@@ -127,7 +127,7 @@ productRouter.get(
     const countProducts = await Product.countDocuments();
     res.send({
       products,
-      countProducts,
+      totalProducts: countProducts, // Include totalProducts in the response
       page,
       pages: Math.ceil(countProducts / pageSize),
     });

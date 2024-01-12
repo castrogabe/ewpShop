@@ -44,40 +44,44 @@ export default function SigninScreen() {
       <Helmet>
         <title>Sign In</title>
       </Helmet>
+
+      <br />
       <Row>
         <Col md={6}>
-          <h1 className='my-3'>Sign In</h1>
-          <Form onSubmit={submitHandler}>
-            <Form.Group className='mb-3' controlId='email'>
-              <Form.Label>Email</Form.Label>
-              <Form.Control
-                type='email'
-                required
-                onChange={(e) => setEmail(e.target.value)}
-              />
-            </Form.Group>
-            <Form.Group className='mb-3' controlId='password'>
-              <Form.Label>Password</Form.Label>
-              <Form.Control
-                type='password'
-                required
-                onChange={(e) => setPassword(e.target.value)}
-              />
-            </Form.Group>
-            <div className='mb-3'>
-              <Button type='submit'>Sign In</Button>
-            </div>
-            <div className='mb-3'>
-              New customer?{' '}
-              <Link to={`/signup?redirect=${redirect}`}>
-                Create your account
-              </Link>
-            </div>
-            <div className='mb-3'>
-              Forget Password?{' '}
-              <Link to={`/forget-password`}>Reset Password</Link>
-            </div>
-          </Form>
+          <h1 className='box'>Sign In</h1>
+          <div className='box'>
+            <Form onSubmit={submitHandler}>
+              <Form.Group className='mb-3' controlId='email'>
+                <Form.Label>Email</Form.Label>
+                <Form.Control
+                  type='email'
+                  required
+                  onChange={(e) => setEmail(e.target.value)}
+                />
+              </Form.Group>
+              <Form.Group className='mb-3' controlId='password'>
+                <Form.Label>Password</Form.Label>
+                <Form.Control
+                  type='password'
+                  required
+                  onChange={(e) => setPassword(e.target.value)}
+                />
+              </Form.Group>
+              <div className='mb-3'>
+                <Button type='submit'>Sign In</Button>
+              </div>
+              <div className='mb-3'>
+                New customer?{' '}
+                <Link to={`/signup?redirect=${redirect}`}>
+                  Create your account
+                </Link>
+              </div>
+              <div className='mb-3'>
+                Forget Password?{' '}
+                <Link to={`/forget-password`}>Reset Password</Link>
+              </div>
+            </Form>
+          </div>
         </Col>
         <Col md={6} className='mt-3'>
           <img src='/images/signin.png' alt='signin' />
