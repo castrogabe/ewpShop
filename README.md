@@ -671,3 +671,18 @@ SigninScreen.js > updated with box
 SignupScreen.js > updated with box
 ForgetPasswordScreen.js > updated with box
 AboutUsScreen.js > updated with Helmet
+
+# Seventy third AboutUs Dropdown, add ContactUs and DesignScreen
+
+FRONTEND
+App.js > updated with DesignScreen.js
+
+folders: components
+Header.js > updated AboutUs with dropdown for ContactUs, and DesignScreen
+Footer.js > updated with DesignScreen.js
+
+folders: screens
+DesignScreen.js > added
+
+folders: public
+images > added more images for DesignScreen.js

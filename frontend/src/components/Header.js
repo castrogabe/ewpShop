@@ -82,11 +82,13 @@ function Header() {
             <SearchBox />
 
             <Nav className='me-auto  w-100  justify-content-end'>
-              <LinkContainer to='/about'>
-                <Nav.Link>
-                  <i className='fas fa-info'></i> About Us
-                </Nav.Link>
-              </LinkContainer>
+              <NavDropdown title='About Us' id='basic-nav-dropdown'>
+                <NavDropdown.Item href='/about'>About Us</NavDropdown.Item>
+                <NavDropdown.Item href='/contact'>Contact Us</NavDropdown.Item>
+                <NavDropdown.Item href='/design'>
+                  Design Choices
+                </NavDropdown.Item>
+              </NavDropdown>
 
               {/* Categories on mobile */}
               <NavDropdown

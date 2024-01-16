@@ -60,6 +60,12 @@ const Footer = () => {
                   </Link>
                 </li>
                 <li>
+                  <Link to='/design' className='email'>
+                    {' '}
+                    <i className='fa fa-info'></i> Design Choices
+                  </Link>
+                </li>
+                <li>
                   <Link to='/jig' className='email'>
                     {' '}
                     <i className='fa fa-info'></i> Published Popular Woodworking
