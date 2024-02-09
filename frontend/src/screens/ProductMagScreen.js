@@ -178,12 +178,19 @@ function ProductMagScreen() {
       <br />
       <Row className='box'>
         <p className='mt-3'>
-          ~ All of the pens shown are handmade and designed by me, no two pens
-          are identical but can be similar to each other. If there is something
-          you like about one pen and it is not available on another pen please
-          contact me using the email me link below and I will gladly do my best
-          to work with you on what type of kit pen or bespoke pen will suit your
-          needs. ~
+          ~ Each pen showcased here is a testament to meticulous craftsmanship
+          and design, brought to life by hand with unwavering attention to
+          detail. No two pens are identical; each possesses its own distinct
+          character and charm. While similarities may arise, every piece is
+          infused with its own unique essence.
+        </p>
+        <p className='mt-3'>
+          If you find a particular feature or design that resonates with you,
+          yet it's not present in another pen, don't hesitate to reach out. I
+          take pride in offering personalized service, and I'm committed to
+          working closely with you to create a pen that perfectly suits your
+          preferences and needs. Whether it's a kit pen or a bespoke creation,
+          I'm here to bring your vision to life. ~
         </p>
       </Row>
       <br />

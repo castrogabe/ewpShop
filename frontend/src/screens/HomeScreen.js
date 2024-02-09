@@ -116,10 +116,19 @@ export default function HomeScreen() {
         <div className='box'>
           <h5>Always Hand Made</h5>
           <p className='mt-3'>
-            ~ I use quality pen kits and pen blanks are hand made by me in my
-            shop from Exotic Woods, Acrylics, Ebonite Materials, Bespoke pens
-            are not kit pens, they are made completely from scratch except for
-            the Jowo #6 nib and converters. ~
+            ~ At ExoticWoodPen, we are dedicated to crafting writing instruments
+            that transcend mere functionality, embodying the artistry of
+            storytelling and the timeless beauty of nature. Each pen is
+            meticulously handcrafted in our workshop, where we merge reclaimed,
+            repurposed, and sustainably harvested exotic woods with premium
+            materials to create exquisite pieces of functional art. From
+            personalized narratives to historical milestones, our pens capture
+            moments in time, whether personal, historical, or symbolic. We take
+            pride in the delicate characteristics of natural burls and reclaimed
+            materials, ensuring that every pen possesses its own unique allure
+            and individuality. Elevate your writing experience with a bespoke
+            pen from ExoticWoodPen – where craftsmanship, sustainability, and
+            the art of storytelling converge. ~
           </p>
         </div>
         <br />

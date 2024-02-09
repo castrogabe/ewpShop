@@ -686,3 +686,10 @@ DesignScreen.js > added
 
 folders: public
 images > added more images for DesignScreen.js
+
+# Seventy fourth, HomeScreen and ProductMagScreen Statements updated
+
+FRONTEND
+folders: screens
+HomeScreen.js > updated with new p statement
+ProductMagScreen.js > updated with new p statement
