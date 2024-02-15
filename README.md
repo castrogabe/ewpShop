@@ -693,3 +693,8 @@ FRONTEND
 folders: screens
 HomeScreen.js > updated with new p statement
 ProductMagScreen.js > updated with new p statement
+
+# Seventy Fifth Commit, modified the <p> text to black in css
+
+FRONTEND
+.css > updated with color: var(--black) #000000 .flush p makes it easier to read

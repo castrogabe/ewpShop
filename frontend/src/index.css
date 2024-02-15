@@ -15,6 +15,7 @@ body {
   --facebook: #4968ad;
   --youtube: #eb3223;
   --button: #4968ad;
+  --black: #000000;
 }
 
 .content {
@@ -452,6 +453,10 @@ button.thumbnail {
 }
 .active1 {
   border: 2px solid rgba(39, 67, 210, 0.8);
+}
+
+.flush p {
+  color: var(--black);
 }
 
 /* ************************************************************* */
