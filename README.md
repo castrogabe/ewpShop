@@ -698,3 +698,9 @@ ProductMagScreen.js > updated with new p statement
 
 FRONTEND
 .css > updated with color: var(--black) #000000 .flush p makes it easier to read
+
+# Seventy Sixth Commit, Add Section styles in DesignScreen.js
+
+FRONTEND
+folders: screens
+DesignScreen.js > update with Section images

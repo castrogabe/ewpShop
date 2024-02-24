@@ -178,19 +178,39 @@ const DesignScreen = () => {
                       Embrace the opportunity to personalize your fountain pen
                       further with our diverse Section Style Options. While the
                       default section material matches the body, you have the
-                      flexibility to choose a Classic, Straight Tapered, or
-                      Contoured design. Customize the length, opting for either
-                      7/8" or 1", to create a pen that truly reflects your
-                      preferences.
+                      flexibility to choose a Classic, Concave, or Tapered
+                      design. Customize the length, opting for either 7/8" or
+                      1", to create a pen that truly reflects your preferences.
                     </p>
                   </Col>
                   <Col>
-                    <img
-                      src='/images/Classic.png'
-                      className='img-responsive'
-                      alt='classic'
-                      loading='lazy'
-                    />
+                    <h4 className='box'>
+                      Classic
+                      <img
+                        src='/images/classic.jpeg'
+                        className='img-responsive'
+                        alt='classic'
+                        loading='lazy'
+                      />
+                    </h4>
+                    <h4 className='box'>
+                      Concave
+                      <img
+                        src='/images/concave.jpeg'
+                        className='img-responsive'
+                        alt='classic'
+                        loading='lazy'
+                      />
+                    </h4>
+                    <h4 className='box'>
+                      Tapered
+                      <img
+                        src='/images/tapered.jpeg'
+                        className='img-responsive'
+                        alt='classic'
+                        loading='lazy'
+                      />
+                    </h4>
                   </Col>
                 </Row>
               </div>
