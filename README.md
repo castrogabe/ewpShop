@@ -704,3 +704,14 @@ FRONTEND
 FRONTEND
 folders: screens
 DesignScreen.js > update with Section images
+
+# Seventy Seventh Commit, update Routes for email PaymentMethods
+
+BACKEND
+folders: routes
+orderRoutes.js > updated for emails
+stripeRoutes.js > updated
+
+FRONTEND
+folders: screens
+ProductEditScreen.js > updated to Container small-screen

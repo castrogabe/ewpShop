@@ -4,7 +4,7 @@ import { toast } from 'react-toastify';
 import axios from 'axios';
 import { Store } from '../Store';
 import { getError } from '../utils';
-import { Col, Form, Button, ListGroup } from 'react-bootstrap';
+import { Container, Col, Form, Button, ListGroup } from 'react-bootstrap';
 import { Helmet } from 'react-helmet-async';
 import MessageBox from '../components/MessageBox';
 import LoadingBox from '../components/LoadingBox';
@@ -160,7 +160,7 @@ export default function ProductEditScreen() {
     toast.success('Image removed successfully. click Update to apply it');
   };
   return (
-    <div className='small-screen'>
+    <Container className='small-screen'>
       <Helmet>
         <title>Edit Product ${productId}</title>
       </Helmet>
@@ -286,6 +286,6 @@ export default function ProductEditScreen() {
           </Form>
         )}
       </Col>
-    </div>
+    </Container>
   );
 }

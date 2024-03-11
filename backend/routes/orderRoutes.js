@@ -137,27 +137,38 @@ orderRouter.put(
         product.sold += item.quantity;
         await product.save();
       }
-      // end count in stock
 
+      // Send email notification based on payment method
       const customerEmail = order.user.email;
-      const purchaseDetails = payOrderEmailTemplate(order);
-
-      // ***************** send purchase receipt email ***********************
-      const emailContent = {
-        from: 'exoticwoodpen@gmail.com',
-        to: customerEmail,
-        subject: 'PayPal Purchase Receipt from exoticwoodpen', // email subject
-        html: purchaseDetails,
-      };
-
+      let emailContent = {}; // Define emailContent variable
+      if (order.paymentMethod === 'PayPal') {
+        // Define purchaseDetails for PayPal
+        const purchaseDetails = payOrderEmailTemplate(order);
+        emailContent = {
+          from: 'exoticwoodpen@gmail.com',
+          to: customerEmail,
+          subject: 'PayPal Purchase Receipt from exoticwoodpen.com', // email subject
+          html: purchaseDetails,
+        };
+      } else if (order.paymentMethod === 'Stripe') {
+        // Define purchaseDetails for Stripe
+        const purchaseDetails = payOrderEmailTemplate(order);
+        emailContent = {
+          from: 'exoticwoodpen@gmail.com',
+          to: customerEmail,
+          subject: 'Stripe Purchase Receipt from exoticwoodpen.com', // email subject
+          html: purchaseDetails,
+        };
+      }
       try {
-        // Send the email using the `transporter`
+        // Send the email using the transporter
         const info = await transporter.sendMail(emailContent);
+        console.log('Email sent:', info.messageId);
+        res.send({ message: 'Order Paid', order: updatedOrder });
       } catch (error) {
         console.error('Error sending email:', error);
+        res.status(500).send({ message: 'Failed to send email' });
       }
-
-      res.send({ message: 'Order Paid', order: updatedOrder });
     } else {
       res.status(404).send({ message: 'Order Not Found' });
     }
@@ -191,7 +202,7 @@ orderRouter.put(
     const emailContent = {
       from: 'exoticwoodpen@gmail.com',
       to: customerEmail,
-      subject: 'Shipping notification from exoticwoodpen', // email subject
+      subject: 'Shipping notification from exoticwoodpen.com', // email subject
       html: shippingDetails,
     };
 

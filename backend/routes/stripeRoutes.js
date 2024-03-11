@@ -2,8 +2,6 @@ import Stripe from 'stripe';
 import express from 'express';
 import config from '../config.js';
 import Order from '../models/orderModel.js';
-import Product from '../models/productModel.js';
-import { transporter, payOrderEmailTemplate } from '../utils.js';
 
 const stripe = Stripe(config.STRIPE_SECRET_KEY);
 
@@ -35,38 +33,6 @@ stripeRouter.get('/secret/:id', async (req, res) => {
       update_time: paymentIntent.created,
       email_address: order.user.email,
     };
-
-    // Update count in stock
-    for (const index in order.orderItems) {
-      const item = order.orderItems[index];
-      const product = await Product.findById(item.product);
-      product.countInStock -= 1;
-      product.sold += item.quantity;
-      await product.save();
-    }
-    // end count in stock
-
-    // Send email to the customer
-    const customerEmail = order.user.email;
-    const purchaseDetails = payOrderEmailTemplate(order);
-
-    // Create email content
-    const emailContent = {
-      from: 'exoticwoodpen@gmail.com',
-      to: customerEmail,
-      subject: 'Stripe Purchase Receipt from exoticwoodpen.com',
-      html: purchaseDetails,
-    };
-
-    try {
-      // Send the email using the `transporter`
-      const info = await transporter.sendMail(emailContent);
-
-      console.log('Email sent:', info.messageId);
-    } catch (error) {
-      console.error('Error sending email:', error);
-    }
-
     await order.save();
 
     res.send({ order, client_secret: paymentIntent.client_secret });
