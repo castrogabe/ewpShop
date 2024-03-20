@@ -44,11 +44,10 @@ export default function SigninScreen() {
       <Helmet>
         <title>Sign In</title>
       </Helmet>
-
       <br />
+      <h1 className='box'>Sign In</h1>
       <Row>
         <Col md={6}>
-          <h1 className='box'>Sign In</h1>
           <div className='box'>
             <Form onSubmit={submitHandler}>
               <Form.Group className='mb-3' controlId='email'>

@@ -1,6 +1,6 @@
 import Axios from 'axios';
 import { useContext, useEffect, useState } from 'react';
-import { Button, Form } from 'react-bootstrap';
+import { Col, Button, Form } from 'react-bootstrap';
 import { Helmet } from 'react-helmet-async';
 import { useNavigate, useParams } from 'react-router-dom';
 import { toast } from 'react-toastify';
@@ -13,6 +13,8 @@ export default function ResetPasswordScreen() {
 
   const [password, setPassword] = useState('');
   const [confirmPassword, setConfirmPassword] = useState('');
+  const [showPassword, setShowPassword] = useState(false);
+  const [showConfirmPassword, setShowConfirmPassword] = useState(false);
 
   const { state } = useContext(Store);
   const { userInfo } = state;
@@ -22,6 +24,14 @@ export default function ResetPasswordScreen() {
       navigate('/');
     }
   }, [navigate, userInfo, token]);
+
+  const togglePasswordVisibility = () => {
+    setShowPassword(!showPassword);
+  };
+
+  const toggleConfirmPasswordVisibility = () => {
+    setShowConfirmPassword(!showConfirmPassword);
+  };
 
   const submitHandler = async (e) => {
     e.preventDefault();
@@ -42,33 +52,60 @@ export default function ResetPasswordScreen() {
   };
 
   return (
-    <div className='content'>
+    <div className='small-screen'>
       <Helmet>
         <title>Reset Password</title>
       </Helmet>
-      <h1 className='my-3'>Reset Password</h1>
-      <Form onSubmit={submitHandler}>
-        <Form.Group className='mb-3' controlId='password'>
-          <Form.Label>New Password</Form.Label>
-          <Form.Control
-            type='password'
-            required
-            onChange={(e) => setPassword(e.target.value)}
-          />
-        </Form.Group>
-        <Form.Group className='mb-3' controlId='confirmPassword'>
-          <Form.Label>Confirm New Password</Form.Label>
-          <Form.Control
-            type='password'
-            onChange={(e) => setConfirmPassword(e.target.value)}
-            required
-          />
-        </Form.Group>
-
-        <div className='mb-3'>
-          <Button type='submit'>Reset Password</Button>
-        </div>
-      </Form>
+      <br />
+      <Col>
+        <h1 className='box'>Reset Password</h1>
+        <Form onSubmit={submitHandler}>
+          <Form.Group className='mb-3' controlId='password'>
+            <Form.Label>New Password</Form.Label>
+            <div className='input-group'>
+              <Form.Control
+                type={showPassword ? 'text' : 'password'}
+                placeholder='Minimum length 8, 1 uppercase, 1 lowercase, 1 digit, and 1 special character'
+                required
+                value={password}
+                onChange={(e) => setPassword(e.target.value)}
+              />
+              <Button
+                variant='outline-secondary'
+                onClick={togglePasswordVisibility}
+              >
+                <i
+                  className={`fa ${
+                    showPassword ? 'fas fa-eye-slash' : 'fa-eye'
+                  }`}
+                ></i>
+              </Button>
+            </div>
+          </Form.Group>
+          <Form.Group className='mb-3' controlId='confirmPassword'>
+            <Form.Label>Confirm New Password</Form.Label>
+            <div className='input-group'>
+              <Form.Control
+                type={showConfirmPassword ? 'text' : 'password'}
+                placeholder='Confirm New Password'
+                value={confirmPassword}
+                onChange={(e) => setConfirmPassword(e.target.value)}
+                required
+              />
+              <Button
+                variant='outline-secondary'
+                onClick={toggleConfirmPasswordVisibility}
+              >
+                <i
+                  className={`fa ${
+                    showConfirmPassword ? 'fas fa-eye-slash' : 'fa-eye'
+                  }`}
+                ></i>
+              </Button>
+            </div>
+          </Form.Group>
+        </Form>
+      </Col>
     </div>
   );
 }

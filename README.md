@@ -715,3 +715,13 @@ stripeRoutes.js > updated
 FRONTEND
 folders: screens
 ProductEditScreen.js > updated to Container small-screen
+
+# Seventy Eighth Commit, Update for show passwords (eye-slash)
+
+FRONTEND
+folders: screens
+ResetPasswordScreen.js > updated for showing password (eye-slash)
+ProfileScreen.js > updated for showing password (eye-slash)
+SignupScreen.js > updated with Regex in placeholders Password and Confirm Password
+SigninScreen.js > updated with Regex in placeholder Password
+ForgetPasswordScreen.js > updated layout

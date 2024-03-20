@@ -1,6 +1,6 @@
 import React, { useContext, useReducer, useState } from 'react';
 import { Helmet } from 'react-helmet-async';
-import { Form, Button, Col } from 'react-bootstrap';
+import { Col, Button, Form } from 'react-bootstrap';
 import { Store } from '../Store';
 import { toast } from 'react-toastify';
 import { getError } from '../utils';
@@ -14,7 +14,6 @@ const reducer = (state, action) => {
       return { ...state, loadingUpdate: false };
     case 'UPDATE_FAIL':
       return { ...state, loadingUpdate: false };
-
     default:
       return state;
   }
@@ -27,6 +26,8 @@ export default function ProfileScreen() {
   const [email, setEmail] = useState(userInfo.email);
   const [password, setPassword] = useState('');
   const [confirmPassword, setConfirmPassword] = useState('');
+  const [showPassword, setShowPassword] = useState(false);
+  const [showConfirmPassword, setShowConfirmPassword] = useState(false);
 
   const [{ loadingUpdate }, dispatch] = useReducer(reducer, {
     loadingUpdate: false,
@@ -41,6 +42,7 @@ export default function ProfileScreen() {
           name,
           email,
           password,
+          loadingUpdate,
         },
         {
           headers: { Authorization: `Bearer ${userInfo.token}` },
@@ -51,7 +53,9 @@ export default function ProfileScreen() {
       });
       ctxDispatch({ type: 'USER_SIGNIN', payload: data });
       localStorage.setItem('userInfo', JSON.stringify(data));
-      toast.success('User updated successfully');
+      toast.success('User updated successfully', {
+        autoClose: 1000, // Display success message for 1 second
+      });
     } catch (err) {
       dispatch({
         type: 'FETCH_FAIL',
@@ -60,14 +64,23 @@ export default function ProfileScreen() {
     }
   };
 
+  const togglePasswordVisibility = () => {
+    setShowPassword(!showPassword);
+  };
+
+  const toggleConfirmPasswordVisibility = () => {
+    setShowConfirmPassword(!showConfirmPassword);
+  };
+
   return (
     <div className='small-screen'>
       <Helmet>
         <title>User Profile</title>
       </Helmet>
       <Col>
+        <br />
         <h4 className='box'>User Profile</h4>
-        <Form onSubmit={submitHandler}>
+        <form onSubmit={submitHandler}>
           <Form.Group className='mb-3' controlId='name'>
             <Form.Label>Name</Form.Label>
             <Form.Control
@@ -76,7 +89,8 @@ export default function ProfileScreen() {
               required
             />
           </Form.Group>
-          <Form.Group className='mb-3' controlId='name'>
+
+          <Form.Group className='mb-3' controlId='email'>
             <Form.Label>Email</Form.Label>
             <Form.Control
               type='email'
@@ -85,24 +99,56 @@ export default function ProfileScreen() {
               required
             />
           </Form.Group>
+
           <Form.Group className='mb-3' controlId='password'>
-            <Form.Label>Password</Form.Label>
-            <Form.Control
-              type='password'
-              onChange={(e) => setPassword(e.target.value)}
-            />
+            <Form.Label>New Password</Form.Label>
+            <div className='input-group'>
+              <Form.Control
+                type={showPassword ? 'text' : 'password'}
+                placeholder='Minimum length 8, 1 uppercase, 1 lowercase, 1 digit, and 1 special character'
+                required
+                value={password}
+                onChange={(e) => setPassword(e.target.value)}
+              />
+              <Button
+                variant='outline-secondary'
+                onClick={togglePasswordVisibility}
+              >
+                <i
+                  className={`fa ${
+                    showPassword ? 'fas fa-eye-slash' : 'fa-eye'
+                  }`}
+                ></i>
+              </Button>
+            </div>
           </Form.Group>
-          <Form.Group className='mb-3' controlId='password'>
-            <Form.Label>Confirm Password</Form.Label>
-            <Form.Control
-              type='password'
-              onChange={(e) => setConfirmPassword(e.target.value)}
-            />
+
+          <Form.Group className='mb-3' controlId='confirmPassword'>
+            <Form.Label>Confirm New Password</Form.Label>
+            <div className='input-group'>
+              <Form.Control
+                type={showConfirmPassword ? 'text' : 'password'}
+                placeholder='Minimum length 8, 1 uppercase, 1 lowercase, 1 digit, and 1 special character'
+                required
+                value={confirmPassword}
+                onChange={(e) => setConfirmPassword(e.target.value)}
+              />
+              <Button
+                variant='outline-secondary'
+                onClick={toggleConfirmPasswordVisibility}
+              >
+                <i
+                  className={`fa ${
+                    showConfirmPassword ? 'fas fa-eye-slash' : 'fa-eye'
+                  }`}
+                ></i>
+              </Button>
+            </div>
           </Form.Group>
           <div className='mb-3'>
             <Button type='submit'>Update</Button>
           </div>
-        </Form>
+        </form>
       </Col>
     </div>
   );
